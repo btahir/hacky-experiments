@@ -1,10 +1,10 @@
-# 🧪 Hacky-Labs
+# 🧪 Hacky Experiments
 
 **An open source playground for my experiments**
 
 ## 👋 Welcome
 
-Welcome to Hacky-Labs! This repository serves as a home for my coding experiments, side projects, and technical explorations. Each project represents a different journey into technology, problem-solving, and creative coding.
+Welcome to Hacky Experiments! This repository serves as a home for my coding experiments, side projects, and technical explorations. Each project represents a different journey into technology, problem-solving, and creative coding.
 
 ## 🔍 What's Inside
 

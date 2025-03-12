@@ -1,5 +1,5 @@
 {
-  "name": "hacky-labs",
+  "name": "hacky-experiments",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -42,6 +42,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.5.2",
+    "framer-motion": "^12.5.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.479.0",
     "next": "15.2.2",
