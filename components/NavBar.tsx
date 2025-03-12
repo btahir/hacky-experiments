@@ -43,9 +43,9 @@ export function NavBar() {
       >
         <div className='container mx-auto px-4 flex items-center justify-between'>
           {/* Logo */}
-          <Link href='/' className='font-bold text-xl flex items-center'>
+          <Link href='/' className='font-bold text-xl flex items-center text-yellow-950'>
             <img src='/icon.svg' alt='Hacky Experiments' className='w-8 h-8 mr-2' />
-            <span className='text-yellow-600 mr-1'>Hacky</span>Experiments
+            <span className='text-red-500 mr-1'>Hacky</span>Experiments
           </Link>
 
           {/* Desktop Navigation */}
