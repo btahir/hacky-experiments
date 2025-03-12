@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Link from 'next/link'
 import { fetchPost, fetchPostSlugs } from '@/lib/contentful'
 import { formatDate } from '@/lib/utils'
@@ -67,7 +66,7 @@ export default async function ExperimentPage({ params }: { params: { slug: strin
           <img
             src={post.heroImage.url}
             alt={post.heroImage.title || post.title}
-            className="object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
       )}

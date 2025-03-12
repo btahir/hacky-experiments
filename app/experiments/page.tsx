@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { fetchAllPosts } from '@/lib/contentful'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/utils'
@@ -48,8 +47,7 @@ export default async function ExperimentsPage({
                   <img
                     src={post.heroImage.url}
                     alt={post.heroImage.title || post.title}
-                    className="object-cover transition-transform duration-200 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-105"
                   />
                 </div>
               )}
