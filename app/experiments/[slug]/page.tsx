@@ -68,7 +68,6 @@ export default async function ExperimentPage({ params }: { params: { slug: strin
             src={post.heroImage.url}
             alt={post.heroImage.title || post.title}
             className="object-cover"
-            priority
           />
         </div>
       )}

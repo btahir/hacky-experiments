@@ -18,6 +18,6 @@ export function formatDate(dateString: string): string {
   }).format(date);
 }
 
-export function cn(...classes: (string | undefined | boolean)[]) {
-  return classes.filter(Boolean).join(' ');
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
