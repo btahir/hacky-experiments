@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧪 Hacky-Labs
 
-## Getting Started
+**An open source playground for my experiments**
 
-First, run the development server:
+## 👋 Welcome
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Welcome to Hacky-Labs! This repository serves as a home for my coding experiments, side projects, and technical explorations. Each project represents a different journey into technology, problem-solving, and creative coding.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔍 What's Inside
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This repository contains a variety of projects ranging from small utilities to more complex applications. The projects will be either a UI (app folder) or scripts (in scripts folder).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+Each project has its own setup instructions in its respective directory. Navigate to any project folder to find specific README files with installation and usage instructions.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The projects in this repository use various technologies including but not limited to:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js
+- Tailwind.css / Shadcn
+- Bun (for scripts)
+- Various APIs
+- And more!
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+While these are personal experiments, I welcome suggestions, bug reports, and even pull requests. Feel free to open an issue to discuss any ideas.
+
+## 📫 Contact
+
+Have questions or want to reach out? Feel free to:
+
+- Open an issue in this repository
+- Connect with me on [Twitter](@deepwhitman)
+
+---
+
+Created with ☕ by [Bilal Tahir](https://github.com/btahir)
