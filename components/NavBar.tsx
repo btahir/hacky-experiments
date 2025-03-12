@@ -45,7 +45,7 @@ export function NavBar() {
           {/* Logo */}
           <Link href='/' className='font-bold text-xl flex items-center'>
             <img src='/icon.svg' alt='Hacky Experiments' className='w-8 h-8 mr-2' />
-            <span className='text-primary mr-1'>Hacky</span>Experiments
+            <span className='text-yellow-600 mr-1'>Hacky</span>Experiments
           </Link>
 
           {/* Desktop Navigation */}
@@ -57,8 +57,8 @@ export function NavBar() {
                 className={cn(
                   'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   pathname === link.path
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+                    ? 'bg-yellow-100 text-yellow-700'
+                    : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
                 )}
               >
                 {link.name}

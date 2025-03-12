@@ -46,7 +46,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className='font-bold text-xl flex items-center'
                 onClick={onClose}
               >
-                <span className='text-primary mr-1'>Hacky</span>Labs
+                <span className='text-yellow-600 mr-1'>Hacky</span>Experiments
               </Link>
               <Button
                 variant='ghost'
@@ -66,8 +66,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   className={cn(
                     'px-4 py-3 rounded-md text-lg font-medium transition-colors',
                     pathname === link.path
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+                      ? 'bg-yellow-100 text-yellow-700'
+                      : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
                   )}
                   onClick={onClose}
                 >

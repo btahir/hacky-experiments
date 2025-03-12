@@ -21,7 +21,7 @@ import {
 
 export default function Home() {
   return (
-    <main className='min-h-screen bg-gradient-to-b from-background to-muted/20'>
+    <main className='min-h-screen bg-yellow-50'>
       {/* Hero Section */}
       <section className='max-w-6xl mx-auto py-8 lg:py-12 px-4 lg:px-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0'>
         <div className='w-full lg:w-1/2 flex flex-col justify-center'>
@@ -45,12 +45,12 @@ export default function Home() {
             </p>
             <div className='flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start'>
               <Link href='/experiments'>
-                <Button size='lg' className='gap-2'>
+                <Button size='lg' className='gap-2 bg-red-500 hover:bg-red-600'>
                   See Experiments <ArrowRight size={16} />
                 </Button>
               </Link>
               <Link href='/about'>
-                <Button size='lg' variant='outline'>
+                <Button size='lg' variant='outline' className='border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600'>
                   About Me
                 </Button>
               </Link>
@@ -65,12 +65,12 @@ export default function Home() {
         >
           <div className='relative'>
             {/* Decorative elements */}
-            <div className='absolute -top-6 -left-6 w-20 h-20 bg-primary/10 rounded-full blur-xl'></div>
-            <div className='absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/20 rounded-full blur-xl'></div>
-            <div className='absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-primary/20 rounded-full blur-lg'></div>
+            <div className='absolute -top-6 -left-6 w-20 h-20 bg-yellow-200/50 rounded-full blur-xl'></div>
+            <div className='absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/50 rounded-full blur-xl'></div>
+            <div className='absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-yellow-200/50 rounded-full blur-lg'></div>
 
             {/* Gradient border effect */}
-            <div className='absolute inset-0 bg-gradient-to-br from-background via-primary/20 to-yellow-200/30 rounded-2xl p-1'>
+            <div className='absolute inset-0 bg-yellow-100/50 rounded-2xl p-1'>
               <div className='absolute inset-0 bg-white/80 backdrop-blur-sm rounded-xl'></div>
             </div>
 
@@ -87,7 +87,7 @@ export default function Home() {
             </div>
 
             {/* Main image with softer background */}
-            <div className='relative bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden p-6 pt-12'>
+            <div className='relative bg-red-100/20 backdrop-blur-sm rounded-xl overflow-hidden p-6 pt-12'>
               {/* Hero image */}
               <img
                 alt='Hacky experiments illustration'
@@ -97,7 +97,7 @@ export default function Home() {
 
               {/* Animated dots */}
               <motion.div
-                className='absolute top-10 right-10 w-12 h-12 bg-primary/10 rounded-full'
+                className='absolute top-10 right-10 w-12 h-12 bg-yellow-200/50 rounded-full'
                 animate={{ y: [0, -10, 0] }}
                 transition={{
                   repeat: Number.POSITIVE_INFINITY,
@@ -106,7 +106,7 @@ export default function Home() {
                 }}
               ></motion.div>
               <motion.div
-                className='absolute bottom-16 left-10 w-8 h-8 bg-yellow-200/30 rounded-full'
+                className='absolute bottom-16 left-10 w-8 h-8 bg-yellow-200/50 rounded-full'
                 animate={{ y: [0, 10, 0] }}
                 transition={{
                   repeat: Number.POSITIVE_INFINITY,
@@ -145,10 +145,9 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Link href='/experiments' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
-                <div className='absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='pb-2'>
-                  <div className='w-12 h-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3'>
+                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Beaker size={24} />
                   </div>
                   <CardTitle className='text-2xl'>Experiments</CardTitle>
@@ -165,17 +164,17 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className='flex justify-between items-center pt-2'>
                   <div className='flex space-x-1'>
-                    <Badge variant='outline' className='bg-blue-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       React
                     </Badge>
-                    <Badge variant='outline' className='bg-blue-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       Next.js
                     </Badge>
-                    <Badge variant='outline' className='bg-blue-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       TypeScript
                     </Badge>
                   </div>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -188,10 +187,9 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Link href='/snippets' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
-                <div className='absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='pb-2'>
-                  <div className='w-12 h-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3'>
+                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Code size={24} />
                   </div>
                   <CardTitle className='text-2xl'>Code Snippets</CardTitle>
@@ -208,17 +206,17 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className='flex justify-between items-center pt-2'>
                   <div className='flex space-x-1'>
-                    <Badge variant='outline' className='bg-green-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       JavaScript
                     </Badge>
-                    <Badge variant='outline' className='bg-green-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       Python
                     </Badge>
-                    <Badge variant='outline' className='bg-green-50'>
+                    <Badge variant='outline' className='bg-yellow-50'>
                       CSS
                     </Badge>
                   </div>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -231,8 +229,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Link href='/products' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
-                <div className='absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='pb-2'>
                   <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Package size={24} />
@@ -261,7 +258,7 @@ export default function Home() {
                       Web
                     </Badge>
                   </div>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
