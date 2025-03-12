@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -47,12 +46,12 @@ export default function Home() {
               Mostly you'll laugh. Definitely you'll enjoy.
             </p>
             <div className='flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start'>
-              <Link href="/experiments">
+              <Link href='/experiments'>
                 <Button size='lg' className='gap-2'>
                   See Experiments <ArrowRight size={16} />
                 </Button>
               </Link>
-              <Link href="/about">
+              <Link href='/about'>
                 <Button size='lg' variant='outline'>
                   About Me
                 </Button>
@@ -91,6 +90,13 @@ export default function Home() {
 
             {/* Main image with softer background */}
             <div className='relative bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden p-6 pt-12'>
+              {/* Hero image */}
+              <img
+                alt='Hacky experiments illustration'
+                src='/hero.png'
+                className='w-full h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg border border-neutral-600'
+              />
+
               {/* Animated dots */}
               <motion.div
                 className='absolute top-10 right-10 w-12 h-12 bg-primary/10 rounded-full'
@@ -140,32 +146,38 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <Link href="/experiments" className="block h-full">
-              <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+            <Link href='/experiments' className='block h-full'>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
+                <div className='absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+                <CardHeader className='pb-2'>
+                  <div className='w-12 h-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3'>
                     <Beaker size={24} />
                   </div>
-                  <CardTitle className="text-2xl">Experiments</CardTitle>
+                  <CardTitle className='text-2xl'>Experiments</CardTitle>
                   <CardDescription>
                     Various exploratory projects and experimental ideas
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Browse through a collection of my experimental projects, prototypes, 
-                    and creative explorations. These are the playgrounds where I test 
-                    new technologies and ideas.
+                  <p className='text-muted-foreground'>
+                    Browse through a collection of my experimental projects,
+                    prototypes, and creative explorations. These are the
+                    playgrounds where I test new technologies and ideas.
                   </p>
                 </CardContent>
-                <CardFooter className="flex justify-between items-center pt-2">
-                  <div className="flex space-x-1">
-                    <Badge variant="outline" className="bg-blue-50">React</Badge>
-                    <Badge variant="outline" className="bg-blue-50">Next.js</Badge>
-                    <Badge variant="outline" className="bg-blue-50">TypeScript</Badge>
+                <CardFooter className='flex justify-between items-center pt-2'>
+                  <div className='flex space-x-1'>
+                    <Badge variant='outline' className='bg-blue-50'>
+                      React
+                    </Badge>
+                    <Badge variant='outline' className='bg-blue-50'>
+                      Next.js
+                    </Badge>
+                    <Badge variant='outline' className='bg-blue-50'>
+                      TypeScript
+                    </Badge>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -177,32 +189,38 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Link href="/snippets" className="block h-full">
-              <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3">
+            <Link href='/snippets' className='block h-full'>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
+                <div className='absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+                <CardHeader className='pb-2'>
+                  <div className='w-12 h-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3'>
                     <Code size={24} />
                   </div>
-                  <CardTitle className="text-2xl">Code Snippets</CardTitle>
+                  <CardTitle className='text-2xl'>Code Snippets</CardTitle>
                   <CardDescription>
                     Useful code fragments and programming solutions
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    A library of reusable code snippets, clever hacks, and programming 
-                    solutions that I've developed over time. Find useful code for 
-                    common programming challenges.
+                  <p className='text-muted-foreground'>
+                    A library of reusable code snippets, clever hacks, and
+                    programming solutions that I've developed over time. Find
+                    useful code for common programming challenges.
                   </p>
                 </CardContent>
-                <CardFooter className="flex justify-between items-center pt-2">
-                  <div className="flex space-x-1">
-                    <Badge variant="outline" className="bg-green-50">JavaScript</Badge>
-                    <Badge variant="outline" className="bg-green-50">Python</Badge>
-                    <Badge variant="outline" className="bg-green-50">CSS</Badge>
+                <CardFooter className='flex justify-between items-center pt-2'>
+                  <div className='flex space-x-1'>
+                    <Badge variant='outline' className='bg-green-50'>
+                      JavaScript
+                    </Badge>
+                    <Badge variant='outline' className='bg-green-50'>
+                      Python
+                    </Badge>
+                    <Badge variant='outline' className='bg-green-50'>
+                      CSS
+                    </Badge>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -214,32 +232,38 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Link href="/products" className="block h-full">
-              <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3">
+            <Link href='/products' className='block h-full'>
+              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/20 overflow-hidden group'>
+                <div className='absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+                <CardHeader className='pb-2'>
+                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Package size={24} />
                   </div>
-                  <CardTitle className="text-2xl">Products</CardTitle>
+                  <CardTitle className='text-2xl'>Products</CardTitle>
                   <CardDescription>
                     Complete products and fully developed applications
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Polished and production-ready applications that solve real-world 
-                    problems. These are my most refined works, developed with a focus 
-                    on user experience and functionality.
+                  <p className='text-muted-foreground'>
+                    Polished and production-ready applications that solve
+                    real-world problems. These are my most refined works,
+                    developed with a focus on user experience and functionality.
                   </p>
                 </CardContent>
-                <CardFooter className="flex justify-between items-center pt-2">
-                  <div className="flex space-x-1">
-                    <Badge variant="outline" className="bg-yellow-50">SaaS</Badge>
-                    <Badge variant="outline" className="bg-yellow-50">Mobile</Badge>
-                    <Badge variant="outline" className="bg-yellow-50">Web</Badge>
+                <CardFooter className='flex justify-between items-center pt-2'>
+                  <div className='flex space-x-1'>
+                    <Badge variant='outline' className='bg-yellow-50'>
+                      SaaS
+                    </Badge>
+                    <Badge variant='outline' className='bg-yellow-50'>
+                      Mobile
+                    </Badge>
+                    <Badge variant='outline' className='bg-yellow-50'>
+                      Web
+                    </Badge>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -251,95 +275,3 @@ export default function Home() {
     </main>
   )
 }
-
-// Keep any component functions that are still needed
-// You can remove the ExperimentCard, SnippetCard, etc. if they're no longer used
-// in the main page but we'll keep them since they might be used elsewhere
-
-function ExperimentCard({ experiment }: { experiment: any }) {
-  // Keep this implementation
-}
-
-function SnippetCard({ snippet }: { snippet: any }) {
-  // Keep this implementation
-}
-
-function ProductCard({ product }: { product: any }) {
-  // Keep this implementation
-}
-
-// Sample Data
-const experiments = [
-  {
-    title: 'AI Color Palette Generator',
-    description: 'Generate color palettes using machine learning algorithms',
-    image: '/placeholder.svg?height=300&width=400',
-    status: 'Live',
-    tags: ['AI', 'Design'],
-  },
-  {
-    title: 'WebGL Particle System',
-    description: 'Interactive particle system built with WebGL and Three.js',
-    image: '/placeholder.svg?height=300&width=400',
-    status: 'WIP',
-    tags: ['WebGL', '3D'],
-  },
-  {
-    title: 'Neural Network Visualizer',
-    description: 'Visualize how neural networks learn and make predictions',
-    image: '/placeholder.svg?height=300&width=400',
-    status: 'Live',
-    tags: ['AI', 'Visualization'],
-  },
-]
-
-const snippets = [
-  {
-    title: 'React Custom Hook',
-    description: 'A custom hook for handling form validation',
-    language: 'TypeScript',
-    preview:
-      'const useFormValidation = (initialState, validate) => {\n  const [values, setValues] = useState(initialState);\n  // More code...\n}',
-  },
-  {
-    title: 'CSS Grid Layout',
-    description: 'A responsive grid layout with auto-placement',
-    language: 'CSS',
-    preview:
-      '.grid-container {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n  gap: 1rem;\n}',
-  },
-  {
-    title: 'WebSocket Connection',
-    description: 'Set up a WebSocket connection with reconnect logic',
-    language: 'JavaScript',
-    preview:
-      'function createWebSocketConnection(url) {\n  const ws = new WebSocket(url);\n  // Connection logic...\n}',
-  },
-]
-
-const products = [
-  {
-    title: 'DevToolkit Pro',
-    description: 'A suite of tools for developers to streamline their workflow',
-    details:
-      'Includes code formatter, API tester, and performance analyzer. Built with Electron and React.',
-    image: '/placeholder.svg?height=300&width=400',
-    status: 'Beta',
-    links: {
-      github: 'https://github.com',
-      live: 'https://example.com',
-    },
-  },
-  {
-    title: 'PixelPerfect',
-    description: 'Design tool for pixel-perfect web layouts',
-    details:
-      'Helps designers and developers create precise layouts with real-time preview and code generation.',
-    image: '/placeholder.svg?height=300&width=400',
-    status: 'Alpha',
-    links: {
-      github: 'https://github.com',
-      live: null,
-    },
-  },
-]
