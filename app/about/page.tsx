@@ -1,12 +1,12 @@
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 function AboutPage() {
-  const router = useRouter()
   return (
     <div className='container mx-auto py-6 sm:py-12'>
       <h1>About Me</h1>
       <img
-        src='/images/me.png'
+        src='/me.png'
         className='object-cover rounded-full w-72 h-72 mx-auto mb-12'
       />
       <div className='w-full px-4 font-secondary'>
@@ -19,12 +19,11 @@ function AboutPage() {
         <p className='mt-6 sm:text-lg md:text-xl'>
           Hello! I'm Bilal. I like to build things and try out some weird hacky
           experiments. And you can find some of them{' '}
-          <button
-            className='text-palette-primary font-bold focus:outline-none'
-            onClick={() => router.push('/blog')}
-          >
-            here
-          </button>
+          <Link href='/experiments'>
+            <Button className='text-palette-primary font-bold focus:outline-none'>
+              here
+            </Button>
+          </Link>
           .
         </p>
         <p className='mt-6 sm:text-lg md:text-xl'>
@@ -36,12 +35,11 @@ function AboutPage() {
         <p className='mt-6 sm:text-lg md:text-xl'>
           If you're curious about how I build stuff you can read about my
           process{' '}
-          <button
-            className='text-palette-primary font-bold focus:outline-none'
-            onClick={() => router.push('/process')}
-          >
-            here
-          </button>
+          <Link href='/process'>
+            <Button className='text-palette-primary font-bold focus:outline-none'>
+              here
+            </Button>
+          </Link>
           .
         </p>
         <p className='mt-6 sm:text-lg md:text-xl'>
@@ -55,19 +53,6 @@ function AboutPage() {
             Twitter
           </a>{' '}
           to catch the latest shenanigans I'm getting myself into.
-        </p>
-        <p className='mt-6 sm:text-lg md:text-xl'>
-          Oh and in case you are curious about the awesome illustration used on
-          the home page, I have this{' '}
-          <a
-            href='https://absurd.design/'
-            target='_blank'
-            rel='noreferrer'
-            className='text-palette-primary font-bold px-1'
-          >
-            amazing artist
-          </a>{' '}
-          to thank.
         </p>
         <p className='mt-6 sm:text-lg md:text-xl'>
           Happy travels.{' '}

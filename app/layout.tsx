@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hacky Labs | Coding Experiments",
-  description: "An open source playground for coding experiments, side projects, and technical explorations.",
+  title: "Hacky Experiments",
+  description: "An open source playground for my coding experiments, side projects, and technical explorations.",
   keywords: ["experiments", "coding", "projects", "open source", "hacky labs"],
 };
 

@@ -17,8 +17,6 @@ import {
   Code,
   Package,
   ArrowRight,
-  Github,
-  ExternalLink,
 } from 'lucide-react'
 
 export default function Home() {
