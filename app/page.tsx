@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-gradient-to-b from-background to-muted/20'>
       {/* Hero Section */}
-      <section className='max-w-6xl mx-auto py-12 px-4 lg:px-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0'>
+      <section className='max-w-6xl mx-auto py-8 lg:py-12 px-4 lg:px-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0'>
         <div className='w-full lg:w-1/2 flex flex-col justify-center'>
           <motion.div
             className='max-w-sm lg:max-w-md space-y-6 w-full mx-auto lg:mx-0 text-center lg:text-left'
