@@ -4,6 +4,8 @@ export const metadata: Metadata = {
   title: 'Gemini Story | Hacky Experiments',
   description: 'Generate a story with text and images using Gemini.',
   openGraph: {
+    title: 'Gemini Story | Hacky Experiments',
+    description: 'Generate a story with text and images using Gemini.',
     images: [
       { url: '/public/micro-experiments/gemini-story.png' },
     ],
