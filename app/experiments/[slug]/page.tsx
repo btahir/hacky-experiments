@@ -34,7 +34,7 @@ interface ContentfulEntry {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
   const post = await fetchPost(slug)
@@ -71,7 +71,7 @@ export async function generateStaticParams() {
 export default async function ExperimentPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
   const post = await fetchPost(slug)
