@@ -87,7 +87,7 @@ export default function Home() {
             </div>
 
             {/* Main image with softer background */}
-            <div className='relative bg-red-100/20 backdrop-blur-sm rounded-xl overflow-hidden p-6 pt-12'>
+            <div className='relative bg-neutral-800 backdrop-blur-sm rounded-xl overflow-hidden p-6'>
               {/* Hero image */}
               <img
                 alt='Hacky experiments illustration'

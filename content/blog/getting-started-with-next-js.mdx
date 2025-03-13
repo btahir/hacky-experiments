@@ -1,0 +1,154 @@
+export const metadata = {
+  title: 'Getting Started with Next.js 15',
+  date: '2024-03-15',
+  excerpt: 'Learn how to set up a modern web application using Next.js 15 and the App Router.',
+  tags: ['Next.js', 'React', 'Web Development'],
+}
+
+# Getting Started with Next.js 15
+
+Next.js is a powerful React framework that enables features such as server-side rendering and static site generation. With the release of Next.js 15, there are even more improvements to enjoy. In this guide, we'll explore how to set up a modern web application using Next.js 15 and the App Router.
+
+## What is Next.js?
+
+Next.js is a React framework that provides a structure and features for your application:
+
+- **Server-Side Rendering (SSR)**: Renders pages on the server for improved performance and SEO.
+- **Static Site Generation (SSG)**: Pre-renders pages at build time for even better performance.
+- **App Router**: A modern routing system introduced in Next.js 13 and improved in Next.js 15.
+- **API Routes**: Create API endpoints as part of your Next.js app.
+- **Image Optimization**: Automatically optimize images for better performance.
+
+## Setting Up a New Project
+
+To create a new Next.js project, run the following command:
+
+```bash
+npx create-next-app@latest my-next-app
+```
+
+The CLI will prompt you with several questions to customize your project. Here's what I recommend:
+
+- Use TypeScript for type safety
+- Use ESLint for code quality
+- Use Tailwind CSS for styling
+- Choose the App Router for modern routing features
+
+After the installation completes, navigate to your project:
+
+```bash
+cd my-next-app
+```
+
+And start the development server:
+
+```bash
+npm run dev
+```
+
+## Understanding the App Router
+
+The App Router introduced in Next.js 13 (and improved in version 15) uses a file-system based routing approach:
+
+- **pages**: Create pages by adding files to the `app` directory
+- **layouts**: Share UI between routes with `layout.tsx` files
+- **loading states**: Add loading indicators with `loading.tsx`
+- **error handling**: Handle errors with `error.tsx`
+
+Here's a simple example of a page component:
+
+```tsx
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <main className="container mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold">Welcome to Next.js 15</h1>
+      <p className="mt-4">This is a sample page using the App Router.</p>
+    </main>
+  );
+}
+```
+
+## Server Components
+
+In Next.js 15, React Server Components are the default. This means your components run on the server unless specified otherwise. Server Components offer several advantages:
+
+- Reduced client-side JavaScript
+- Access to backend resources
+- Enhanced security
+- Improved initial load performance
+
+To make a component run on the client, add the `'use client'` directive at the top of your file:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  )
+}
+```
+
+## Styling Options
+
+Next.js supports various styling options:
+
+1. **CSS Modules**: Local scoped CSS files
+2. **Tailwind CSS**: Utility-first CSS framework
+3. **CSS-in-JS**: Libraries like styled-components or emotion
+4. **Sass/SCSS**: Extended CSS syntax
+
+With Tailwind CSS, you can quickly build modern UIs without writing custom CSS:
+
+```tsx
+export default function Card() {
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+      <h2 className="text-xl font-semibold mb-2">Card Title</h2>
+      <p className="text-gray-600">Card content goes here.</p>
+      <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+        Learn More
+      </button>
+    </div>
+  );
+}
+```
+
+## Data Fetching
+
+Next.js 15 simplifies data fetching within Server Components:
+
+```tsx
+// This component fetches data on the server
+async function PostList() {
+  const posts = await fetch('https://api.example.com/posts').then(res => res.json());
+  
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+You can also use React's `cache` function or the `revalidatePath` API for advanced data fetching strategies.
+
+## Conclusion
+
+Next.js 15 provides a powerful foundation for building modern web applications. With the App Router, Server Components, and built-in optimizations, it offers an excellent developer experience while ensuring great performance for end users.
+
+For more information, check out the [official Next.js documentation](https://nextjs.org/docs).
+
+---
+
+I hope you found this introduction to Next.js 15 helpful! Stay tuned for more tutorials on advanced Next.js features. 

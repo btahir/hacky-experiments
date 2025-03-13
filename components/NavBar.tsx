@@ -25,10 +25,11 @@ export function NavBar() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Experiments', path: '/experiments' },
-    { name: 'Snippets', path: '/snippets' },
-    { name: 'Products', path: '/products' },
     { name: 'About', path: '/about' },
+    { name: 'Experiments', path: '/experiments' },
+    { name: 'Microsites', path: '/microsites' },
+    { name: 'Scripts', path: '/scripts' },
+    { name: 'Blog', path: '/blog' },
   ]
 
   return (

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -143,4 +144,65 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* MDX Styling */
+.prose {
+  @apply max-w-none;
+}
+
+.prose a {
+  @apply text-yellow-700 hover:text-yellow-800 font-medium;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-bold text-foreground scroll-mt-24;
+}
+
+.prose h1 {
+  @apply text-3xl mb-6 mt-12;
+}
+
+.prose h2 {
+  @apply text-2xl mb-4 mt-10;
+}
+
+.prose h3 {
+  @apply text-xl mb-3 mt-8;
+}
+
+.prose p, .prose ul, .prose ol {
+  @apply mb-6 text-foreground/90;
+}
+
+.prose code {
+  @apply bg-yellow-50 px-1 py-0.5 rounded text-yellow-800 font-mono text-sm;
+}
+
+.prose pre {
+  @apply bg-zinc-950 text-zinc-50 rounded-lg p-4 my-6 overflow-x-auto;
+}
+
+.prose pre code {
+  @apply bg-transparent text-inherit p-0;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-yellow-200 pl-4 italic text-foreground/80;
+}
+
+.prose img {
+  @apply rounded-lg my-8 mx-auto;
+}
+
+.prose hr {
+  @apply my-12 border-yellow-100;
+}
+
+.prose :where(tbody td, tfoot td):not(:has(> :is(ul, ol, p, div)):not(:where(.not-prose, .not-prose *))) {
+  @apply p-2 border-b border-yellow-100;
+}
+
+.prose-yellow {
+  @apply prose;
 }

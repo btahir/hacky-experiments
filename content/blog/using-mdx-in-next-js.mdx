@@ -1,0 +1,183 @@
+export const metadata = {
+  title: 'Using MDX in Next.js',
+  date: '2024-03-18',
+  excerpt: 'Learn how to set up and use MDX in your Next.js application for rich content experiences.',
+  tags: ['Next.js', 'MDX', 'Content'],
+}
+
+# Using MDX in Next.js
+
+MDX is a powerful format that lets you seamlessly write JSX in your markdown documents. It's perfect for blogs, documentation sites, and any content-heavy applications.
+
+## What is MDX?
+
+MDX combines the simplicity of markdown with the power of React components. This allows you to:
+
+- Write content in markdown format
+- Import and use React components directly in your content
+- Use JSX expressions for dynamic content
+- Apply styling through components
+
+## Setting Up MDX in Next.js
+
+There are several approaches to using MDX in Next.js, but one of the most flexible is using `next-mdx-remote`. Let's walk through the setup process.
+
+First, install the necessary dependencies:
+
+```bash
+npm install next-mdx-remote gray-matter
+```
+
+Next, create a utility file to handle MDX content loading:
+
+```tsx
+// lib/mdx.ts
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+
+const postsDirectory = path.join(process.cwd(), 'content/blog')
+
+export async function getAllPosts() {
+  const fileNames = fs.readdirSync(postsDirectory)
+  
+  return fileNames
+    .filter((fileName) => fileName.endsWith('.mdx'))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '')
+      const fullPath = path.join(postsDirectory, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const { data } = matter(fileContents)
+      
+      return {
+        slug,
+        ...data,
+      }
+    })
+}
+
+export async function getPostBySlug(slug) {
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data, content } = matter(fileContents)
+  
+  return {
+    slug,
+    content,
+    ...data,
+  }
+}
+```
+
+## Creating Content Pages
+
+With MDX set up, you can now create blog posts or other content pages using the `.mdx` file extension. Each file should include frontmatter at the top:
+
+```mdx
+---
+title: 'My Blog Post'
+date: '2024-03-18'
+---
+
+# Hello, world!
+
+This is my first MDX blog post.
+```
+
+## Rendering MDX Content
+
+To render MDX content in your Next.js pages, use the `MDXRemote` component:
+
+```tsx
+// app/blog/[slug]/page.tsx
+import { getPostBySlug } from '@/lib/mdx'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+
+export default async function BlogPost({ params }) {
+  const post = await getPostBySlug(params.slug)
+  
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <MDXRemote source={post.content} />
+    </article>
+  )
+}
+```
+
+## Custom Components in MDX
+
+One of the most powerful features of MDX is the ability to use custom components. You can define a set of components to be available in your MDX content:
+
+```tsx
+// components/mdx-components.tsx
+import Image from 'next/image'
+import { CodeBlock } from './code-block'
+import { Callout } from './callout'
+
+export const components = {
+  Image,
+  CodeBlock,
+  Callout,
+}
+```
+
+Then pass these components to the `MDXRemote` component:
+
+```tsx
+<MDXRemote source={post.content} components={components} />
+```
+
+Now you can use these components in your MDX files:
+
+```mdx
+# My Blog Post
+
+<Callout type="info">
+  This is an important note!
+</Callout>
+
+Here's some code:
+
+<CodeBlock language="javascript">
+  const hello = 'world';
+  console.log(hello);
+</CodeBlock>
+```
+
+## Styling MDX Content
+
+You can style your MDX content using Tailwind's Typography plugin, which provides sensible defaults for content-heavy pages:
+
+1. Install the plugin:
+
+```bash
+npm install @tailwindcss/typography
+```
+
+2. Add it to your Tailwind config:
+
+```js
+// tailwind.config.js
+module.exports = {
+  // ...
+  plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
+}
+```
+
+3. Apply the `prose` class to your MDX content container:
+
+```tsx
+<article className="prose prose-slate max-w-none">
+  <MDXRemote source={post.content} />
+</article>
+```
+
+## Conclusion
+
+MDX offers a powerful way to create rich content experiences in your Next.js applications. By combining the simplicity of markdown with the flexibility of React components, you can create dynamic, interactive content while maintaining a straightforward authoring experience.
+
+Whether you're building a blog, documentation site, or content-heavy application, MDX is an excellent choice for managing and rendering your content in Next.js. 

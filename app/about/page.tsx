@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { Github, Twitter, ExternalLink, Mail, Code, Briefcase, GraduationCap } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-
+import Image from 'next/image'
 export default function AboutPage() {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -32,9 +32,11 @@ export default function AboutPage() {
           >
             <div className="relative">
               <div className="absolute -inset-1 rounded-full bg-gradient-to-tl from-red-500 to-yellow-400 opacity-70 blur"></div>
-              <img
+              <Image
                 src="/me.png"
-                alt="Bilal's profile photo"
+                alt="Bilal's profile photo"                
+                width={400}
+                height={400}
                 className="relative w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-full border-4 border-white"
               />
             </div>
