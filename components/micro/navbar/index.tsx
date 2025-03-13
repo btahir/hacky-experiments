@@ -30,14 +30,14 @@ export function NavBar() {
         setMobileMenuOpen(false)
       }
     }
-    
+
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
   // Updated navLinks for micro-experiments section
   const navLinks = [
-    { name: 'Go Back', path: '/', icon: <ArrowLeft className="mr-1 size-4" /> },
+    { name: 'Micro Experiments', path: '/micro' },
     { name: 'Gemini Story', path: '/micro/gemini-story' },
     // Add more micro-experiments here as they are created
   ]
@@ -60,7 +60,7 @@ export function NavBar() {
         <div className='container mx-auto px-4 flex items-center justify-between'>
           {/* Logo */}
           <Link
-            href='/micro'
+            href='/'
             className='font-bold text-xl flex items-center text-yellow-950'
           >
             <img
@@ -68,7 +68,7 @@ export function NavBar() {
               alt='Hacky Experiments'
               className='w-8 h-8 mr-2'
             />
-            <span className='text-red-500 mr-1'>Micro</span>Experiments
+            <span className='text-red-500 mr-1'>Hacky</span>Experiments
           </Link>
 
           {/* Desktop Navigation */}
@@ -84,7 +84,6 @@ export function NavBar() {
                     : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
                 )}
               >
-                {link.icon && link.icon}
                 {link.name}
               </Link>
             ))}
@@ -107,7 +106,7 @@ export function NavBar() {
               className='text-foreground relative z-50'
               onClick={handleMenuToggle}
               aria-label='Open Menu'
-              type="button"
+              type='button'
               aria-expanded={mobileMenuOpen}
             >
               <Menu size={24} />
