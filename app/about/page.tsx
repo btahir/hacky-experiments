@@ -1,18 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import {
-  Github,
-  Twitter,
-  ExternalLink,
-  Mail,
-  Code,
-  Briefcase,
-  GraduationCap,
-} from 'lucide-react'
+import { Github, Twitter, Linkedin } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 export default function AboutPage() {
@@ -114,11 +105,11 @@ export default function AboutPage() {
               <Github size={20} className='text-gray-800' />
             </a>
             <a
-              href='mailto:contact@example.com'
+              href='https://www.linkedin.com/in/biltahir/'
               className='p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
-              aria-label='Email'
+              aria-label='Linkedin'
             >
-              <Mail size={20} className='text-red-500' />
+              <Linkedin size={20} className='text-blue-500' />
             </a>
           </motion.div>
         </div>

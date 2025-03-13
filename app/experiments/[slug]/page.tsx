@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { fetchPost, fetchPostSlugs } from '@/lib/contentful'
-import { formatDate, formatContentfulDate } from '@/lib/utils'
+import { formatContentfulDate } from '@/lib/utils'
 import dynamic from 'next/dynamic'
 
 const DynamicCodeBlock = dynamic(() => import('./CodeBlock'))
