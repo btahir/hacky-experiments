@@ -39,7 +39,7 @@ export default function Home() {
               Here lies the remains of some of my projects. Maybe you&apos;ll
               learn. Mostly you&apos;ll laugh. Definitely you&apos;ll enjoy.
             </p>
-            <div className='flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start'>
+            <div className='flex gap-4 pt-4 justify-center lg:justify-start'>
               <Link href='/experiments'>
                 <Button size='lg' className='gap-2 bg-red-500 hover:bg-red-600'>
                   See Experiments <ArrowRight size={16} />
@@ -59,65 +59,55 @@ export default function Home() {
         </div>
         <motion.div
           className='w-full lg:w-1/2'
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div className='relative'>
+          <div className='relative h-[500px] sm:h-[550px] md:h-[600px]'>
             {/* Decorative elements */}
             <div className='hidden lg:block absolute -top-6 -left-6 w-20 h-20 bg-yellow-200/50 rounded-full blur-xl'></div>
             <div className='hidden lg:block absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/50 rounded-full blur-xl'></div>
             <div className='hidden lg:block absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-yellow-200/50 rounded-full blur-lg'></div>
 
-            {/* Gradient border effect */}
-            <div className='absolute inset-0 bg-yellow-100/50 rounded-2xl p-1'>
-              <div className='absolute inset-0 bg-white/80 backdrop-blur-sm rounded-xl'></div>
+            {/* Nail */}
+            <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10'>
+              <div className='w-6 h-6 rounded-full bg-neutral-700 shadow-md'></div>
+              <div className='w-2 h-4 bg-neutral-800 mx-auto -mt-1 rounded-b-sm shadow-sm'></div>
             </div>
 
-            {/* Pattern overlay */}
-            <div className='absolute inset-0 opacity-10 mix-blend-overlay'>
-              <div
-                className='w-full h-full'
-                style={{
-                  backgroundImage:
-                    'radial-gradient(circle at 20px 20px, #f0f0f0 2px, transparent 0), radial-gradient(circle at 40px 70px, #f0f0f0 2px, transparent 0), radial-gradient(circle at 120px 120px, #f0f0f0 2px, transparent 0)',
-                  backgroundSize: '150px 150px',
-                }}
-              ></div>
-            </div>
+            {/* Single thread */}
+            <div className='absolute top-6 left-1/2 -translate-x-1/2 h-10 w-[1px] bg-neutral-400'></div>
 
-            {/* Main image with softer background */}
-            <div className='relative bg-yellow-950 backdrop-blur-sm rounded-xl overflow-hidden p-6'>
-              {/* Hero image */}
-              <Image
-                alt='Hacky experiments illustration'
-                src='/hero.png'
-                className='w-full h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg border border-neutral-600'
-                width={1000}
-                height={1000}
-              />
+            {/* Hanging frame with shadow */}
+            <motion.div
+              className='absolute top-16 left-1/2 -translate-x-1/2 w-[90%] max-w-[500px]'
+              animate={{
+                rotate: ['-1deg', '1deg', '-1deg'],
+              }}
+              transition={{
+                duration: 6,
+                ease: 'easeInOut',
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+            >
+              {/* Frame border */}
+              <div className='bg-yellow-950 p-3 rounded-xl shadow-lg transform rotate-1'>
+                {/* White mat border */}
+                <div className='bg-neutral-100 p-3 rounded-lg'>
+                  {/* Hero image */}
+                  <Image
+                    alt='Hacky experiments illustration'
+                    src='/hero.png'
+                    className='w-full h-[350px] sm:h-[400px] md:h-[450px] object-cover rounded-lg border border-neutral-600'
+                    width={1000}
+                    height={1000}
+                  />
+                </div>
+              </div>
 
-              {/* Animated dots */}
-              <motion.div
-                className='absolute top-10 right-10 w-12 h-12 bg-yellow-200/50 rounded-full'
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 3,
-                  ease: 'easeInOut',
-                }}
-              ></motion.div>
-              <motion.div
-                className='absolute bottom-16 left-10 w-8 h-8 bg-yellow-200/50 rounded-full'
-                animate={{ y: [0, 10, 0] }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 2.5,
-                  ease: 'easeInOut',
-                  delay: 0.5,
-                }}
-              ></motion.div>
-            </div>
+              {/* Shadow beneath the frame */}
+              <div className='absolute -bottom-4 left-1/2 -translate-x-1/2 w-[95%] h-4 bg-black/20 blur-md rounded-full'></div>
+            </motion.div>
           </div>
         </motion.div>
       </section>
