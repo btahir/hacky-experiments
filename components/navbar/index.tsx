@@ -40,7 +40,7 @@ export function NavBar() {
     { name: 'About', path: '/about' },
     { name: 'Blog', path: '/blog' },
     { name: 'Experiments', path: '/experiments' },
-    { name: 'Micro Apps', path: '/micro-apps' },
+    { name: 'Micro', path: '/micro-experiments' },
   ]
 
   const handleMenuToggle = (e: React.MouseEvent) => {
