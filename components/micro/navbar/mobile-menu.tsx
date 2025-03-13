@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 interface NavLink {
   name: string
   path: string
+  icon?: React.ReactNode
 }
 
 interface MobileMenuProps {
@@ -64,7 +65,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
             >
               <div className='flex justify-between items-center mb-8'>
                 <Link
-                  href='/'
+                  href='/micro'
                   className='font-bold text-xl flex items-center text-yellow-950 pointer-events-auto'
                   onClick={handleLinkClick}
                 >
@@ -73,7 +74,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                     alt='Hacky Experiments'
                     className='w-8 h-8 mr-2'
                   />
-                  <span className='text-red-500 mr-1'>Hacky</span>Experiments
+                  <span className='text-red-500 mr-1'>Micro</span>Experiments
                 </Link>
                 <Button
                   variant='ghost'
@@ -96,13 +97,14 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                     key={link.path}
                     href={link.path}
                     className={cn(
-                      'px-4 py-3 rounded-md text-lg font-medium transition-colors w-full pointer-events-auto',
+                      'px-4 py-3 rounded-md text-lg font-medium transition-colors w-full pointer-events-auto flex items-center',
                       pathname === link.path
                         ? 'bg-yellow-100 text-yellow-700'
                         : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
                     )}
                     onClick={handleLinkClick}
                   >
+                    {link.icon && link.icon}
                     {link.name}
                   </Link>
                 ))}

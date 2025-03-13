@@ -15,14 +15,15 @@ import { motion } from 'framer-motion'
 
 // List of micro experiments
 const microExperiments: any = [
-  // {
-  //   id: 'test-app',
-  //   title: 'Test App',
-  //   description: 'A simple test application to demonstrate basic functionality',
-  //   icon: '🧪',
-  //   tags: ['Demo', 'Basic'],
-  //   path: '/test-app'
-  // },
+  {
+    id: 'gemini-story',
+    title: 'Gemini Story Generator',
+    description:
+      "Generate visual stories using Google's Gemini AI model based on your prompts",
+    icon: '🤖',
+    tags: ['AI', 'Gemini', 'Visual Stories'],
+    path: '/gemini-story',
+  },
 ]
 
 export default function MicroExperimentsPage() {
@@ -55,10 +56,7 @@ export default function MicroExperimentsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Link
-                href={`/micro${experiment.path}`}
-                className='block h-full'
-              >
+              <Link href={`/micro${experiment.path}`} className='block h-full'>
                 <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                   <CardHeader>
                     <div className='flex justify-between items-start'>

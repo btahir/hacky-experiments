@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Menu } from 'lucide-react'
+import { Github, Menu, ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { MobileMenu } from './mobile-menu'
@@ -35,12 +35,11 @@ export function NavBar() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
+  // Updated navLinks for micro-experiments section
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Experiments', path: '/experiments' },
-    { name: 'Micro', path: '/micro' },
+    { name: 'Go Back', path: '/', icon: <ArrowLeft className="mr-1 size-4" /> },
+    { name: 'Gemini Story', path: '/micro/gemini-story' },
+    // Add more micro-experiments here as they are created
   ]
 
   const handleMenuToggle = (e: React.MouseEvent) => {
@@ -61,7 +60,7 @@ export function NavBar() {
         <div className='container mx-auto px-4 flex items-center justify-between'>
           {/* Logo */}
           <Link
-            href='/'
+            href='/micro'
             className='font-bold text-xl flex items-center text-yellow-950'
           >
             <img
@@ -69,7 +68,7 @@ export function NavBar() {
               alt='Hacky Experiments'
               className='w-8 h-8 mr-2'
             />
-            <span className='text-red-500 mr-1'>Hacky</span>Experiments
+            <span className='text-red-500 mr-1'>Micro</span>Experiments
           </Link>
 
           {/* Desktop Navigation */}
@@ -79,12 +78,13 @@ export function NavBar() {
                 key={link.path}
                 href={link.path}
                 className={cn(
-                  'px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  'px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center',
                   pathname === link.path
                     ? 'bg-yellow-100 text-yellow-700'
                     : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
                 )}
               >
+                {link.icon && link.icon}
                 {link.name}
               </Link>
             ))}
