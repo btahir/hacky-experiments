@@ -97,8 +97,10 @@ export default async function ExperimentsPage({
                           src={post.heroImage.url}
                           alt={post.heroImage.title || post.title}
                           className='object-cover w-full h-full transition-transform duration-200 group-hover:scale-105'
-                          width={post.heroImage.width}
-                          height={post.heroImage.height}
+                          width={post.heroImage.width || 800}
+                          height={post.heroImage.height || 600}
+                          sizes='(max-width: 768px) 100vw, 33vw'
+                          priority={startIndex <= 3}
                         />
                       </div>
                     )}
@@ -123,83 +125,24 @@ export default async function ExperimentsPage({
               ))}
             </div>
 
-            {/* Server-side pagination - generate links to different pages */}
+            {/* Server-side pagination - simplified to just next/previous */}
             {totalPages > 1 && (
               <div className='mt-12 flex justify-center'>
-                <nav className='flex items-center gap-1'>
+                <nav className='flex items-center gap-4'>
                   {currentPage > 1 && (
                     <Link
                       href={`/experiments?page=${currentPage - 1}${
                         searchQuery ? `&search=${searchQuery}` : ''
                       }`}
-                      className='inline-flex items-center gap-1 px-2.5 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
+                      className='inline-flex items-center gap-1 px-3 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
                     >
                       <span>←</span>
-                      <span className='hidden sm:inline'>Previous</span>
+                      <span>Previous</span>
                     </Link>
                   )}
 
-                  <div className='flex items-center gap-1'>
-                    {/* Generate pagination numbers with ellipsis */}
-                    {Array.from({ length: totalPages }).map((_, i) => {
-                      const pageNumber = i + 1
-                      // Always show first page, last page, current page, and pages around current
-                      const showPageNumber =
-                        pageNumber === 1 ||
-                        pageNumber === totalPages ||
-                        (pageNumber >= currentPage - 1 &&
-                          pageNumber <= currentPage + 1) ||
-                        (pageNumber === 2 && currentPage <= 4) ||
-                        (pageNumber === totalPages - 1 &&
-                          currentPage >= totalPages - 3)
-
-                      // Show ellipsis after first page if needed
-                      if (pageNumber === 2 && currentPage > 4) {
-                        return (
-                          <span
-                            key={`ellipsis-start`}
-                            className='inline-flex h-9 w-9 items-center justify-center'
-                          >
-                            …
-                          </span>
-                        )
-                      }
-
-                      // Show ellipsis before last page if needed
-                      if (
-                        pageNumber === totalPages - 1 &&
-                        currentPage < totalPages - 3
-                      ) {
-                        return (
-                          <span
-                            key={`ellipsis-end`}
-                            className='inline-flex h-9 w-9 items-center justify-center'
-                          >
-                            …
-                          </span>
-                        )
-                      }
-
-                      if (showPageNumber) {
-                        return (
-                          <Link
-                            key={i}
-                            href={`/experiments?page=${pageNumber}${
-                              searchQuery ? `&search=${searchQuery}` : ''
-                            }`}
-                            className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm ${
-                              currentPage === pageNumber
-                                ? 'bg-primary text-primary-foreground'
-                                : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                            }`}
-                          >
-                            {pageNumber}
-                          </Link>
-                        )
-                      }
-
-                      return null
-                    })}
+                  <div className='text-sm font-medium'>
+                    Page {currentPage} of {totalPages}
                   </div>
 
                   {currentPage < totalPages && (
@@ -207,9 +150,9 @@ export default async function ExperimentsPage({
                       href={`/experiments?page=${currentPage + 1}${
                         searchQuery ? `&search=${searchQuery}` : ''
                       }`}
-                      className='inline-flex items-center gap-1 px-2.5 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
+                      className='inline-flex items-center gap-1 px-3 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
                     >
-                      <span className='hidden sm:inline'>Next</span>
+                      <span>Next</span>
                       <span>→</span>
                     </Link>
                   )}
