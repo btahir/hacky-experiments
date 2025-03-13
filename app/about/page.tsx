@@ -66,7 +66,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <span className='text-red-500'>Hello,</span> I'm Bilal
+            <span className='text-red-500'>Hello,</span> I&apos;m Bilal
           </motion.h1>
 
           <motion.div
@@ -132,8 +132,8 @@ export default function AboutPage() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <blockquote className='text-2xl sm:text-3xl italic text-gray-700 text-center'>
-            "All life is an experiment. The more experiments you make the
-            better."
+            &quot;All life is an experiment. The more experiments you make the
+            better.&quot;
           </blockquote>
           <p className='text-lg text-gray-500 mt-4 text-center'>
             — Ralph Waldo Emerson
@@ -150,14 +150,14 @@ export default function AboutPage() {
         >
           <div className='text-lg text-gray-700 space-y-6'>
             <p>
-              Hello! I'm Bilal. I like to build things and try out some weird
-              hacky experiments. I'm at my happiest in the thick of the creation
-              process, going from ideation to execution.
+              Hello! I&apos;m Bilal. I like to build things and try out some
+              weird hacky experiments. I&apos;m at my happiest in the thick of
+              the creation process, going from ideation to execution.
             </p>
             <p>
-              Things don't always work out, but I love the process and hope to
-              share some of it here. Would love to have you along for the ride.
-              Let's have an adventure together!
+              Things don&apos;t always work out, but I love the process and hope
+              to share some of it here. Would love to have you along for the
+              ride. Let&apos;s have an adventure together!
             </p>
             <p>
               You can find some of my experiments{' '}
@@ -167,8 +167,8 @@ export default function AboutPage() {
               >
                 here
               </Link>
-              . If you're curious about how I build stuff, you can read about my
-              process{' '}
+              . If you&apos;re curious about how I build stuff, you can read
+              about my process{' '}
               <Link
                 href='/process'
                 className='text-red-500 hover:text-red-700 font-medium underline underline-offset-2'
@@ -192,10 +192,10 @@ export default function AboutPage() {
         >
           <Card className='bg-gradient-to-r from-red-500 to-yellow-500 text-white shadow-lg'>
             <CardContent className='p-8'>
-              <h3 className='text-2xl font-bold mb-4'>Let's Connect!</h3>
+              <h3 className='text-2xl font-bold mb-4'>Let&apos;s Connect!</h3>
               <p className='mb-6'>
-                Follow me on Twitter to catch the latest shenanigans I'm getting
-                myself into.
+                Follow me on Twitter to catch the latest shenanigans I&apos;m
+                getting myself into.
               </p>
               <a
                 href='https://twitter.com/deepwhitman'
@@ -211,31 +211,5 @@ export default function AboutPage() {
         </motion.div>
       </div>
     </main>
-  )
-}
-
-function TimelineItem({
-  title,
-  date,
-  description,
-  icon,
-}: {
-  title: string
-  date: string
-  description: string
-  icon: React.ReactNode
-}) {
-  return (
-    <div className='flex'>
-      <div className='flex flex-col items-center mr-4'>
-        <div className='rounded-full p-3 bg-white shadow-md'>{icon}</div>
-        <div className='h-full w-0.5 bg-gray-200 mt-3'></div>
-      </div>
-      <div className='pt-1 pb-8'>
-        <h3 className='text-xl font-bold'>{title}</h3>
-        <p className='text-sm text-gray-500 mb-2'>{date}</p>
-        <p className='text-gray-700'>{description}</p>
-      </div>
-    </div>
   )
 }
