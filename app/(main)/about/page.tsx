@@ -60,7 +60,7 @@ export default function AboutPage() {
               Developer
             </Badge>
             <Badge className='bg-green-100 text-green-700 hover:bg-green-200'>
-              Thinker
+              (Over) Thinker
             </Badge>
           </motion.div>
 
@@ -90,6 +90,8 @@ export default function AboutPage() {
             </a>
             <a
               href='https://www.linkedin.com/in/biltahir/'
+              target='_blank'
+              rel='noreferrer'
               className='p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
               aria-label='Linkedin'
             >

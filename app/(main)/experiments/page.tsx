@@ -90,9 +90,9 @@ export default async function ExperimentsPage({
                   key={post.sys.id}
                   className='group'
                 >
-                  <Card className='h-full flex flex-col transition-all duration-200 hover:shadow-lg'>
+                  <Card className='h-full flex flex-col transition-all duration-200 hover:shadow-lg pt-0'>
                     {post.heroImage?.url && (
-                      <div className='relative w-full h-48 overflow-hidden rounded-t-lg'>
+                      <div className='relative w-full h-64 overflow-hidden rounded-t-lg'>
                         <Image
                           src={post.heroImage.url}
                           alt={post.heroImage.title || post.title}
