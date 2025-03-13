@@ -23,6 +23,18 @@ export function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Handle escape key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [mobileMenuOpen])
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -30,6 +42,11 @@ export function NavBar() {
     { name: 'Experiments', path: '/experiments' },
     { name: 'Micro Apps', path: '/micro-apps' },
   ]
+
+  const handleMenuToggle = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setMobileMenuOpen(true)
+  }
 
   return (
     <>
@@ -87,9 +104,11 @@ export function NavBar() {
             <Button
               variant='ghost'
               size='icon'
-              className='text-foreground'
-              onClick={() => setMobileMenuOpen(true)}
+              className='text-foreground relative z-50'
+              onClick={handleMenuToggle}
               aria-label='Open Menu'
+              type="button"
+              aria-expanded={mobileMenuOpen}
             >
               <Menu size={24} />
             </Button>
@@ -101,6 +120,7 @@ export function NavBar() {
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
+        navLinks={navLinks}
       />
     </>
   )
