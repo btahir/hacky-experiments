@@ -2,6 +2,7 @@
 import fs from 'fs'
 import path from 'path'
 import { getAllPosts } from '../lib/mdx'
+import { fetchAllPosts } from '../lib/contentful'
 
 // Base URL of the website
 const BASE_URL = 'https://hackyexperiments.com' // Replace with your actual domain
@@ -48,12 +49,28 @@ async function generateSitemap() {
 `
     }
 
-    // Add blog posts to sitemap
-    const blogPosts = await getAllPosts()
-    for (const post of blogPosts) {
+    // Add blog posts to sitemap from MDX
+    console.log('Fetching MDX blog posts...')
+    const mdxBlogPosts = await getAllPosts()
+    for (const post of mdxBlogPosts) {
       sitemap += `  <url>
     <loc>${BASE_URL}/blog/${post.slug}</loc>
     <lastmod>${new Date(post.date).toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+`
+    }
+
+    // Add experiments to sitemap from Contentful
+    console.log('Fetching experiments from Contentful...')
+    const experiments = await fetchAllPosts()
+    for (const experiment of experiments) {
+      sitemap += `  <url>
+    <loc>${BASE_URL}/experiments/${experiment.slug}</loc>
+    <lastmod>${
+      new Date(experiment.publishDate).toISOString().split('T')[0]
+    }</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
