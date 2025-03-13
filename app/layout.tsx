@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: 'Hacky Experiments',
   description:
     'An open source playground for my coding experiments, side projects, and technical explorations.',
-  keywords: ['experiments', 'coding', 'projects', 'open source', 'hacky labs'],
+  keywords: ['experiments', 'coding', 'projects', 'open source'],
 }
 
 export default function RootLayout({

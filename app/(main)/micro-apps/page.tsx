@@ -42,8 +42,7 @@ export default function MicroAppsPage() {
           </h1>
           <p className='text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto'>
             A collection of small web applications built to showcase specific
-            technologies and techniques. Each micro app is self-contained and
-            demonstrates different aspects of web development.
+            technologies and techniques. The code is part of the codebase here.
           </p>
         </motion.div>
 
