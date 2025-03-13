@@ -28,6 +28,7 @@ export function NavBar() {
     { name: 'About', path: '/about' },
     { name: 'Blog', path: '/blog' },
     { name: 'Experiments', path: '/experiments' },
+    { name: 'Micro Apps', path: '/micro-apps' },
   ]
 
   return (

@@ -36,9 +36,6 @@ export default function MicroAppsPage() {
           transition={{ duration: 0.5 }}
           className='text-center mb-16'
         >
-          <Badge className='mb-4 text-sm py-1 px-3 bg-yellow-100 text-yellow-800 hover:bg-yellow-200'>
-            Micro Applications
-          </Badge>
           <h1 className='font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight text-foreground mb-6'>
             Explore My{' '}
             <span className='text-red-500 font-bold'>Micro Apps</span>

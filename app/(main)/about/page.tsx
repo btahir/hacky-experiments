@@ -28,9 +28,9 @@ export default function AboutPage() {
               <Image
                 src='/me.png'
                 alt="Bilal's profile photo"
-                width={400}
-                height={400}
-                className='relative w-32 h-32 sm:w-40 sm:h-40 object-cover rounded-full border-4 border-white'
+                width={800}
+                height={800}
+                className='relative w-48 h-48 sm:w-56 sm:h-56 object-cover rounded-full border-4 border-white'
               />
             </div>
           </motion.div>
