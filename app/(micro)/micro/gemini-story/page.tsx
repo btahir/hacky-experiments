@@ -116,13 +116,6 @@ export default function GeminiStory() {
 
       const responseData = await response.json()
 
-      // Store raw response without image data to avoid overwhelming the console
-      const scenesSummary =
-        responseData.scenes?.map((scene: StoryScene) => ({
-          text: scene.text,
-          hasImage: !!scene.imageUrl && scene.imageUrl.length > 0,
-        })) || []
-
       if (!response.ok) {
         const errorData = responseData as ApiErrorResponse
         console.error('API error:', errorData)
