@@ -1,7 +1,7 @@
 # Gemini Story Creator
 
 A web application that leverages Google's Gemini AI model to transform user prompts into visual stories with text and matching imagery.
-The primary UI Code is located at `app/(micro)/micro/gemini-story`.
+The code for this application is primarily located at `app/(micro)/micro/gemini-story`.
 
 ## Flow Overview
 
