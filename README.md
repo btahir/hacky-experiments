@@ -15,7 +15,7 @@ Welcome to Hacky Experiments! This repository is home to my coding experiments, 
 Inside this repository you'll find:
 - **Experiments**: A collection of coding experiments and side projects. These are external projects.
 - **Blog**: Posts and insights on my technical explorations.
-- **Microapps**: Small, focused applications designed for quick demos. They will be part of the codebase here.
+- **Micro Experiments**: Small, focused experiments designed for quick demos. They will be part of the codebase here.
 
 Each project comes with its own setup instructions—simply navigate to the project directory and check out its README for installation and usage details.
 
