@@ -65,9 +65,9 @@ export default function Home() {
         >
           <div className='relative'>
             {/* Decorative elements */}
-            <div className='absolute -top-6 -left-6 w-20 h-20 bg-yellow-200/50 rounded-full blur-xl'></div>
-            <div className='absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/50 rounded-full blur-xl'></div>
-            <div className='absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-yellow-200/50 rounded-full blur-lg'></div>
+            <div className='hidden lg:block absolute -top-6 -left-6 w-20 h-20 bg-yellow-200/50 rounded-full blur-xl'></div>
+            <div className='hidden lg:block absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/50 rounded-full blur-xl'></div>
+            <div className='hidden lg:block absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-yellow-200/50 rounded-full blur-lg'></div>
 
             {/* Gradient border effect */}
             <div className='absolute inset-0 bg-yellow-100/50 rounded-2xl p-1'>
