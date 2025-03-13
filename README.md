@@ -2,7 +2,6 @@
 
 <div align="center">
   <img src="app/opengraph-image.png" alt="Open Deep Research Demo" width="800"/>
-  <p><em>Note: Demo is sped up for brevity</em></p>
 </div>
 
 **An open source playground for my experiments**
