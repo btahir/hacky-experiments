@@ -15,13 +15,9 @@ export default async function BlogPage() {
     <main className='min-h-screen bg-yellow-50'>
       <div className='container mx-auto px-4 py-16 lg:py-24'>
         <div className='text-center mb-12'>
-          <Badge className='mb-4 text-sm py-1 px-3 bg-yellow-100 text-yellow-800 hover:bg-yellow-200'>
-            Latest Thoughts
-          </Badge>
           <h1 className='text-4xl font-bold mb-4'>Blog</h1>
           <p className='text-muted-foreground text-lg max-w-2xl mx-auto'>
-            Explore my latest articles, tutorials, and random musings about
-            code, design, and digital experiments.
+            Some thoughts, I had.
           </p>
         </div>
 
