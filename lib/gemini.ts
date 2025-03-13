@@ -18,6 +18,13 @@ const generationPlainTextConfig = {
   responseMimeType: 'text/plain',
 }
 
+const generationFlashExpConfig = {
+  temperature: 1,
+  maxOutputTokens: 8192,
+  responseMimeType: 'text/plain',
+  responseModalities: ['text', 'image'],
+}
+
 const safetySettings = [
   {
     category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -47,6 +54,12 @@ export const geminiFlashModel = genAI.getGenerativeModel({
   model: 'gemini-2.0-flash',
   safetySettings,
   generationConfig: generationJsonConfig,
+})
+
+export const geminiFlashExpModel = genAI.getGenerativeModel({
+  model: 'gemini-2.0-flash-exp',
+  safetySettings,
+  generationConfig: generationFlashExpConfig,
 })
 
 export const geminiFlashThinkingModel = genAI.getGenerativeModel({
