@@ -1,10 +1,15 @@
-# 🧪 Hacky Experiments
+# Hacky Experiments
+
+<div align="center">
+  <img src="app/opengraph-image.png" alt="Open Deep Research Demo" width="800"/>
+  <p><em>Note: Demo is sped up for brevity</em></p>
+</div>
 
 **An open source playground for my experiments**
 
 ## 👋 Welcome
 
-Welcome to Hacky Experiments! This repository is home to my coding experiments, side projects, and technical explorations. Each project represents a unique journey into technology, problem-solving, and creative coding. I’m passionate about building, iterating quickly, and learning along the way.
+Welcome to Hacky Experiments! This repository is home to my coding experiments, side projects, and technical explorations. Each project represents a unique journey into technology, problem-solving, and creative coding. I'm passionate about building, iterating quickly, and learning along the way.
 
 ## 🔍 What's Inside
 
@@ -18,8 +23,8 @@ Each project comes with its own setup instructions—simply navigate to the proj
 ## 🚀 Getting Started
 
 1. Clone the repository.
-2. Choose the project you’re interested in.
-3. Follow the instructions provided in the project’s README file.
+2. Choose the project you're interested in.
+3. Follow the instructions provided in the project's README file.
 
 ## 🛠️ Technologies
 
@@ -50,7 +55,7 @@ Have questions or want to reach out? You can:
 > "All life is an experiment. The more experiments you make, the better."  
 > — Ralph Waldo Emerson
 
-If you’re curious about how I build stuff and continuously improve through rapid iteration, you’re in the right place. Let’s build, experiment, and embark on this adventure together!
+If you're curious about how I build stuff and continuously improve through rapid iteration, you're in the right place. Let's build, experiment, and embark on this adventure together!
 
 ---
 
