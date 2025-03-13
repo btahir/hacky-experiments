@@ -158,108 +158,74 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className='text-muted-foreground'>
+                  <p className='text-muted-foreground h-28'>
                     Browse through a collection of my experimental projects,
                     prototypes, and creative explorations. These are the
                     playgrounds where I test new technologies and ideas.
                   </p>
                 </CardContent>
-                <CardFooter className='flex justify-between items-center pt-2'>
-                  <div className='flex space-x-1'>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      React
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      Next.js
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      TypeScript
-                    </Badge>
-                  </div>
+                <CardFooter className='flex justify-end items-center pt-2'>
                   <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
           </motion.div>
 
-          {/* Code Snippets Card */}
+          {/* Blog Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Link href='/snippets' className='block h-full'>
+            <Link href='/blog' className='block h-full'>
               <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='pb-2'>
                   <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Code size={24} />
                   </div>
-                  <CardTitle className='text-2xl'>Code Snippets</CardTitle>
+                  <CardTitle className='text-2xl'>Blog</CardTitle>
                   <CardDescription>
-                    Useful code fragments and programming solutions
+                    Thoughts, tutorials, and technical insights
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className='text-muted-foreground'>
-                    A library of reusable code snippets, clever hacks, and
-                    programming solutions that I&apos;ve developed over time.
-                    Find useful code for common programming challenges.
+                  <p className='text-muted-foreground h-28'>
+                    My digital journal where I share programming tips, development stories,
+                    and deep dives into technical topics that interest me and might help others.
                   </p>
                 </CardContent>
-                <CardFooter className='flex justify-between items-center pt-2'>
-                  <div className='flex space-x-1'>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      JavaScript
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      Python
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      CSS
-                    </Badge>
-                  </div>
+                <CardFooter className='flex justify-end items-center pt-2'>
                   <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
           </motion.div>
 
-          {/* Products Card */}
+          {/* Microsites Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Link href='/products' className='block h-full'>
+            <Link href='/microsites' className='block h-full'>
               <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='pb-2'>
                   <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
                     <Package size={24} />
                   </div>
-                  <CardTitle className='text-2xl'>Products</CardTitle>
+                  <CardTitle className='text-2xl'>Microsites</CardTitle>
                   <CardDescription>
-                    Complete products and fully developed applications
+                    Quick micro apps demonstrating cool technologies
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className='text-muted-foreground'>
-                    Polished and production-ready applications that solve
-                    real-world problems. These are my most refined works,
-                    developed with a focus on user experience and functionality.
+                  <p className='text-muted-foreground h-28'>
+                    A collection of small, focused web applications built to showcase
+                    specific technologies and techniques. Each microsite demonstrates
+                    a particular concept in a concise, interactive way.
                   </p>
                 </CardContent>
-                <CardFooter className='flex justify-between items-center pt-2'>
-                  <div className='flex space-x-1'>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      SaaS
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      Mobile
-                    </Badge>
-                    <Badge variant='outline' className='bg-yellow-50'>
-                      Web
-                    </Badge>
-                  </div>
+                <CardFooter className='flex justify-end items-center pt-2'>
                   <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
