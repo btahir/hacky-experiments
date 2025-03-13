@@ -65,7 +65,7 @@ export default async function ExperimentsPage({
         {filteredPosts.length === 0 ? (
           <div className='text-center py-12'>
             <p className='text-lg text-gray-600'>
-              No experiments found matching "{searchQuery}"
+              No experiments found matching &quot;{searchQuery}&quot;
             </p>
             <Link
               href='/experiments'
