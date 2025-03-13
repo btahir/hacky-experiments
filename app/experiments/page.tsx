@@ -99,19 +99,64 @@ export default async function ExperimentsPage({
               )}
 
               <div className='flex items-center gap-1'>
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <Link
-                    key={i}
-                    href={`/experiments?page=${i + 1}`}
-                    className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm ${
-                      currentPage === i + 1
-                        ? 'bg-primary text-primary-foreground'
-                        : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    {i + 1}
-                  </Link>
-                ))}
+                {/* Generate pagination numbers with ellipsis */}
+                {Array.from({ length: totalPages }).map((_, i) => {
+                  const pageNumber = i + 1
+                  // Always show first page, last page, current page, and pages around current
+                  const showPageNumber =
+                    pageNumber === 1 ||
+                    pageNumber === totalPages ||
+                    (pageNumber >= currentPage - 1 &&
+                      pageNumber <= currentPage + 1) ||
+                    (pageNumber === 2 && currentPage <= 4) ||
+                    (pageNumber === totalPages - 1 &&
+                      currentPage >= totalPages - 3)
+
+                  // Show ellipsis after first page if needed
+                  if (pageNumber === 2 && currentPage > 4) {
+                    return (
+                      <span
+                        key={`ellipsis-start`}
+                        className='inline-flex h-9 w-9 items-center justify-center'
+                      >
+                        …
+                      </span>
+                    )
+                  }
+
+                  // Show ellipsis before last page if needed
+                  if (
+                    pageNumber === totalPages - 1 &&
+                    currentPage < totalPages - 3
+                  ) {
+                    return (
+                      <span
+                        key={`ellipsis-end`}
+                        className='inline-flex h-9 w-9 items-center justify-center'
+                      >
+                        …
+                      </span>
+                    )
+                  }
+
+                  if (showPageNumber) {
+                    return (
+                      <Link
+                        key={i}
+                        href={`/experiments?page=${pageNumber}`}
+                        className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm ${
+                          currentPage === pageNumber
+                            ? 'bg-primary text-primary-foreground'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        {pageNumber}
+                      </Link>
+                    )
+                  }
+
+                  return null
+                })}
               </div>
 
               {currentPage < totalPages && (
