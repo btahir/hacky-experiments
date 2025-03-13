@@ -60,7 +60,6 @@ export default function GeminiStory() {
   const [storyScenes, setStoryScenes] = useState<StoryScene[]>([])
   const [isGeneratingStory, setIsGeneratingStory] = useState(false)
   const [storyError, setStoryError] = useState<string | null>(null)
-  const [rawStoryResponse, setRawStoryResponse] = useState<string>('')
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
   const [autoSlide, setAutoSlide] = useState(true)
   const autoSlideIntervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -102,7 +101,6 @@ export default function GeminiStory() {
     setIsGeneratingStory(true)
     setStoryError(null)
     setStoryScenes([])
-    setRawStoryResponse('')
     setCurrentSceneIndex(0)
 
     try {
@@ -124,7 +122,6 @@ export default function GeminiStory() {
           text: scene.text,
           hasImage: !!scene.imageUrl && scene.imageUrl.length > 0,
         })) || []
-      setRawStoryResponse(JSON.stringify({ scenes: scenesSummary }, null, 2))
 
       if (!response.ok) {
         const errorData = responseData as ApiErrorResponse
