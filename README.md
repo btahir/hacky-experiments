@@ -1,7 +1,7 @@
 # Hacky Experiments
 
 <div align="center">
-  <img src="app/opengraph-image.png" alt="Open Deep Research Demo" width="800"/>
+  <img src="app/opengraph-image.png" alt="Open Deep Research Demo" width="100%"/>
 </div>
 
 **An open source playground for my experiments**
