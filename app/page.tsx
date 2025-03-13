@@ -12,12 +12,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import {
-  Beaker,
-  Code,
-  Package,
-  ArrowRight,
-} from 'lucide-react'
+import { Beaker, Code, Package, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -40,8 +36,8 @@ export default function Home() {
               <span className='text-red-500 font-bold'>hacky experiments!</span>
             </h1>
             <p className='text-muted-foreground text-lg md:text-xl'>
-              Here lies the remains of some of my projects. Maybe you'll learn.
-              Mostly you'll laugh. Definitely you'll enjoy.
+              Here lies the remains of some of my projects. Maybe you&apos;ll
+              learn. Mostly you&apos;ll laugh. Definitely you&apos;ll enjoy.
             </p>
             <div className='flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start'>
               <Link href='/experiments'>
@@ -50,7 +46,11 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href='/about'>
-                <Button size='lg' variant='outline' className='border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600'>
+                <Button
+                  size='lg'
+                  variant='outline'
+                  className='border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600'
+                >
                   About Me
                 </Button>
               </Link>
@@ -89,10 +89,12 @@ export default function Home() {
             {/* Main image with softer background */}
             <div className='relative bg-neutral-800 backdrop-blur-sm rounded-xl overflow-hidden p-6'>
               {/* Hero image */}
-              <img
+              <Image
                 alt='Hacky experiments illustration'
                 src='/hero.png'
                 className='w-full h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg border border-neutral-600'
+                width={1000}
+                height={1000}
               />
 
               {/* Animated dots */}
@@ -133,7 +135,7 @@ export default function Home() {
           </h2>
           <p className='text-muted-foreground text-lg max-w-2xl mx-auto'>
             A collection of weird, wonderful, and occasionally useful things
-            I've built.
+            I&apos;ve built.
           </p>
         </motion.div>
 
@@ -200,8 +202,8 @@ export default function Home() {
                 <CardContent>
                   <p className='text-muted-foreground'>
                     A library of reusable code snippets, clever hacks, and
-                    programming solutions that I've developed over time. Find
-                    useful code for common programming challenges.
+                    programming solutions that I&apos;ve developed over time.
+                    Find useful code for common programming challenges.
                   </p>
                 </CardContent>
                 <CardFooter className='flex justify-between items-center pt-2'>

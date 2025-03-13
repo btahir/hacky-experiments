@@ -12,22 +12,6 @@ export default function AboutPage() {
     visible: { opacity: 1, y: 0 },
   }
 
-  const skills = [
-    'JavaScript',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'Node.js',
-    'Python',
-    'GraphQL',
-    'CSS/SCSS',
-    'Tailwind CSS',
-    'SQL',
-    'AWS',
-    'Firebase',
-    'Docker',
-  ]
-
   return (
     <main className='min-h-screen bg-yellow-50 py-20'>
       <div className='container mx-auto px-4 sm:px-6 max-w-5xl'>
