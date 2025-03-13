@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Github, Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { MobileMenu } from './MobileMenu'
+import { MobileMenu } from './mobile-menu'
 
 export function NavBar() {
   const pathname = usePathname()
@@ -26,10 +26,8 @@ export function NavBar() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Experiments', path: '/experiments' },
-    { name: 'Microsites', path: '/microsites' },
-    { name: 'Scripts', path: '/scripts' },
     { name: 'Blog', path: '/blog' },
+    { name: 'Experiments', path: '/experiments' },
   ]
 
   return (
@@ -44,8 +42,15 @@ export function NavBar() {
       >
         <div className='container mx-auto px-4 flex items-center justify-between'>
           {/* Logo */}
-          <Link href='/' className='font-bold text-xl flex items-center text-yellow-950'>
-            <img src='/icon.svg' alt='Hacky Experiments' className='w-8 h-8 mr-2' />
+          <Link
+            href='/'
+            className='font-bold text-xl flex items-center text-yellow-950'
+          >
+            <img
+              src='/icon.svg'
+              alt='Hacky Experiments'
+              className='w-8 h-8 mr-2'
+            />
             <span className='text-red-500 mr-1'>Hacky</span>Experiments
           </Link>
 
