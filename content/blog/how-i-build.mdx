@@ -1,0 +1,34 @@
+export const metadata = {
+  title: 'How I Build Fast (Without Being Actually Fast)',
+  date: '2025-03-13',
+  excerpt: 'Learn how I build fast without being actually fast.',
+  tags: ['Process'],
+}
+
+
+---
+I first wrote this post years ago when I was just starting out. Since then, I've learned a lot and my methods have evolved (a bit), but the principle remains the same: **I like to ship fast**.
+
+I believe there is something powerful about momentum. When you are constantly shipping, it gives you:
+- A **confidence boost**
+- A state of **flow**
+- A **feedback loop** that helps you improve quickly
+
+As Naval Ravikant says: *your rate of learning is not the number of hours you put into a process but the number of iterations*.
+
+I've probably launched close to 100 projects by now—honestly, I lost count a while back. It's actually not that hard, and I wanted to share my process here.
+
+**Everyone has their hammer, and mine is:**
+- **Next.js**
+- **Tailwind CSS**
+- **Shadcn**
+
+This setup lets me deploy apps that look great. I use Vercel to deploy them, but you can choose from many alternatives like Netlify or Cloudflare. Vercel offers a great developer experience and first-class support for Next.js, making it a product I’m very happy with.
+
+For my authentication and database needs (two in one!), I rely on **Supabase**. Although I've experimented with other solutions like PlanetScale and Clerk—and might try them again in the future—Supabase works for now. My only gripe is its pricing, which can get expensive. I've been tempted to set up my own Postgres database and roll my own auth.
+
+For payments, I mainly use **Stripe**. I've also tried Lemon Squeezy, which worked fine, though I've heard of some issues with their service. Do your own research, but Stripe is a solid starting point.
+
+Once you build projects on each layer—**basic**, **basic + auth**, **basic + auth + payment**—you create these Lego pieces that you can quickly reuse. With AI, reconfiguring them becomes even easier, often with just a few commands.
+
+It's never been easier to build. So build, do anything—just move!
