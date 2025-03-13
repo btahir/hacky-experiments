@@ -5,6 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { fetchPost, fetchPostSlugs } from '@/lib/contentful'
 import { formatContentfulDate } from '@/lib/utils'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 const DynamicCodeBlock = dynamic(() => import('./CodeBlock'))
 
@@ -176,12 +177,12 @@ export default async function ExperimentPage({
           // Handle image assets
           return (
             <div className='my-6'>
-              <img
+              <Image
                 src={asset.url}
                 alt={asset.title || 'Embedded image'}
                 className='rounded-lg max-w-full'
-                width={asset.width}
-                height={asset.height}
+                width={asset.width || 1000}
+                height={asset.height || 1000}
               />
               {asset.description && (
                 <p className='text-sm text-gray-500 dark:text-gray-400 mt-2'>
