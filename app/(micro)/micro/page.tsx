@@ -56,7 +56,7 @@ export default function MicroExperimentsPage() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Link
-                href={`/micro-experiments${experiment.path}`}
+                href={`/micro${experiment.path}`}
                 className='block h-full'
               >
                 <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>

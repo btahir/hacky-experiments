@@ -80,7 +80,7 @@ async function generateSitemap() {
     // Add micro-experiments to sitemap
     for (const experiment of MICRO_EXPERIMENTS) {
       sitemap += `  <url>
-    <loc>${BASE_URL}/micro-experiments/${experiment}</loc>
+    <loc>${BASE_URL}/micro/${experiment}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

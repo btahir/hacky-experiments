@@ -198,7 +198,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Link href='/micro-experiments' className='block h-full'>
+            <Link href='/micro' className='block h-full'>
               <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
                 <CardHeader className='h-32 sm:h-40'>
                   <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
