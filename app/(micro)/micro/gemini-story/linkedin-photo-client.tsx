@@ -347,7 +347,7 @@ export default function LinkedinPhotoConverter() {
                 <Button
                   type="submit"
                   disabled={isProcessing || !selectedFile}
-                  className="w-full"
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   variant="default"
                 >
                   {isProcessing ? (
@@ -394,28 +394,38 @@ export default function LinkedinPhotoConverter() {
                 <div className="space-y-4">
                   {/* View Toggle */}
                   <div className="flex justify-end">
-                    <div className="inline-flex items-center border rounded-lg overflow-hidden">
+                    <div className="inline-flex items-center rounded-md overflow-hidden shadow-sm">
                       <Button
-                        variant={compareView ? "default" : "outline"}
+                        variant="ghost"
                         size="sm"
                         onClick={() => setCompareView(true)}
-                        className={compareView 
-                          ? "" 
-                          : "border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
-                        }
+                        className={cn(
+                          "px-4 py-2 rounded-l-md rounded-r-none border-r transition-all duration-200",
+                          compareView
+                            ? "bg-purple-600 text-white hover:bg-purple-700"
+                            : "bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/40 dark:text-purple-100 dark:hover:bg-purple-800/60"
+                        )}
                       >
-                        Before/After
+                        <span className="flex items-center gap-2">
+                          <span className="i-lucide-columns text-sm" />
+                          Before/After
+                        </span>
                       </Button>
                       <Button
-                        variant={!compareView ? "default" : "outline"}
+                        variant="ghost"
                         size="sm"
                         onClick={() => setCompareView(false)}
-                        className={!compareView 
-                          ? "" 
-                          : "border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
-                        }
+                        className={cn(
+                          "px-4 py-2 rounded-r-md rounded-l-none transition-all duration-200",
+                          !compareView
+                            ? "bg-purple-600 text-white hover:bg-purple-700"
+                            : "bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/40 dark:text-purple-100 dark:hover:bg-purple-800/60"
+                        )}
                       >
-                        Full Image
+                        <span className="flex items-center gap-2">
+                          <span className="i-lucide-maximize-2 text-sm" />
+                          Full Image
+                        </span>
                       </Button>
                     </div>
                   </div>
@@ -462,12 +472,7 @@ export default function LinkedinPhotoConverter() {
                       <img
                         src={enhancedImageUrl}
                         alt="Enhanced LinkedIn Photo"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "contain",
-                          maxHeight: "400px",
-                        }}
+                        className="w-full h-full object-cover rounded-lg"
                       />
                     </div>
                   )}
@@ -477,7 +482,7 @@ export default function LinkedinPhotoConverter() {
                     <Button
                       asChild
                       variant="default"
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white"
                     >
                       <a
                         href={enhancedImageUrl}
