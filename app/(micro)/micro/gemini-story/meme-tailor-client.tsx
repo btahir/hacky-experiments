@@ -200,7 +200,7 @@ export default function MemeTailorClient() {
       if (ctx) {
         // Calculate font size proportional to the actual image dimensions
         const scaledFontSize = calculateScaledFontSize(img.width);
-        
+
         ctx.textAlign = "center";
         ctx.font = `bold ${scaledFontSize}px Impact, sans-serif`;
         ctx.lineJoin = "round"; // Add round line joins to prevent sharp corners
@@ -210,10 +210,10 @@ export default function MemeTailorClient() {
         if (topText.trim()) {
           const uppercaseTopText = topText.toUpperCase();
           // Adjust top position to ensure it doesn't touch the top of the image
-          const topY = scaledFontSize + (scaledFontSize * 0.2);
+          const topY = scaledFontSize + scaledFontSize * 0.2;
 
           // Draw stroke first - more subtle to avoid artifacts
-          ctx.lineWidth = scaledFontSize / 10;
+          ctx.lineWidth = scaledFontSize / 6; // Thicker stroke to match preview
           ctx.strokeStyle = textStrokeColor;
           ctx.strokeText(uppercaseTopText, canvas.width / 2, topY);
 
@@ -226,10 +226,10 @@ export default function MemeTailorClient() {
         if (bottomText.trim()) {
           const uppercaseBottomText = bottomText.toUpperCase();
           // Adjust bottom position to ensure it doesn't touch the bottom of the image
-          const bottomY = canvas.height - (scaledFontSize * 0.3);
+          const bottomY = canvas.height - scaledFontSize * 0.3;
 
           // Draw stroke first
-          ctx.lineWidth = scaledFontSize / 10;
+          ctx.lineWidth = scaledFontSize / 6; // Thicker stroke to match preview
           ctx.strokeStyle = textStrokeColor;
           ctx.strokeText(uppercaseBottomText, canvas.width / 2, bottomY);
 
@@ -256,10 +256,10 @@ export default function MemeTailorClient() {
   // Function to render text overlay
   const renderTextOverlay = (imageUrl: string) => {
     // Calculate scaled font size based on the rendered image dimensions
-    const calculatedFontSize = imageRef.current 
-      ? calculateScaledFontSize(imageRef.current.clientWidth) 
+    const calculatedFontSize = imageRef.current
+      ? calculateScaledFontSize(imageRef.current.clientWidth)
       : fontSize;
-      
+
     return (
       <div className="relative">
         <img
@@ -284,7 +284,16 @@ export default function MemeTailorClient() {
               fontSize: `${calculatedFontSize}px`,
               fontWeight: "bold",
               color: textColor,
-              textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
+              textShadow: `
+                -1px -1px 0 ${textStrokeColor},
+                1px -1px 0 ${textStrokeColor},
+                -1px 1px 0 ${textStrokeColor},
+                1px 1px 0 ${textStrokeColor},
+                -2px 0 0 ${textStrokeColor},
+                2px 0 0 ${textStrokeColor},
+                0 -2px 0 ${textStrokeColor},
+                0 2px 0 ${textStrokeColor}
+              `,
               textTransform: "uppercase",
               wordWrap: "break-word",
             }}
@@ -303,7 +312,16 @@ export default function MemeTailorClient() {
               fontSize: `${calculatedFontSize}px`,
               fontWeight: "bold",
               color: textColor,
-              textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
+              textShadow: `
+                -1px -1px 0 ${textStrokeColor},
+                1px -1px 0 ${textStrokeColor},
+                -1px 1px 0 ${textStrokeColor},
+                1px 1px 0 ${textStrokeColor},
+                -2px 0 0 ${textStrokeColor},
+                2px 0 0 ${textStrokeColor},
+                0 -2px 0 ${textStrokeColor},
+                0 2px 0 ${textStrokeColor}
+              `,
               textTransform: "uppercase",
               wordWrap: "break-word",
             }}
