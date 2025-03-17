@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Camera, Sparkles } from "lucide-react";
+import { BookOpen, Camera, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
@@ -25,7 +25,7 @@ export default function GeminiFlashApp() {
         />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="mb-8 flex justify-center">
-            <Sparkles className="h-16 w-16 text-gray-800" />
+            <Zap className="h-16 w-16 text-gray-800" />
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-6">
@@ -35,7 +35,7 @@ export default function GeminiFlashApp() {
             <span className="inline-block text-gray-700">Experiments</span>
           </h1>
 
-          <p className="text-xl max-w-2xl mx-auto mb-8 text-gray-600">
+          <p className="text-xl max-w-2xl mx-auto mb-8 text-gray-600 px-4 sm:px-0">
             Explore the capabilities of Google&apos;s Gemini AI with these
             interactive demos
           </p>
