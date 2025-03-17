@@ -6,6 +6,7 @@ import { BookOpen, Camera, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 export default function GeminiFlashApp() {
   const [activeTab, setActiveTab] = useState("story");
@@ -13,25 +14,37 @@ export default function GeminiFlashApp() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-2">
-        <div className="max-w-4xl mx-auto text-center">
-          <Sparkles className="h-16 w-16 mx-auto mb-4" />
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4">
-            <span className="inline-block border-b-4 border-white/50 pb-1">Gemini Flash</span>{" "}
-            <span className="relative inline-block">
-              Experiments
-              <span className="absolute -top-6 right-0 text-xs bg-white/20 px-2 py-1 rounded-full font-normal">Beta</span>
-            </span>
+      <div className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <FlickeringGrid
+          className="absolute inset-0 z-0"
+          squareSize={3}
+          gridGap={8}
+          color="#ffffff"
+          maxOpacity={0.2}
+          flickerChance={0.1}
+        />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <div className="mb-8 flex justify-center">
+            <Sparkles className="h-16 w-16 text-white" />
+          </div>
+
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-6">
+            <span className="inline-block border-b-4 border-white/50 pb-1">
+              Gemini Flash
+            </span>{" "}
+            <span className="inline-block">Experiments</span>
           </h1>
-          <p className="text-xl max-w-2xl mx-auto">
+
+          <p className="text-xl max-w-2xl mx-auto mb-8 text-white/90">
             Explore the capabilities of Google&apos;s Gemini AI with these
             interactive demos
           </p>
-          <div className="mt-4 text-sm">
+
+          <div className="mt-6">
             <Button
               variant="outline"
-              size="sm"
-              className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+              size="lg"
+              className="bg-white/10 hover:bg-white/20 text-white border-white/20 transition-all duration-300"
               asChild
             >
               <a
@@ -39,7 +52,7 @@ export default function GeminiFlashApp() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <BookOpen className="h-4 w-4 mr-2" />
+                <BookOpen className="h-5 w-5 mr-2" />
                 View Documentation
               </a>
             </Button>
