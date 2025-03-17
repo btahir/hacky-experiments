@@ -72,37 +72,27 @@ export const BACKGROUND_COLORS = {
   neutral_gray: {
     id: "neutral_gray",
     name: "Neutral Gray",
-    description: "Professional, clean gray gradient background",
+    description: "Classic professional gray background (most popular choice)",
   },
-  soft_blue: {
-    id: "soft_blue",
-    name: "Soft Blue",
-    description: "Subtle blue gradient that conveys trust and professionalism",
+  studio_gradient: {
+    id: "studio_gradient",
+    name: "Studio Backdrop",
+    description: "Professional studio lighting with subtle gradient backdrop",
   },
-  warm_beige: {
-    id: "warm_beige",
-    name: "Warm Beige",
-    description: "Warm neutral tones that create a welcoming professional look",
+  office_environment: {
+    id: "office_environment",
+    name: "Office Environment",
+    description: "Tastefully blurred modern office setting in background",
   },
-  deep_gradient: {
-    id: "deep_gradient",
-    name: "Deep Gradient",
-    description: "Rich gradient from navy to dark gray for a premium look",
+  textured_solid: {
+    id: "textured_solid",
+    name: "Textured Solid",
+    description: "Solid colored background with subtle texture for dimension",
   },
-  minimal_white: {
-    id: "minimal_white",
-    name: "Minimal White",
-    description: "Clean white to light gray gradient for a minimalist approach",
-  },
-  office_blur: {
-    id: "office_blur",
-    name: "Office Blur",
-    description: "Heavily blurred modern office environment",
-  },
-  abstract_pro: {
-    id: "abstract_pro",
-    name: "Abstract Professional",
-    description: "Soft abstract shapes in professional colors",
+  outdoor_professional: {
+    id: "outdoor_professional",
+    name: "Outdoor Professional",
+    description: "Clean outdoor setting with professional lighting",
   },
 };
 
@@ -112,42 +102,37 @@ export function buildPhotoPrompt(
   gender: string,
   backgroundColor: string
 ): string {
-  const genderOption =
-    GENDER_OPTIONS[gender as keyof typeof GENDER_OPTIONS] ||
-    GENDER_OPTIONS.neutral;
-
-  // Get the appropriate clothing description based on style and gender
+  // Get the clothing description based on gender and photo style
   const clothing =
-    genderOption.clothing[photoStyle as keyof typeof genderOption.clothing] ||
-    "professional attire appropriate for the context";
+    GENDER_OPTIONS[gender as keyof typeof GENDER_OPTIONS]?.clothing[
+      photoStyle as keyof typeof PHOTO_STYLES
+    ] || "professional attire";
 
-  // Set background based on selected option
+  // Get background description based on selected background color
   let backgroundDesc = "";
-  
-  switch(backgroundColor) {
+  switch (backgroundColor) {
     case "neutral_gray":
-      backgroundDesc = "a clean, neutral gray gradient background with no distracting elements";
+      backgroundDesc = "a clean, professional neutral gray backdrop";
       break;
-    case "soft_blue":
-      backgroundDesc = "a subtle blue gradient background that conveys trust and professionalism";
+    case "studio_gradient":
+      backgroundDesc =
+        "a professional studio backdrop with soft, flattering lighting and subtle gradient";
       break;
-    case "warm_beige":
-      backgroundDesc = "a warm beige/tan gradient background that creates a welcoming professional atmosphere";
+    case "office_environment":
+      backgroundDesc =
+        "a tastefully blurred professional office environment that suggests a corporate setting";
       break;
-    case "deep_gradient":
-      backgroundDesc = "a rich gradient from navy to dark gray that creates a premium, executive look";
+    case "textured_solid":
+      backgroundDesc =
+        "a solid colored background with subtle texture that adds visual interest while keeping focus on the subject";
       break;
-    case "minimal_white":
-      backgroundDesc = "a clean white to very light gray gradient background for a minimalist, modern approach";
-      break;
-    case "office_blur":
-      backgroundDesc = "a heavily blurred modern office environment with no distinguishable details";
-      break;
-    case "abstract_pro":
-      backgroundDesc = "a soft abstract background with subtle professional shapes and colors that don't distract from the subject";
+    case "outdoor_professional":
+      backgroundDesc =
+        "a clean, well-lit outdoor setting with professional lighting that looks polished but natural";
       break;
     default:
-      backgroundDesc = "a clean, neutral background with no distracting elements";
+      backgroundDesc =
+        "a professionally lit neutral backdrop that enhances the subject's presence";
   }
 
   // Base prompts for each style
