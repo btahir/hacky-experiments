@@ -14,28 +14,28 @@ export default function GeminiFlashApp() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="relative overflow-hidden bg-white text-gray-900 py-16 px-4 sm:px-6 lg:px-8">
         <FlickeringGrid
           className="absolute inset-0 z-0"
           squareSize={3}
           gridGap={8}
-          color="#ffffff"
-          maxOpacity={0.2}
+          color="#000000"
+          maxOpacity={0.1}
           flickerChance={0.1}
         />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="mb-8 flex justify-center">
-            <Sparkles className="h-16 w-16 text-white" />
+            <Sparkles className="h-16 w-16 text-gray-800" />
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-6">
-            <span className="inline-block border-b-4 border-white/50 pb-1">
+            <span className="inline-block border-b-4 border-gray-200 pb-1">
               Gemini Flash
             </span>{" "}
-            <span className="inline-block">Experiments</span>
+            <span className="inline-block text-gray-700">Experiments</span>
           </h1>
 
-          <p className="text-xl max-w-2xl mx-auto mb-8 text-white/90">
+          <p className="text-xl max-w-2xl mx-auto mb-8 text-gray-600">
             Explore the capabilities of Google&apos;s Gemini AI with these
             interactive demos
           </p>
@@ -44,7 +44,7 @@ export default function GeminiFlashApp() {
             <Button
               variant="outline"
               size="lg"
-              className="bg-white/10 hover:bg-white/20 text-white border-white/20 transition-all duration-300"
+              className="bg-gray-50 hover:bg-gray-100 text-gray-800 border-gray-200 transition-all duration-300"
               asChild
             >
               <a
