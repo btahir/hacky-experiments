@@ -472,7 +472,7 @@ export default function LinkedinPhotoConverter() {
                       <img
                         src={enhancedImageUrl}
                         alt="Enhanced LinkedIn Photo"
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-contain rounded-lg"
                       />
                     </div>
                   )}
