@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Camera, Zap } from "lucide-react";
+import { BookOpen, Camera, Zap, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
+import MemeTailorClient from "./meme-tailor-client";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 export default function GeminiFlashApp() {
@@ -69,7 +70,7 @@ export default function GeminiFlashApp() {
           className="max-w-6xl mx-auto"
         >
           <div className="flex justify-center mb-6">
-            <TabsList className="grid grid-cols-2 w-full max-w-md bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 p-1 rounded-lg">
+            <TabsList className="grid grid-cols-3 w-full max-w-md bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 p-1 rounded-lg">
               <TabsTrigger
                 value="story"
                 className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-indigo-700 dark:data-[state=active]:text-indigo-300 rounded-md transition-all"
@@ -84,6 +85,13 @@ export default function GeminiFlashApp() {
                 <Camera className="h-4 w-4" />
                 <span>LinkedIn Photo</span>
               </TabsTrigger>
+              <TabsTrigger
+                value="meme"
+                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-violet-700 dark:data-[state=active]:text-violet-300 rounded-md transition-all"
+              >
+                <Smile className="h-4 w-4" />
+                <span>Meme Tailor</span>
+              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -93,6 +101,10 @@ export default function GeminiFlashApp() {
 
           <TabsContent value="linkedin" className="mt-0">
             <LinkedinPhotoConverter />
+          </TabsContent>
+
+          <TabsContent value="meme" className="mt-0">
+            <MemeTailorClient />
           </TabsContent>
         </Tabs>
       </div>

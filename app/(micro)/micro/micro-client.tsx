@@ -19,9 +19,9 @@ const microExperiments: any = [
     id: "gemini-story",
     title: "Gemini Flash Experiments",
     description:
-      "Explore the multi-modal capabilities of Google's Gemini AI with interactive demos.",
+      "Explore the multi-modal capabilities of Google's Gemini AI with interactive demos, including a Story Creator, LinkedIn Photo enhancer, and Meme Tailor.",
     icon: "🤖",
-    tags: ["Gemini", "Multi-modal"],
+    tags: ["Gemini", "Multi-modal", "Memes"],
     path: "/gemini-story",
     colors: {
       bg: "bg-yellow-100",

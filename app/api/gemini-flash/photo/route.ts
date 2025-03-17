@@ -3,10 +3,10 @@ import { geminiPhotoRatelimit } from "@/lib/redis";
 
 const identifier = "gemini-photo";
 
-// Function to enhance photo using Gemini API
-async function enhancePhotoWithGemini(
+export async function enhancePhotoWithGemini(
   imageBase64: string,
-  prompt: string
+  prompt: string,
+  mimeType: string = "image/jpeg"
 ): Promise<string> {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error("GEMINI_API_KEY environment variable is not set");
@@ -18,7 +18,7 @@ async function enhancePhotoWithGemini(
       { text: prompt },
       {
         inlineData: {
-          mimeType: "image/jpeg", // Assuming JPEG for simplicity, adjust as needed
+          mimeType: mimeType,
           data: imageBase64,
         },
       },
