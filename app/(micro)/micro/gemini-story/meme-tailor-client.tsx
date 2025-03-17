@@ -33,6 +33,13 @@ export default function MemeTailorClient() {
   const [generatedMeme, setGeneratedMeme] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  // State for meme text
+  const [topText, setTopText] = useState("");
+  const [bottomText, setBottomText] = useState("");
+  const [fontSize, setFontSize] = useState(32);
+  const [textColor, setTextColor] = useState("#ffffff");
+  const [textStrokeColor, setTextStrokeColor] = useState("#000000");
+
   // State for meme templates
   const [memeTemplates, setMemeTemplates] = useState<MemeTemplate[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -165,13 +172,120 @@ export default function MemeTailorClient() {
   const downloadMeme = () => {
     if (!generatedMeme) return;
 
-    const link = document.createElement("a");
-    link.href = generatedMeme;
-    link.download = "meme.jpg";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success("Meme downloaded!");
+    // Create canvas to draw image and text
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      // Set canvas dimensions to match image
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Draw image on canvas
+      ctx?.drawImage(img, 0, 0);
+
+      // Configure text style
+      if (ctx) {
+        ctx.textAlign = "center";
+        ctx.font = `bold ${fontSize}px Impact, sans-serif`;
+
+        // Draw top text with stroke
+        if (topText.trim()) {
+          const uppercaseTopText = topText.toUpperCase();
+          const topY = fontSize + 10;
+
+          // Draw stroke first
+          ctx.lineWidth = fontSize / 8;
+          ctx.strokeStyle = textStrokeColor;
+          ctx.strokeText(uppercaseTopText, canvas.width / 2, topY);
+
+          // Then draw fill on top
+          ctx.fillStyle = textColor;
+          ctx.fillText(uppercaseTopText, canvas.width / 2, topY);
+        }
+
+        // Draw bottom text with stroke
+        if (bottomText.trim()) {
+          const uppercaseBottomText = bottomText.toUpperCase();
+          const bottomY = canvas.height - 20;
+
+          // Draw stroke first
+          ctx.lineWidth = fontSize / 8;
+          ctx.strokeStyle = textStrokeColor;
+          ctx.strokeText(uppercaseBottomText, canvas.width / 2, bottomY);
+
+          // Then draw fill on top
+          ctx.fillStyle = textColor;
+          ctx.fillText(uppercaseBottomText, canvas.width / 2, bottomY);
+        }
+      }
+
+      // Convert canvas to data URL and download
+      const dataUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "meme.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success("Meme downloaded!");
+    };
+
+    img.src = generatedMeme;
+  };
+
+  // Function to render text on displayed image
+  const renderTextOverlay = (imageUrl: string) => {
+    return (
+      <div className="relative">
+        <img
+          src={imageUrl}
+          alt="Generated meme"
+          className="max-w-full object-contain"
+          crossOrigin="anonymous"
+        />
+        {topText && (
+          <div
+            className="absolute w-full text-center"
+            style={{
+              top: "5px",
+              left: 0,
+              right: 0,
+              fontFamily: "Impact, sans-serif",
+              fontSize: `${fontSize}px`,
+              fontWeight: "bold",
+              color: textColor,
+              textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
+              textTransform: "uppercase",
+              wordWrap: "break-word",
+            }}
+          >
+            {topText}
+          </div>
+        )}
+        {bottomText && (
+          <div
+            className="absolute w-full text-center"
+            style={{
+              bottom: "5px",
+              left: 0,
+              right: 0,
+              fontFamily: "Impact, sans-serif",
+              fontSize: `${fontSize}px`,
+              fontWeight: "bold",
+              color: textColor,
+              textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
+              textTransform: "uppercase",
+              wordWrap: "break-word",
+            }}
+          >
+            {bottomText}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -303,6 +417,71 @@ export default function MemeTailorClient() {
                     />
                   </div>
 
+                  {/* Meme Text Controls */}
+                  <div className="space-y-2">
+                    <Label htmlFor="top-text">Top Text</Label>
+                    <Input
+                      id="top-text"
+                      placeholder="TOP TEXT"
+                      value={topText}
+                      onChange={(e) => setTopText(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="bottom-text">Bottom Text</Label>
+                    <Input
+                      id="bottom-text"
+                      placeholder="BOTTOM TEXT"
+                      value={bottomText}
+                      onChange={(e) => setBottomText(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="font-size">Font Size</Label>
+                      <div className="flex items-center space-x-2">
+                        <Input
+                          id="font-size"
+                          type="number"
+                          min="12"
+                          max="72"
+                          value={fontSize}
+                          onChange={(e) => setFontSize(Number(e.target.value))}
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <Label htmlFor="text-color" className="mb-2">
+                            Fill
+                          </Label>
+                          <Input
+                            id="text-color"
+                            type="color"
+                            value={textColor}
+                            onChange={(e) => setTextColor(e.target.value)}
+                            className="h-9 w-full"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="stroke-color" className="mb-2">
+                            Stroke
+                          </Label>
+                          <Input
+                            id="stroke-color"
+                            type="color"
+                            value={textStrokeColor}
+                            onChange={(e) => setTextStrokeColor(e.target.value)}
+                            className="h-9 w-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     <Button
                       disabled={!selectedTemplate || isGenerating}
@@ -328,12 +507,7 @@ export default function MemeTailorClient() {
               {generatedMeme ? (
                 <>
                   <div className="mb-4 max-w-full overflow-hidden rounded-md shadow-md">
-                    <img
-                      src={generatedMeme}
-                      alt="Generated meme"
-                      className="max-w-full object-contain"
-                      crossOrigin="anonymous"
-                    />
+                    {renderTextOverlay(generatedMeme)}
                   </div>
 
                   <Button
