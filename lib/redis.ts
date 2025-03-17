@@ -9,10 +9,10 @@ export const redis = new Redis({
 // Search: Configurable requests per minute
 export const geminiStoryRatelimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, '15 m'),
+  limiter: Ratelimit.slidingWindow(10, '15 m'),
 })
 
 export const geminiPhotoRatelimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(10, '15 m'),
+  limiter: Ratelimit.slidingWindow(100, '15 m'),
 })
