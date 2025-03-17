@@ -71,7 +71,7 @@ export default function MemeTailorClient() {
       }
 
       // Filter templates based on search query
-      const allTemplates = data.data.memes.slice(0, 100) as MemeTemplate[];
+      const allTemplates = data.data.memes.slice(0, 20) as MemeTemplate[];
       const filteredTemplates = allTemplates.filter((template) =>
         template.name.toLowerCase().includes(query.toLowerCase())
       );
@@ -259,7 +259,7 @@ export default function MemeTailorClient() {
                     </div>
                   ) : (
                     <div className="flex items-center justify-center h-full">
-                      <p className="text-slate-500">
+                      <p className="text-slate-500 pt-24">
                         Search for meme templates above
                       </p>
                     </div>
@@ -336,7 +336,11 @@ export default function MemeTailorClient() {
                     />
                   </div>
 
-                  <Button onClick={downloadMeme} variant="outline">
+                  <Button
+                    onClick={downloadMeme}
+                    variant="outline"
+                    className="w-full"
+                  >
                     <Download className="mr-2 h-4 w-4" />
                     Download
                   </Button>
