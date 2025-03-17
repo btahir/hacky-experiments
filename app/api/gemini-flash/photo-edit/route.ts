@@ -3,7 +3,7 @@ import { geminiPhotoRatelimit } from "@/lib/redis";
 
 const identifier = "gemini-photo-edit";
 
-export async function enhancePhotoWithGemini(
+async function enhancePhotoWithGemini(
   imageBase64: string,
   prompt: string,
   mimeType: string = "image/jpeg"
