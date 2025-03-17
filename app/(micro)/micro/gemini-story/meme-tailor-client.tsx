@@ -43,7 +43,7 @@ export default function MemeTailorClient() {
 
   // State for meme customization
   const [customPrompt, setCustomPrompt] = useState(
-    "Create a funny meme about technology"
+    "Transform this image into a Pixar-style 3D animation with their characteristic lighting and texturing"
   );
 
   // Search for meme templates with debounce
@@ -135,7 +135,7 @@ export default function MemeTailorClient() {
       formData.append("prompt", memePrompt);
 
       // Call the API
-      const response = await fetch("/api/gemini-flash/photo", {
+      const response = await fetch("/api/gemini-flash/photo-edit", {
         method: "POST",
         body: formData,
       });

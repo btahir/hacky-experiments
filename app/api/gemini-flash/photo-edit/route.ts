@@ -1,7 +1,7 @@
 import { geminiFlashExpModel } from "@/lib/gemini";
 import { geminiPhotoRatelimit } from "@/lib/redis";
 
-const identifier = "gemini-photo";
+const identifier = "gemini-photo-edit";
 
 export async function enhancePhotoWithGemini(
   imageBase64: string,
@@ -108,7 +108,7 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("[API ERROR] POST /api/gemini-flash/photo:", error);
+    console.error("[API ERROR] POST /api/gemini-flash/photo-edit:", error);
 
     if (error instanceof Error && error.message.includes("GEMINI_API_KEY")) {
       return Response.json(

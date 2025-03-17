@@ -121,7 +121,7 @@ export default function LinkedinPhotoConverter() {
       formData.append("image", selectedFile);
       formData.append("prompt", customPrompt);
 
-      const response = await fetch("/api/gemini-flash/photo", {
+      const response = await fetch("/api/gemini-flash/photo-edit", {
         method: "POST",
         body: formData,
       });
