@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Home, BookOpen, Camera, Zap, Smile } from "lucide-react";
+import { Newspaper, BookOpen, Camera, Zap, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
@@ -49,9 +49,9 @@ export default function GeminiFlashApp() {
               className="mr-2 sm:mr-4 bg-gray-900 hover:bg-gray-800 text-gray-100 border-gray-200 transition-all duration-300"
               asChild
             >
-              <Link href="/">
-                <Home className="h-5 w-5 mr-2" />
-                Hacky Home
+              <Link href="/blog/gemini-flash-experiments">
+                <Newspaper className="h-5 w-5 mr-2" />
+                Blog Post
               </Link>
             </Button>
             <Button
