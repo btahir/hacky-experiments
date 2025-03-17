@@ -177,7 +177,7 @@ export default function MemeTailorClient() {
   return (
     <div className="flex flex-col items-center">
       {/* Purple Header */}
-      <div className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-10">
+      <div className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg">
         <div className="max-w-4xl mx-auto text-center">
           <Smile className="h-16 w-16 mx-auto mb-4" />
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4">
