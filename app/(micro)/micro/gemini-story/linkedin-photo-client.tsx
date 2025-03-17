@@ -172,7 +172,7 @@ export default function LinkedinPhotoConverter() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Upload Section */}
-          <Card className="shadow-lg border-purple-100 dark:border-purple-900">
+          <Card className="shadow-lg border-purple-100 dark:border-purple-900 pt-0">
             <CardHeader className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-t-lg">
               <CardTitle className="text-2xl text-purple-800 dark:text-purple-300">
                 Upload Your Photo
@@ -379,7 +379,7 @@ export default function LinkedinPhotoConverter() {
           </Card>
 
           {/* Results Section */}
-          <Card className="shadow-lg border-purple-100 dark:border-purple-900">
+          <Card className="shadow-lg border-purple-100 dark:border-purple-900 pt-0">
             <CardHeader className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-t-lg">
               <CardTitle className="text-2xl text-purple-800 dark:text-purple-300">
                 Enhanced Result
