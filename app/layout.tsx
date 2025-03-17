@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description:
     'An open source playground for my coding experiments, side projects, and technical explorations.',
   keywords: ['experiments', 'coding', 'projects', 'open source'],
+  metadataBase: new URL('https://hackyexperiments.com'),
 }
 
 export default function RootLayout({

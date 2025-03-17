@@ -14,12 +14,12 @@ export const PHOTO_STYLES = {
   },
   "industry-specialist": {
     id: "industry-specialist",
-    name: "Industry Specialist",
-    description: "Subject shown as an expert in their professional environment",
+    name: "Industry Expert",
+    description: "Subject shown as an expert with confident posture",
   },
   "thought-leader": {
     id: "thought-leader",
-    name: "Thought Leader",
+    name: "Presenter/Speaker",
     description: "Subject presenting or speaking at a professional event",
   },
 };
@@ -67,55 +67,42 @@ export const GENDER_OPTIONS = {
   },
 };
 
-// Profession-specific elements and environments
-export const PROFESSION_OPTIONS = {
-  tech: {
-    id: "tech",
-    name: "Technology",
-    elements:
-      "premium laptop, modern tech devices, and a clean minimalist environment with subtle tech elements. Background can include code snippets on screens or modern office space with tech company aesthetic.",
+// Background color options and environments
+export const BACKGROUND_COLORS = {
+  neutral_gray: {
+    id: "neutral_gray",
+    name: "Neutral Gray",
+    description: "Professional, clean gray gradient background",
   },
-  finance: {
-    id: "finance",
-    name: "Finance/Business",
-    elements:
-      "elegant office environment with financial charts or trading screens in the background, leather portfolio, or modern financial district elements.",
+  soft_blue: {
+    id: "soft_blue",
+    name: "Soft Blue",
+    description: "Subtle blue gradient that conveys trust and professionalism",
   },
-  healthcare: {
-    id: "healthcare",
-    name: "Healthcare",
-    elements:
-      "professional medical setting with subtle medical equipment, lab coat if appropriate, stethoscope or other relevant tools of the profession in a clean clinical environment.",
+  warm_beige: {
+    id: "warm_beige",
+    name: "Warm Beige",
+    description: "Warm neutral tones that create a welcoming professional look",
   },
-  creative: {
-    id: "creative",
-    name: "Creative/Design",
-    elements:
-      "creative workspace with design elements, artistic tools, portfolios, or screens showing design work in an inspiring creative studio environment.",
+  deep_gradient: {
+    id: "deep_gradient",
+    name: "Deep Gradient",
+    description: "Rich gradient from navy to dark gray for a premium look",
   },
-  education: {
-    id: "education",
-    name: "Education",
-    elements:
-      "professional academic setting with books, teaching materials, or scholarly elements in a classroom, library, or campus environment.",
+  minimal_white: {
+    id: "minimal_white",
+    name: "Minimal White",
+    description: "Clean white to light gray gradient for a minimalist approach",
   },
-  legal: {
-    id: "legal",
-    name: "Legal",
-    elements:
-      "professional law office with legal books, subtle legal scales of justice motif, or elegant wood-paneled environment with legal documents.",
+  office_blur: {
+    id: "office_blur",
+    name: "Office Blur",
+    description: "Heavily blurred modern office environment",
   },
-  engineering: {
-    id: "engineering",
-    name: "Engineering",
-    elements:
-      "professional engineering environment with blueprints, models, or technical equipment relevant to their engineering specialty.",
-  },
-  general: {
-    id: "general",
-    name: "General Professional",
-    elements:
-      "clean professional environment with modern office elements and subtle professional tools.",
+  abstract_pro: {
+    id: "abstract_pro",
+    name: "Abstract Professional",
+    description: "Soft abstract shapes in professional colors",
   },
 };
 
@@ -123,62 +110,91 @@ export const PROFESSION_OPTIONS = {
 export function buildPhotoPrompt(
   photoStyle: string,
   gender: string,
-  profession: string
+  backgroundColor: string
 ): string {
   const genderOption =
     GENDER_OPTIONS[gender as keyof typeof GENDER_OPTIONS] ||
     GENDER_OPTIONS.neutral;
-  const professionOption =
-    PROFESSION_OPTIONS[profession as keyof typeof PROFESSION_OPTIONS] ||
-    PROFESSION_OPTIONS.general;
 
   // Get the appropriate clothing description based on style and gender
   const clothing =
     genderOption.clothing[photoStyle as keyof typeof genderOption.clothing] ||
     "professional attire appropriate for the context";
 
+  // Set background based on selected option
+  let backgroundDesc = "";
+  
+  switch(backgroundColor) {
+    case "neutral_gray":
+      backgroundDesc = "a clean, neutral gray gradient background with no distracting elements";
+      break;
+    case "soft_blue":
+      backgroundDesc = "a subtle blue gradient background that conveys trust and professionalism";
+      break;
+    case "warm_beige":
+      backgroundDesc = "a warm beige/tan gradient background that creates a welcoming professional atmosphere";
+      break;
+    case "deep_gradient":
+      backgroundDesc = "a rich gradient from navy to dark gray that creates a premium, executive look";
+      break;
+    case "minimal_white":
+      backgroundDesc = "a clean white to very light gray gradient background for a minimalist, modern approach";
+      break;
+    case "office_blur":
+      backgroundDesc = "a heavily blurred modern office environment with no distinguishable details";
+      break;
+    case "abstract_pro":
+      backgroundDesc = "a soft abstract background with subtle professional shapes and colors that don't distract from the subject";
+      break;
+    default:
+      backgroundDesc = "a clean, neutral background with no distracting elements";
+  }
+
   // Base prompts for each style
   const basePrompts = {
-    "professional-headshot": `Edit this photo to create a stunning professional headshot with a clean, neutral background. 
+    "professional-headshot": `Edit this photo to create a stunning professional headshot with ${backgroundDesc}. 
       Keep the person's face and identity intact but enhance it to show them with a warm, confident smile and bright, engaging eyes. 
       Dress the subject in ${clothing}. 
       Make the lighting soft and flattering with perfect exposure to highlight facial features without harsh shadows. 
-      Create subtle, professional skin retouching while maintaining a natural look. 
+      Ensure the subject takes up approximately 80% of the frame, with proper headroom and spacing.
       Position the subject with head and shoulders framing at a slightly angled pose that conveys approachability and leadership. 
       Ensure sharp focus on the face with professional color grading that complements skin tone.`,
 
-    "casual-professional": `Edit this photo to create a polished business casual portrait that looks like it was taken in a modern, well-lit office or co-working space. 
+    "casual-professional": `Edit this photo to create a polished business casual portrait with ${backgroundDesc}. 
       Maintain the person's identity but enhance their appearance with a relaxed yet confident expression showing a genuine smile that reaches their eyes. 
       Dress the subject in ${clothing}. 
       Create natural-looking lighting as if from large windows, with subtle highlights on the face. 
-      Adjust the subject's posture to appear engaged and approachable, positioned at a slight angle to camera. 
-      Add a sophisticated, slightly blurred background showing a clean, contemporary workspace with subtle professional elements like minimalist furniture or plants. 
+      Position the person to take up 70-80% of the frame with a professional, relaxed pose.
+      Apply subtle bokeh effect to the background for a professional depth-of-field.
       Enhance colors to create a warm, inviting professional atmosphere.`,
 
-    "industry-specialist": `Edit this photo to create a compelling professional portrait in a work environment that establishes subject matter expertise. 
-      Keep the person's face and identity intact but enhance the image to show them confidently engaged in their professional environment with an authoritative yet approachable expression. 
+    "industry-specialist": `Edit this photo to create a compelling professional portrait with ${backgroundDesc}. 
+      Keep the person's face and identity intact but enhance the image to show them confidently engaged as the main focus with an authoritative yet approachable expression. 
       Dress the subject in ${clothing}. 
-      Include ${professionOption.elements} 
-      Enhance the lighting to create depth and dimension with professional color grading that creates a cohesive look. 
-      Position the subject as the clear focal point with perfect focus and a slight perspective that emphasizes their command of their field. 
-      Show them actively demonstrating skill or knowledge through posture and expression.`,
+      Ensure the subject takes up at least 70% of the frame with perfect lighting that highlights their face and expression.
+      Maintain clean, minimal composition with professional lighting that creates separation between subject and background.
+      Position the subject as the clear focal point with perfect focus and a slight perspective that emphasizes their expertise. 
+      Apply a subtle vignette effect to further focus attention on the subject.`,
 
-    "thought-leader": `Edit this photo to make it look like the person is confidently presenting or speaking at a high-profile professional event. 
+    "thought-leader": `Edit this photo to make it look like the person is confidently presenting or speaking at a professional event with ${backgroundDesc}. 
       Keep the person's face and identity intact but enhance their appearance with perfect grooming and tailored professional attire. 
       Dress the subject in ${clothing}. 
       Show them with animated, passionate facial expressions and deliberate hand gestures that convey expertise and conviction. 
-      Adjust the camera angle to appear slightly from below eye level to convey authority. 
-      Create dramatic, professional stage lighting that highlights their features. 
-      Add a sophisticated background suggesting a conference, TED-style stage, or executive setting with subtle audience or venue elements. 
-      Include subtle ${professionOption.elements} where appropriate.
-      Enhance colors to create a high-impact, memorable image with professional color grading that emphasizes blues and contrasting tones. 
+      Position the subject in the foreground taking up about 60% of the frame, standing confidently.
+      
+      Create a professional speaking context with:
+      - Soft spotlighting on the subject from above
+      - A sense of space around the subject suggesting a stage or speaking area
+      - IMPORTANT: Ensure a completely clear, unobstructed view of the subject
+      
+      Enhance colors to create a high-impact, memorable image that emphasizes the subject as a thought leader.
       Ensure the clothing appears pristine with perfect fit and premium quality.`,
   };
 
   // Get the base prompt for the selected style
   const basePrompt =
     basePrompts[photoStyle as keyof typeof basePrompts] ||
-    `Edit this photo to create a professional portrait. Keep the person's face and identity intact but enhance it to look professional and polished. Dress them in ${clothing} and include ${professionOption.elements}`;
+    `Edit this photo to create a professional portrait. Keep the person's face and identity intact but enhance it to look professional and polished. Dress them in ${clothing} with ${backgroundDesc}`;
 
   // Clean up and format the prompt
   return basePrompt.replace(/\s+/g, " ").trim();
