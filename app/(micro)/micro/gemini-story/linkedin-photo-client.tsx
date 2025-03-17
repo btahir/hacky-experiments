@@ -27,6 +27,7 @@ import {
 interface ApiErrorResponse {
   error: string;
   details?: string | unknown;
+  status?: number;
 }
 
 // Form schema for photo enhancement
@@ -126,6 +127,13 @@ export default function LinkedinPhotoConverter() {
       });
 
       const result = await response.json();
+
+      // Check for rate limit error first before any validation
+      if (response.status === 429 || result.status === 429) {
+        throw new Error(
+          "Rate limit exceeded. Please try again in a few minutes."
+        );
+      }
 
       if (!response.ok) {
         const errorResponse = result as ApiErrorResponse;
