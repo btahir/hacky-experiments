@@ -201,17 +201,6 @@ export default function GeminiStory() {
             Transform your ideas into captivating visual stories with
             AI-generated text and images
           </p>
-          <div className="mt-4 text-sm">
-            <a
-              href="https://github.com/btahir/hacky-experiments/blob/main/app/(micro)/micro/gemini-story/README.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors"
-            >
-              <BookOpen className="h-4 w-4 mr-2" />
-              View Documentation
-            </a>
-          </div>
         </div>
       </div>
 
