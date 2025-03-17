@@ -73,21 +73,21 @@ export default function GeminiFlashApp() {
             <TabsList className="grid grid-cols-3 w-full max-w-md bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 p-1 rounded-lg">
               <TabsTrigger
                 value="story"
-                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-indigo-700 dark:data-[state=active]:text-indigo-300 rounded-md transition-all"
+                className="text-xs flex items-center gap-1 sm:gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-indigo-700 dark:data-[state=active]:text-indigo-300 rounded-md transition-all"
               >
                 <BookOpen className="h-4 w-4" />
                 <span>Story Creator</span>
               </TabsTrigger>
               <TabsTrigger
                 value="linkedin"
-                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-700 dark:data-[state=active]:text-blue-300 rounded-md transition-all"
+                className="text-xs flex items-center gap-1 sm:gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-700 dark:data-[state=active]:text-blue-300 rounded-md transition-all"
               >
                 <Camera className="h-4 w-4" />
                 <span>LinkedIn Photo</span>
               </TabsTrigger>
               <TabsTrigger
                 value="meme"
-                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-violet-700 dark:data-[state=active]:text-violet-300 rounded-md transition-all"
+                className="text-xs flex items-center gap-1 sm:gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-violet-700 dark:data-[state=active]:text-violet-300 rounded-md transition-all"
               >
                 <Smile className="h-4 w-4" />
                 <span>Meme Tailor</span>
