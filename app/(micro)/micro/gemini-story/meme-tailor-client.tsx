@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -52,6 +52,9 @@ export default function MemeTailorClient() {
   const [customPrompt, setCustomPrompt] = useState(
     "Transform this image into a Pixar-style 3D animation with their characteristic lighting and texturing"
   );
+
+  // Reference for the image element to get dimensions
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Search for meme templates with debounce
   const debouncedSearch = useDebounceCallback(async (query: string) => {
@@ -168,6 +171,13 @@ export default function MemeTailorClient() {
     }
   };
 
+  // Function to calculate font size based on image dimensions
+  const calculateScaledFontSize = (imageWidth: number) => {
+    // Base scaling - typical meme font is about 5% of image width
+    const scaleFactor = 0.05;
+    return Math.max(16, Math.round(imageWidth * scaleFactor * (fontSize / 32)));
+  };
+
   // Download generated meme
   const downloadMeme = () => {
     if (!generatedMeme) return;
@@ -188,16 +198,22 @@ export default function MemeTailorClient() {
 
       // Configure text style
       if (ctx) {
+        // Calculate font size proportional to the actual image dimensions
+        const scaledFontSize = calculateScaledFontSize(img.width);
+        
         ctx.textAlign = "center";
-        ctx.font = `bold ${fontSize}px Impact, sans-serif`;
+        ctx.font = `bold ${scaledFontSize}px Impact, sans-serif`;
+        ctx.lineJoin = "round"; // Add round line joins to prevent sharp corners
+        ctx.miterLimit = 2; // Limit the miter length
 
         // Draw top text with stroke
         if (topText.trim()) {
           const uppercaseTopText = topText.toUpperCase();
-          const topY = fontSize + 10;
+          // Adjust top position to ensure it doesn't touch the top of the image
+          const topY = scaledFontSize + (scaledFontSize * 0.2);
 
-          // Draw stroke first
-          ctx.lineWidth = fontSize / 8;
+          // Draw stroke first - more subtle to avoid artifacts
+          ctx.lineWidth = scaledFontSize / 10;
           ctx.strokeStyle = textStrokeColor;
           ctx.strokeText(uppercaseTopText, canvas.width / 2, topY);
 
@@ -209,10 +225,11 @@ export default function MemeTailorClient() {
         // Draw bottom text with stroke
         if (bottomText.trim()) {
           const uppercaseBottomText = bottomText.toUpperCase();
-          const bottomY = canvas.height - 20;
+          // Adjust bottom position to ensure it doesn't touch the bottom of the image
+          const bottomY = canvas.height - (scaledFontSize * 0.3);
 
           // Draw stroke first
-          ctx.lineWidth = fontSize / 8;
+          ctx.lineWidth = scaledFontSize / 10;
           ctx.strokeStyle = textStrokeColor;
           ctx.strokeText(uppercaseBottomText, canvas.width / 2, bottomY);
 
@@ -236,15 +253,25 @@ export default function MemeTailorClient() {
     img.src = generatedMeme;
   };
 
-  // Function to render text on displayed image
+  // Function to render text overlay
   const renderTextOverlay = (imageUrl: string) => {
+    // Calculate scaled font size based on the rendered image dimensions
+    const calculatedFontSize = imageRef.current 
+      ? calculateScaledFontSize(imageRef.current.clientWidth) 
+      : fontSize;
+      
     return (
       <div className="relative">
         <img
+          ref={imageRef}
           src={imageUrl}
           alt="Generated meme"
           className="max-w-full object-contain"
           crossOrigin="anonymous"
+          onLoad={() => {
+            // Force re-render when image loads to get correct dimensions
+            setFontSize(fontSize);
+          }}
         />
         {topText && (
           <div
@@ -254,7 +281,7 @@ export default function MemeTailorClient() {
               left: 0,
               right: 0,
               fontFamily: "Impact, sans-serif",
-              fontSize: `${fontSize}px`,
+              fontSize: `${calculatedFontSize}px`,
               fontWeight: "bold",
               color: textColor,
               textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
@@ -273,7 +300,7 @@ export default function MemeTailorClient() {
               left: 0,
               right: 0,
               fontFamily: "Impact, sans-serif",
-              fontSize: `${fontSize}px`,
+              fontSize: `${calculatedFontSize}px`,
               fontWeight: "bold",
               color: textColor,
               textShadow: `-2px -2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px 2px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor}, 0px 3px 0 ${textStrokeColor}, 3px 0px 0 ${textStrokeColor}, 0px -3px 0 ${textStrokeColor}, -3px 0px 0 ${textStrokeColor}`,
