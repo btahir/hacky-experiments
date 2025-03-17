@@ -1,0 +1,49 @@
+export const metadata = {
+  title: 'Gemini Flash Experiments: Multimodal AI in Action',
+  date: '2025-03-17',
+  excerpt: 'Exploring the multimodal capabilities of Google\'s Gemini Flash with three interactive demos.',
+  tags: ['Micro Experiments', 'Gemini'],
+}
+
+---
+
+Google just released Gemini Flash, and it's wild what they've managed to pull off. If you've been in the AI space for a while, you'll remember the days of stitching together different models to get anything done. Want text? That's one model. Images? Another model. Now those days are finally over.
+
+The big unlock with Gemini Flash is its true multimodal capabilities. You can finally generate both text and images together in a single API call (I believe they use Imagen 3 under the hood for image generation). This dramatically simplifies workflows and opens up entirely new use cases.
+
+I spent the weekend playing with it and built three interactive demos as part of my Micro Experiments series. These are small, focused applications that showcase new technologies - and they're all open source, so you can grab the code and build your own versions.
+
+## Story Creator
+
+Story creator is one of the most obvious use cases to showcase Gemini Flash's multimodal capabilities. You can generate a complete story with matching illustrations in a Disney digital art style with a single prompt. The output is presented as an interactive slideshow with 4-6 scenes, and you can even set it to auto-play.
+
+What makes this cool is that everything, both the narrative and the visuals, comes from a single prompt. The model handles the whole story arc, character development, and matching illustrations without any additional guidance.
+
+## LinkedIn Photo Enhancer
+
+Some of you might find this one particularly useful (I know I did, haha). Upload any photo of yourself, and this tool transforms it into a professional LinkedIn headshot.
+
+You get options to customize:
+- Clothing styles (male/female/neutral)
+- Background settings (neutral gray, studio, office, etc.)
+- Overall photo style
+
+The transformation quality is impressive. It maintains your likeness while making the image look professionally shot and LinkedIn-appropriate.
+
+## Meme Tailor
+
+The newest addition to the collection! This one lets you search for popular meme templates and then customize them with AI. Just pick a template, enter a prompt describing how you want to transform it, and Gemini does the rest.
+
+It's an interesting showcase of image editing capabilities. You can search through templates, preview your selection, and download the final result.
+
+## What's Next?
+
+I already have a ton more ideas I want to try, like putting users in movie posters or generating custom avatars in different art styles. The multimodal nature of Gemini Flash makes these kinds of applications much simpler to build than before.
+
+## Try It Yourself
+
+All three demos are available on my Hacky Experiments site at `/micro/gemini-story`. It's free to use (subject to rate limits) and all the code is open source if you want to build your own version.
+
+That's it! Check out the demos and have fun generating stories, LinkedIn photos, and memes. Let me know what you build!
+
+Bilal
