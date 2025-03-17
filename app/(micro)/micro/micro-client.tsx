@@ -17,11 +17,11 @@ import { motion } from 'framer-motion'
 const microExperiments: any = [
   {
     id: 'gemini-story',
-    title: 'Gemini Story Generator',
+    title: 'Gemini Flash Experiments',
     description:
-      "Generate visual stories using Google's Gemini AI model based on your prompts",
+      "Explore the multi-modal capabilities of Google's Gemini AI with interactive demos.",
     icon: '🤖',
-    tags: ['AI', 'Gemini', 'Visual Stories'],
+    tags: ['Gemini', 'Multi-modal'],
     path: '/gemini-story',
   },
 ]
