@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Camera, Zap, Smile } from "lucide-react";
+import { Home, BookOpen, Camera, Zap, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
 import MemeTailorClient from "./meme-tailor-client";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import Link from "next/link";
 
 export default function GeminiFlashApp() {
   const [activeTab, setActiveTab] = useState("story");
@@ -42,6 +43,17 @@ export default function GeminiFlashApp() {
           </p>
 
           <div className="mt-6">
+            <Button
+              variant="default"
+              size="lg"
+              className="mr-2 sm:mr-4 bg-gray-900 hover:bg-gray-800 text-gray-100 border-gray-200 transition-all duration-300"
+              asChild
+            >
+              <Link href="/">
+                <Home className="h-5 w-5 mr-2" />
+                Hacky Home
+              </Link>
+            </Button>
             <Button
               variant="outline"
               size="lg"
