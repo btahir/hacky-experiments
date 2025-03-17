@@ -1,14 +1,14 @@
-import GeminiStory from './gemini-story-client'
+import GeminiFlashApp from './gemini-flash-client'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Gemini Story | Hacky Experiments',
-  description: 'Generate a story with text and images using Gemini.',
+  title: 'Gemini Flash Experiments | Hacky Experiments',
+  description: 'Explore the capabilities of Google\'s Gemini AI with interactive demos for story creation and image enhancement.',
   openGraph: {
     images: [{ url: '/micro-experiments/gemini-story.png' }],
   },
 }
 
-export default function GeminiStoryPage() {
-  return <GeminiStory />
+export default function GeminiFlashPage() {
+  return <GeminiFlashApp />
 }

@@ -106,7 +106,7 @@ export default function GeminiStory() {
     try {
       console.log('Submitting story prompt:', values.prompt)
 
-      const response = await fetch('/api/gemini-story/generate-story', {
+      const response = await fetch('/api/gemini-flash/story', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -11,3 +11,8 @@ export const geminiStoryRatelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(5, '15 m'),
 })
+
+export const geminiPhotoRatelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, '15 m'),
+})

@@ -16,12 +16,9 @@ interface StoryScene {
   imageUrl: string
 }
 
-// Gemini API configuration
-const apiKey = process.env.GEMINI_API_KEY
-
 // Function to generate story using Gemini API
 async function generateStoryWithGemini(prompt: string): Promise<StoryScene[]> {
-  if (!apiKey) {
+  if (!process.env.GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY environment variable is not set')
   }
 
@@ -116,7 +113,7 @@ export async function POST(request: Request) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('[API ERROR] POST /api/gemini-story/generate-story:', error)
+    console.error('[API ERROR] POST /api/gemini-flash/story:', error)
 
     if (error instanceof z.ZodError) {
       // Handle validation errors

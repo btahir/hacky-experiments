@@ -22,7 +22,7 @@ const generationFlashExpConfig = {
   temperature: 1,
   maxOutputTokens: 8192,
   responseMimeType: 'text/plain',
-  responseModalities: ['text', 'image'],
+  responseModalities: ['Text', 'Image'],
 }
 
 const safetySettings = [
@@ -57,7 +57,7 @@ export const geminiFlashModel = genAI.getGenerativeModel({
 })
 
 export const geminiFlashExpModel = genAI.getGenerativeModel({
-  model: 'gemini-2.0-flash-exp',
+  model: 'gemini-2.0-flash-exp-image-generation',
   safetySettings,
   generationConfig: generationFlashExpConfig,
 })
