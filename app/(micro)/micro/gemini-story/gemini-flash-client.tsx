@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, Camera, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import GeminiStory from "./gemini-story-client";
 import LinkedinPhotoConverter from "./linkedin-photo-client";
 
@@ -16,22 +17,32 @@ export default function GeminiFlashApp() {
         <div className="max-w-4xl mx-auto text-center">
           <Sparkles className="h-16 w-16 mx-auto mb-4" />
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4">
-            Gemini Flash Experiments
+            <span className="inline-block border-b-4 border-white/50 pb-1">Gemini Flash</span>{" "}
+            <span className="relative inline-block">
+              Experiments
+              <span className="absolute -top-6 right-0 text-xs bg-white/20 px-2 py-1 rounded-full font-normal">Beta</span>
+            </span>
           </h1>
           <p className="text-xl max-w-2xl mx-auto">
             Explore the capabilities of Google&apos;s Gemini AI with these
             interactive demos
           </p>
           <div className="mt-4 text-sm">
-            <a
-              href="https://github.com/btahir/hacky-experiments/blob/main/app/(micro)/micro/gemini-story/README.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors"
+            <Button
+              variant="outline"
+              size="sm"
+              className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+              asChild
             >
-              <BookOpen className="h-4 w-4 mr-2" />
-              View Documentation
-            </a>
+              <a
+                href="https://github.com/btahir/hacky-experiments/blob/main/app/(micro)/micro/gemini-story/README.md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                View Documentation
+              </a>
+            </Button>
           </div>
         </div>
       </div>

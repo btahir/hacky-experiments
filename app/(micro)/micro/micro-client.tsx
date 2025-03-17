@@ -23,6 +23,11 @@ const microExperiments: any = [
     icon: '🤖',
     tags: ['Gemini', 'Multi-modal'],
     path: '/gemini-story',
+    colors: {
+      bg: 'bg-yellow-100',
+      text: 'text-yellow-700',
+      hover: 'hover:border-yellow-200'
+    }
   },
 ]
 
@@ -57,10 +62,10 @@ export default function MicroExperimentsPage() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Link href={`/micro${experiment.path}`} className='block h-full'>
-                <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
+                <Card className={`h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent ${experiment.colors?.hover || 'hover:border-yellow-200'} overflow-hidden group`}>
                   <CardHeader>
                     <div className='flex justify-between items-start'>
-                      <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center text-2xl mb-3'>
+                      <div className={`w-12 h-12 rounded-lg ${experiment.colors?.bg || 'bg-yellow-100'} ${experiment.colors?.text || 'text-yellow-700'} flex items-center justify-center text-2xl mb-3`}>
                         {experiment.icon}
                       </div>
                       <div className='flex gap-2'>
