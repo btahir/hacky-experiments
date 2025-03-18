@@ -74,7 +74,7 @@ export default function MemeTailorClient() {
           )
         }
 
-        const templates = data.data.memes.slice(0, 20) as MemeTemplate[]
+        const templates = data.data.memes as MemeTemplate[]
         setAllMemeTemplates(templates)
         setFilteredTemplates(templates)
       } catch (error) {
