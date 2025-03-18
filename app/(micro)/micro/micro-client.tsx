@@ -23,11 +23,15 @@ const microExperiments: any = [
     icon: "🤖",
     tags: ["Gemini", "Multi-modal"],
     path: "/gemini-story",
-    colors: {
-      bg: "bg-yellow-100",
-      text: "text-yellow-700",
-      hover: "hover:border-yellow-200",
-    },
+  },
+  {
+    id: "before-after",
+    title: "Before After Comparison",
+    description:
+      "A tool to quickly get a before and after comparison of an image.",
+    icon: "📸",
+    tags: ["Image"],
+    path: "/before-after",
   },
 ];
 
@@ -63,18 +67,12 @@ export default function MicroExperimentsPage() {
             >
               <Link href={`/micro${experiment.path}`} className="block h-full">
                 <Card
-                  className={`h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent ${
-                    experiment.colors?.hover || "hover:border-yellow-200"
-                  } overflow-hidden group`}
+                  className={`h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group`}
                 >
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div
-                        className={`w-12 h-12 rounded-lg ${
-                          experiment.colors?.bg || "bg-yellow-100"
-                        } ${
-                          experiment.colors?.text || "text-yellow-700"
-                        } flex items-center justify-center text-2xl mb-3`}
+                        className={`w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center text-2xl mb-3`}
                       >
                         {experiment.icon}
                       </div>
