@@ -23,6 +23,7 @@ You are an expert TypeScript software engineer and architect with over 10 years 
 - Implement proper error boundaries and loading states for better user experience.
 - Using default shadcn/ui color theme (I.e not hardcoded)
 - Some shadcn/ui components have been improved. 
+- Do not use Next Image component unless specifically asked.
 
 ### Folder Structure
 Within the frontend, using nextjs, you can leverage route grouping using `(group)`
