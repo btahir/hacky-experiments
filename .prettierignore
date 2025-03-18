@@ -1,0 +1,10 @@
+.next
+node_modules
+public
+build
+dist
+coverage
+.vercel
+.turbo
+.env*
+!.env.example
