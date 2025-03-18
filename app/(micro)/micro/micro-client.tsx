@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -87,12 +86,10 @@ export default function MicroExperimentsPage() {
                     <CardTitle className="text-2xl">
                       {experiment.title}
                     </CardTitle>
-                    <CardDescription>{experiment.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
-                      Click to open this micro experiment and explore its
-                      functionality.
+                      {experiment.description}
                     </p>
                   </CardContent>
                   <CardFooter className="flex justify-end items-center pt-2">
