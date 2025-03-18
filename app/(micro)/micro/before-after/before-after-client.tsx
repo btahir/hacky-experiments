@@ -1,10 +1,18 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toPng } from "html-to-image";
 import { ArrowRightLeft } from "lucide-react";
 
@@ -12,7 +20,18 @@ export default function BeforeAfterClient() {
   const [beforeImage, setBeforeImage] = useState<string | null>(null);
   const [afterImage, setAfterImage] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
+  const [arrowStyle, setArrowStyle] = useState("thick-curve");
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const arrowOptions = [
+    { value: "fat-loop", label: "Fat Loop" },
+    { value: "squeeze", label: "Squeeze" },
+    { value: "straight", label: "Straight" },
+    { value: "swirl", label: "Swirl" },
+    { value: "thin-loop", label: "Thin Loop" },
+    { value: "thin-curve", label: "Thin Curve" },
+    { value: "thick-curve", label: "Thick Curve" },
+  ];
 
   const handleBeforeImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -110,6 +129,24 @@ export default function BeforeAfterClient() {
         </div>
       </div>
 
+      <div className="mb-4">
+        <Label htmlFor="arrow-style" className="mb-2 block">
+          Arrow Style
+        </Label>
+        <Select value={arrowStyle} onValueChange={setArrowStyle}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select an arrow style" />
+          </SelectTrigger>
+          <SelectContent>
+            {arrowOptions.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       <div className="mb-8">
         <Button
           onClick={captureScreenshot}
@@ -124,10 +161,13 @@ export default function BeforeAfterClient() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 relative">
           {beforeImage ? (
             <div className="relative w-full max-w-sm mx-auto flex justify-center">
-              <img
+              <Image
                 src={beforeImage}
                 alt="Before"
                 className="rounded-lg shadow-md object-cover h-72 sm:h-80"
+                width={320}
+                height={320}
+                unoptimized
               />
             </div>
           ) : (
@@ -136,40 +176,28 @@ export default function BeforeAfterClient() {
             </div>
           )}
 
-          {/* Curvy Arrow */}
+          {/* Arrow from SVG assets */}
           {beforeImage && afterImage && (
-            <div className="transform rotate-90 md:rotate-0 my-4 md:my-0">
-              <svg
-                width="100"
-                height="50"
-                viewBox="0 0 100 50"
-                className="text-blue-600"
-              >
-                <path
-                  d="M 10,25 C 40,5 60,45 90,25"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M 80,15 L 90,25 L 80,35"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <div className="transform rotate-90 md:rotate-0 my-4 md:my-0 flex items-center justify-center w-32 h-16">
+              <Image
+                src={`/micro-experiments/arrows/${arrowStyle}.svg`}
+                alt="Transformation arrow"
+                className="w-full h-full"
+                width={100}
+                height={50}
+              />
             </div>
           )}
 
           {afterImage ? (
             <div className="relative w-full max-w-sm mx-auto flex justify-center">
-              <img
+              <Image
                 src={afterImage}
                 alt="After"
                 className="rounded-lg shadow-md object-cover h-72 sm:h-80"
+                width={320}
+                height={320}
+                unoptimized
               />
             </div>
           ) : (
