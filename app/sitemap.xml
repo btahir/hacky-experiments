@@ -26,14 +26,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://hackyexperiments.com/blog/gemini-flash-experiments</loc>
+    <lastmod>2025-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/blog/jfk-rag-adventures</loc>
+    <lastmod>2025-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://hackyexperiments.com/blog/how-i-build</loc>
-    <lastmod>2025-03-13</lastmod>
+    <lastmod>2025-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/blog/hello-world</loc>
-    <lastmod>2025-03-13</lastmod>
+    <lastmod>2025-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/experiments/auntie-pdf</loc>
+    <lastmod>2025-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -104,12 +122,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/replicover</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://hackyexperiments.com/experiments/tiny-llms</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -117,6 +129,12 @@
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/tuber-times</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/experiments/replicover</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -248,13 +266,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/tail-blend</loc>
+    <loc>https://hackyexperiments.com/experiments/notion-capture</loc>
     <lastmod>2021-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/marble-tracker</loc>
+    <loc>https://hackyexperiments.com/experiments/tail-blend</loc>
     <lastmod>2021-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -266,19 +284,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/notion-capture</loc>
+    <loc>https://hackyexperiments.com/experiments/marble-tracker</loc>
     <lastmod>2021-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/nerdogram</loc>
+    <loc>https://hackyexperiments.com/experiments/pichance</loc>
     <lastmod>2021-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/pichance</loc>
+    <loc>https://hackyexperiments.com/experiments/nerdogram</loc>
     <lastmod>2021-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -302,7 +320,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/summarlight</loc>
+    <loc>https://hackyexperiments.com/experiments/dogemeter</loc>
     <lastmod>2021-07-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -314,7 +332,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/experiments/dogemeter</loc>
+    <loc>https://hackyexperiments.com/experiments/summarlight</loc>
     <lastmod>2021-07-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -332,7 +350,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/micro-experiments/test-app</loc>
+    <loc>https://hackyexperiments.com/micro/test-app</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
