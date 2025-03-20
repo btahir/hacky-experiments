@@ -1,0 +1,37 @@
+export const metadata = {
+  title: 'JFK-RAG Adventures: Playing Detective Using Some Python',
+  date: '2025-03-20',
+  excerpt: 'Diving into Python to scrape, parse, and index the newly released JFK files into a searchable database.',
+  tags: ['Python', 'RAG'],
+}
+
+---
+
+When I switched from data engineering and Python to full-stack frontend engineering and JavaScript, I never looked back. Everything was just easier and more fun. You realize how much of a pain async/await in Python is only after trying out Node. Of course, this is a personal preference and it really depends on what you're working on and your style.
+
+These days, I rarely leave TypeScript-land, but sometimes I like to go back and dust off those old Colabs from the bookshelf. Python still shines for quick data fetching with good ol' Beautiful Soup and data analysis. And so when I saw a huge batch of JFK files had been released, I figured this was a good opportunity to revisit Python.
+
+The idea: could I quickly fetch all 2000 PDFs, parse them, and build an indexed, searchable DB? Surprisingly, there aren't many plug-and-play solutions for this (and I think there's a product opportunity here: drag and drop files to get a searchable DB). Since I couldn’t find what I wanted, I threw together a quick Colab to do the job. I aimed for speed and simplicity, making a few shortcut decisions I wouldn’t recommend for production. The biggest one? Using Pinecone.
+
+Pinecone is great, but I’m a relational DB guy (and PG_VECTOR works great), and I think vector DB vendors oversold the RAG promise. I also don’t like their restrictive free tier; you hit rate limits quickly. That said, they make it dead simple to insert records and get something running.
+
+Here’s what the Colab does:
+- Scrapes the JFK assassination archive page for all PDF links.
+- Fetches all 2000+ PDFs from those links.
+- Parses them using Mistral OCR.
+- Indexes them in Pinecone.
+
+I’ve mentioned Mistral OCR before in [Auntie PDF](https://www.auntiepdf.com)
+
+It’s a solid API for parsing PDFs. It gives you a JSON object you can use to reconstruct the parsed information into Markdown (with images if you want) and text.
+
+Next, we take the text files, chunk them, and index them in Pinecone.  
+For chunking, there are various strategies like context-aware chunking, but I kept it simple and just naively chopped the docs into 512-character chunks.
+
+There are two main ways to search: lexical or semantic. Lexical is closer to keyword matching (e.g., "Oswald" or "shooter"). Semantic tries to pull results based on meaning. For this exercise, I used lexical search because users will likely hunt for specific terms in the files. Hybrid search (mixing both) works best in production, but keyword matching made sense here.
+
+Great, now we have a searchable DB up and running. Time to put some lipstick on this pig! I created a simple UI that hooks up to the Pinecone DB and lets users search through all the text chunks. You can now uncover hidden truths and overlooked details in this case that everyone else missed! 🕵️‍♂️  
+
+
+[Demo App](https://www.hackyexperiments.com/micro/jfk)  
+[Colab](https://github.com/btahir/hacky-experiments/blob/main/app/(micro)/micro/jfk/JFK_RAG.ipynb)
