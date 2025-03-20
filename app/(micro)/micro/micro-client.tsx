@@ -32,6 +32,14 @@ const microExperiments: any = [
     tags: ["Image"],
     path: "/before-after",
   },
+  {
+    id: "jfk",
+    title: "The JFK Files",
+    description: "Uncover the truth behind one of history's most controversial event.",
+    icon: "📜",
+    tags: ["Search", "Document"],
+    path: "/jfk",
+  },
 ];
 
 export default function MicroExperimentsPage() {
