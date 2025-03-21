@@ -10,12 +10,7 @@ import { toast } from 'sonner'
 import { Textarea } from '@/components/ui/textarea'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
-
-// API error response interface
-interface ApiErrorResponse {
-  error: string
-  details?: string
-}
+import { enhancePhotoWithGemini } from './actions/photo-edit'
 
 // Meme template interface
 interface MemeTemplate {
@@ -125,12 +120,6 @@ export default function MemeTailorClient() {
         type: 'image/jpeg',
       })
 
-      // Create form data for API
-      const formData = new FormData()
-
-      // Photo route uses "image" instead of "template"
-      formData.append('image', templateFile)
-
       // Build a prompt for meme generation
       let memePrompt =
         customPrompt ||
@@ -141,23 +130,23 @@ export default function MemeTailorClient() {
         memePrompt = `Create a funny and engaging meme image based on the template "${selectedTemplate.name}"`
       }
 
+      // Create a FormData object to pass to the server action
+      const formData = new FormData()
+      formData.append('image', templateFile)
       formData.append('prompt', memePrompt)
 
-      // Call the API
-      const response = await fetch('/api/gemini-flash/photo-edit', {
-        method: 'POST',
-        body: formData,
-      })
+      // Call the server action
+      const response = await enhancePhotoWithGemini(formData)
 
-      if (!response.ok) {
-        const errorData: ApiErrorResponse = await response.json()
-        throw new Error(errorData.error || 'Failed to generate meme')
+      if (response.success && response.imageUrl) {
+        setGeneratedMeme(response.imageUrl)
+        toast.success('Meme generated successfully!')
+      } else {
+        console.error('Error generating meme:', response)
+        toast.error(
+          `Failed to generate meme: ${response.error ?? 'Unknown error'}`
+        )
       }
-
-      const data = await response.json()
-      setGeneratedMeme(data.imageUrl)
-
-      toast.success('Meme generated successfully!')
     } catch (error) {
       console.error('Error generating meme:', error)
       toast.error(

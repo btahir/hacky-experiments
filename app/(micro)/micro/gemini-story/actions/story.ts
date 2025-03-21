@@ -1,8 +1,8 @@
+'use server'
+
 import { z } from "zod";
 import { geminiFlashExpModel } from "@/lib/gemini";
 import { geminiStoryRatelimit } from "@/lib/redis";
-
-export const maxDuration = 30;
 
 const identifier = "gemini-story";
 
@@ -13,18 +13,40 @@ const storyPromptSchema = z.object({
   }),
 });
 
-interface StoryScene {
+export interface StoryScene {
   text: string;
   imageUrl: string;
 }
 
-// Function to generate story using Gemini API
-async function generateStoryWithGemini(prompt: string): Promise<StoryScene[]> {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error("GEMINI_API_KEY environment variable is not set");
+/**
+ * Server action to generate a story using Gemini API
+ */
+export async function generateStoryWithGemini(
+  prompt: string
+): Promise<{ success: boolean; scenes?: StoryScene[]; error?: string; details?: string }> {
+  const { success } = await geminiStoryRatelimit.limit(identifier);
+  if (!success) {
+    return { success: false, error: "Rate limit exceeded", details: "Please try again later" };
   }
 
   try {
+    // Validate prompt
+    try {
+      storyPromptSchema.parse({ prompt });
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        return { 
+          success: false, 
+          error: "Invalid input", 
+          details: validationError.errors.map(e => e.message).join(", ") 
+        };
+      }
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY environment variable is not set");
+    }
+
     // Create a prompt that asks for a visual story with multiple scenes
     const formattedPrompt = `Generate a visual story based on the following prompt: "${prompt}". 
     Create 4-6 scenes that tell a complete story with a beginning, middle, and end.
@@ -85,64 +107,23 @@ async function generateStoryWithGemini(prompt: string): Promise<StoryScene[]> {
 
     console.log("Extracted scenes count:", scenes.length);
 
-    return scenes;
+    return { success: true, scenes: scenes };
   } catch (error) {
-    console.error("Error in generateStoryWithGemini:", error);
-    throw error;
-  }
-}
-
-/**
- * POST: Generate a story based on user prompt
- */
-export async function POST(request: Request) {
-  const { success } = await geminiStoryRatelimit.limit(identifier);
-  if (!success) {
-    return Response.json({ error: "Rate limit exceeded", status: 429 });
-  }
-
-  try {
-    // Parse and validate request body
-    const body: unknown = await request.json();
-
-    const { prompt } = storyPromptSchema.parse(body);
-
-    // Generate story scenes
-    const storyScenes = await generateStoryWithGemini(prompt);
-
-    // Return successful response with structured data
-    return Response.json(
-      {
-        scenes: storyScenes,
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("[API ERROR] POST /api/gemini-flash/story:", error);
-
-    if (error instanceof z.ZodError) {
-      // Handle validation errors
-      return Response.json(
-        { error: "Invalid input", details: error.errors },
-        { status: 400 }
-      );
-    }
-
-    // Handle Gemini API key error
+    console.error("Error in generateStoryWithGemini server action:", error);
+    
     if (error instanceof Error && error.message.includes("GEMINI_API_KEY")) {
-      return Response.json(
-        { error: "API configuration error", details: error.message },
-        { status: 500 }
-      );
+      return { 
+        success: false, 
+        error: "API configuration error", 
+        details: error.message 
+      };
     }
 
     // Handle other errors
-    return Response.json(
-      {
-        error: "Failed to generate story",
-        details: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
+    return {
+      success: false,
+      error: "Failed to generate story",
+      details: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }

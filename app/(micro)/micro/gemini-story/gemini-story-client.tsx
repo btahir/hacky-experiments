@@ -35,19 +35,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-// Define the story scene interface
-interface StoryScene {
-  text: string;
-  imageUrl: string;
-}
-
-// API error response interface
-interface ApiErrorResponse {
-  error: string;
-  details?: string | unknown;
-  status?: number;
-}
+import { generateStoryWithGemini, StoryScene } from "./actions/story";
 
 // Story form schema
 const storyFormSchema = z.object({
@@ -107,47 +95,28 @@ export default function GeminiStory() {
     try {
       console.log("Submitting story prompt:", values.prompt);
 
-      const response = await fetch("/api/gemini-flash/story", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: values.prompt }),
-      });
+      const response = await generateStoryWithGemini(values.prompt);
 
-      const responseData = await response.json();
-
-      // Check for rate limit error first before any data validation
-      if (response.status === 429 || responseData.status === 429) {
+      if (!response.success) {
         throw new Error(
-          "Rate limit exceeded. Please try again in a few minutes."
+          response.details
+            ? `${response.error}: ${response.details}`
+            : response.error || "Failed to generate story"
         );
       }
 
-      if (!response.ok) {
-        const errorData = responseData as ApiErrorResponse;
-        console.error("API error:", errorData);
+      const scenes = response.scenes;
 
-        const errorMessage = errorData.details
-          ? `${errorData.error}: ${errorData.details}`
-          : errorData.error;
+      if (!scenes || !Array.isArray(scenes) || scenes.length === 0) {
+        console.error("Invalid scenes data:", scenes);
 
-        throw new Error(errorMessage || "Failed to generate story");
-      }
-
-      if (
-        !responseData.scenes ||
-        !Array.isArray(responseData.scenes) ||
-        responseData.scenes.length === 0
-      ) {
-        console.error("API returned invalid scenes data:", responseData);
         throw new Error("The story generation API returned invalid data");
       }
 
-      setStoryScenes(responseData.scenes);
+      setStoryScenes(scenes);
       console.log(
-        `Received ${responseData.scenes.length} scenes, ${
-          responseData.scenes.filter((s: StoryScene) => s.imageUrl).length
+        `Received ${scenes.length} scenes, ${
+          scenes.filter((s: StoryScene) => s.imageUrl).length
         } with images`
       );
 

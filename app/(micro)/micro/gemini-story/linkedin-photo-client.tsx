@@ -22,13 +22,7 @@ import {
   BACKGROUND_COLORS,
   buildPhotoPrompt,
 } from "./linkedin-photo-templates";
-
-// API error response interface
-interface ApiErrorResponse {
-  error: string;
-  details?: string | unknown;
-  status?: number;
-}
+import { enhancePhotoWithGemini } from "./actions/photo-edit";
 
 // Form schema for photo enhancement
 const photoFormSchema = z.object({
@@ -121,27 +115,18 @@ export default function LinkedinPhotoConverter() {
       formData.append("image", selectedFile);
       formData.append("prompt", customPrompt);
 
-      const response = await fetch("/api/gemini-flash/photo-edit", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await enhancePhotoWithGemini(formData);
 
-      const result = await response.json();
+      if (response.success) {
+        if (response.imageUrl) {
+          setEnhancedImageUrl(response.imageUrl);
+        }
 
-      // Check for rate limit error first before any validation
-      if (response.status === 429 || result.status === 429) {
-        throw new Error(
-          "Rate limit exceeded. Please try again in a few minutes."
-        );
+        toast.success("Photo enhanced successfully!");
+      } else {
+        setError(response.error || "An unexpected error occurred");
+        toast.error("Failed to enhance photo");
       }
-
-      if (!response.ok) {
-        const errorResponse = result as ApiErrorResponse;
-        throw new Error(errorResponse.error || "Failed to enhance photo");
-      }
-
-      setEnhancedImageUrl(result.imageUrl);
-      toast.success("Photo enhanced successfully!");
     } catch (err) {
       console.error("Error enhancing photo:", err);
       setError(
