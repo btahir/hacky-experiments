@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import type React from 'react'
 import { useState, useEffect, useRef } from 'react'
@@ -9,12 +9,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useDebounce } from '@/hooks/use-debounce'
 import { Badge } from '@/components/ui/badge'
-
-interface JFKDocument {
-  id: string
-  chunk_text: string
-  filename: string
-}
+import { searchJFKDocuments, JFKDocument } from './actions'
 
 export default function JFKClient() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -38,26 +33,8 @@ export default function JFKClient() {
     setHasSearched(true)
 
     try {
-      const response = await fetch('/api/jfk-search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          limit: 8,
-        }),
-      })
-
-      const data = await response.json()
-      console.log(data)
-
-      if (response.ok) {
-        setResults(data.results || [])
-      } else {
-        console.error('Search error:', data.error)
-        setResults([])
-      }
+      const data = await searchJFKDocuments(query, 8)
+      setResults(data.results || [])
     } catch (error) {
       console.error('Failed to search JFK documents:', error)
       setResults([])

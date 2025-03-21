@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+'use server'
+
 import { Pinecone } from '@pinecone-database/pinecone'
 
 // Create a Pinecone client
@@ -16,15 +17,10 @@ const index = pc.index(
 const namespace = index.namespace('jfk-namespace')
 
 // Define the JFK document interface
-interface JFKDocument {
+export interface JFKDocument {
   id: string
   chunk_text: string
   filename: string
-}
-
-interface SearchRequest {
-  query: string
-  limit?: number
 }
 
 // Interface for Pinecone response structure
@@ -46,18 +42,12 @@ interface PineconeResponse {
 }
 
 /**
- * API route handler for JFK document search
+ * Server action for JFK document search
  */
-export async function POST(request: NextRequest) {
+export async function searchJFKDocuments(query: string, limit: number = 8): Promise<{ results: JFKDocument[] }> {
   try {
-    const body = (await request.json()) as SearchRequest
-    const { query = '', limit = 8 } = body
-
     if (!query.trim()) {
-      return NextResponse.json(
-        { error: 'Search query is required' },
-        { status: 400 }
-      )
+      return { results: [] }
     }
 
     // Perform the search using Pinecone
@@ -81,12 +71,9 @@ export async function POST(request: NextRequest) {
         } as JFKDocument
       }) || []
 
-    return NextResponse.json({ results })
+    return { results }
   } catch (error) {
-    console.error('Exception in JFK search API:', error)
-    return NextResponse.json(
-      { error: 'An unexpected error occurred' },
-      { status: 500 }
-    )
+    console.error('Exception in JFK search server action:', error)
+    return { results: [] }
   }
 }
