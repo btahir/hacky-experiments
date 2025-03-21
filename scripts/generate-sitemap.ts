@@ -10,20 +10,36 @@ const BASE_URL = 'https://hackyexperiments.com' // Replace with your actual doma
 // Directory to save the sitemap
 const APP_DIR = path.join(process.cwd(), 'app')
 
+// Directory where micro-experiments are stored
+const MICRO_EXPERIMENTS_DIR = path.join(process.cwd(), 'app', '(micro)', 'micro')
+
 // Main pages (hardcoded)
 const MAIN_PAGES = [
   '', // Homepage
   'about',
   'blog',
   'experiments',
-  'micro-experiments',
+  'micro',
 ]
 
-// Micro experiments (hardcoded)
-const MICRO_EXPERIMENTS = [
-  'test-app',
-  // Add more micro-experiments here
-]
+// Function to get all micro-experiments from the filesystem
+function getMicroExperiments(): string[] {
+  try {
+    if (!fs.existsSync(MICRO_EXPERIMENTS_DIR)) {
+      console.warn(`⚠️ Micro experiments directory not found: ${MICRO_EXPERIMENTS_DIR}`)
+      return []
+    }
+
+    // Read all directories inside the micro-experiments directory
+    return fs
+      .readdirSync(MICRO_EXPERIMENTS_DIR, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name)
+  } catch (error) {
+    console.error('❌ Error reading micro-experiments directory:', error)
+    return []
+  }
+}
 
 // Generate the sitemap XML
 async function generateSitemap() {
@@ -43,8 +59,6 @@ async function generateSitemap() {
       const url = page ? `${BASE_URL}/${page}` : BASE_URL
       sitemap += `  <url>
     <loc>${url}</loc>
-    <changefreq>weekly</changefreq>
-    <priority>${page === '' ? '1.0' : '0.8'}</priority>
   </url>
 `
     }
@@ -56,8 +70,6 @@ async function generateSitemap() {
       sitemap += `  <url>
     <loc>${BASE_URL}/blog/${post.slug}</loc>
     <lastmod>${new Date(post.date).toISOString().split('T')[0]}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 `
     }
@@ -68,21 +80,20 @@ async function generateSitemap() {
     for (const experiment of experiments) {
       sitemap += `  <url>
     <loc>${BASE_URL}/experiments/${experiment.slug}</loc>
-    <lastmod>${
-      new Date(experiment.publishDate).toISOString().split('T')[0]
-    }</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>${new Date(experiment.publishDate).toISOString().split('T')[0]}</lastmod>
   </url>
 `
     }
 
+    // Get micro-experiments dynamically from filesystem
+    console.log('Searching for micro-experiments in filesystem...')
+    const microExperiments = getMicroExperiments()
+    console.log(`Found ${microExperiments.length} micro-experiments.`)
+
     // Add micro-experiments to sitemap
-    for (const experiment of MICRO_EXPERIMENTS) {
+    for (const experiment of microExperiments) {
       sitemap += `  <url>
     <loc>${BASE_URL}/micro/${experiment}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 `
     }

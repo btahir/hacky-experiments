@@ -2,356 +2,242 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hackyexperiments.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/about</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/micro-experiments</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hackyexperiments.com/blog/gemini-flash-experiments</loc>
-    <lastmod>2025-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hackyexperiments.com/blog/jfk-rag-adventures</loc>
-    <lastmod>2025-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hackyexperiments.com/blog/how-i-build</loc>
-    <lastmod>2025-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://hackyexperiments.com/micro</loc>
   </url>
   <url>
     <loc>https://hackyexperiments.com/blog/hello-world</loc>
-    <lastmod>2025-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-03-21</lastmod>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/blog/jfk-rag-adventures</loc>
+    <lastmod>2025-03-21</lastmod>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/blog/how-i-build</loc>
+    <lastmod>2025-03-21</lastmod>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/blog/gemini-flash-experiments</loc>
+    <lastmod>2025-03-21</lastmod>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/auntie-pdf</loc>
     <lastmod>2025-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/open-deep-research</loc>
     <lastmod>2024-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/next-beats</loc>
     <lastmod>2024-11-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/react-email-generator</loc>
     <lastmod>2024-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/super-guten</loc>
     <lastmod>2024-08-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/many-shot</loc>
     <lastmod>2024-08-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/codeloom</loc>
     <lastmod>2024-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/ai-gifs</loc>
     <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/snoop-hawk</loc>
     <lastmod>2024-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/ai-standup-comedy-practice</loc>
     <lastmod>2024-02-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/glam-graph</loc>
     <lastmod>2024-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/shorts-generator</loc>
     <lastmod>2023-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/tiny-llms</loc>
     <lastmod>2023-11-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/tuber-times</loc>
     <lastmod>2023-11-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/replicover</loc>
     <lastmod>2023-11-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/plainscribe</loc>
     <lastmod>2023-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/you-tldr</loc>
     <lastmod>2023-03-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/gpt-hotline</loc>
     <lastmod>2023-03-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/bilal-news</loc>
     <lastmod>2023-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/asksteve</loc>
     <lastmod>2023-02-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/gpt-minus1</loc>
     <lastmod>2023-02-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/photopop</loc>
     <lastmod>2023-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/lexverse</loc>
     <lastmod>2023-01-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/uselesshooks</loc>
     <lastmod>2022-12-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/git-trends</loc>
     <lastmod>2022-11-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/mailtap</loc>
     <lastmod>2022-11-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/eth-lookup</loc>
     <lastmod>2022-09-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/unlocal</loc>
     <lastmod>2022-03-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/twitter-card-image-creator</loc>
     <lastmod>2022-01-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/wordle-race</loc>
     <lastmod>2022-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/vididoo</loc>
     <lastmod>2021-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/next-tails</loc>
     <lastmod>2021-07-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/life-like-tales</loc>
     <lastmod>2021-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/hello-world</loc>
     <lastmod>2021-07-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/doggystickers</loc>
     <lastmod>2021-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/puzzling-tiles</loc>
     <lastmod>2021-07-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/notion-capture</loc>
     <lastmod>2021-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/tail-blend</loc>
     <lastmod>2021-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/hearty-notifications</loc>
     <lastmod>2021-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/marble-tracker</loc>
     <lastmod>2021-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/pichance</loc>
     <lastmod>2021-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/nerdogram</loc>
     <lastmod>2021-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/brewy-mail</loc>
     <lastmod>2021-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/the-daily-mini-journal</loc>
     <lastmod>2021-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/scrilys</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/dogemeter</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/notion-landing-page</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/summarlight</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/heroes-journey-notion-template</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hackyexperiments.com/experiments/project-job</loc>
     <lastmod>2021-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hackyexperiments.com/micro/test-app</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://hackyexperiments.com/micro/gemini-story</loc>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/micro/before-after</loc>
+  </url>
+  <url>
+    <loc>https://hackyexperiments.com/micro/jfk</loc>
   </url>
 </urlset>
