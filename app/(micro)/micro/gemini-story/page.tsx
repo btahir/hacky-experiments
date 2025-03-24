@@ -1,15 +1,16 @@
-import GeminiFlashApp from "./gemini-flash-client";
-import { Metadata } from "next";
+import GeminiFlashApp from './gemini-flash-client'
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Gemini Flash Experiments | Hacky Experiments",
-  description:
-    "Explore the multi-modal capabilities of Google's Gemini AI with interactive demos.",
+  title: 'Gemini Flash Experiments | Hacky Experiments',
+  description: "Explore the multi-modal capabilities of Google's Gemini AI with interactive demos.",
   openGraph: {
-    images: [{ url: "/micro-experiments/gemini-story.png" }],
+    images: [{ url: '/micro-experiments/gemini-story.png' }],
   },
-};
+}
+
+export const maxDuration = 30
 
 export default function GeminiFlashPage() {
-  return <GeminiFlashApp />;
+  return <GeminiFlashApp />
 }
