@@ -33,6 +33,15 @@ const microExperiments: any = [
     path: "/before-after",
   },
   {
+    id: "gif-face-swap",
+    title: "GIF Face Swapper",
+    description:
+      "Search GIFs from GIPHY, upload a face, and swap it with AI.",
+    icon: "🎭",
+    tags: ["GIF", "GIPHY", "AI"],
+    path: "/gif-face-swap",
+  },
+  {
     id: "jfk",
     title: "The JFK Files",
     description: "Uncover the truth behind one of history's most controversial event.",
