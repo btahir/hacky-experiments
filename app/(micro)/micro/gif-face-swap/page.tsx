@@ -271,8 +271,8 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-purple-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-              <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-t-lg">
+            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-purple-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+              <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white">
                     <Upload className="w-4 h-4" />
@@ -357,8 +357,8 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-blue-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-              <CardHeader className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-t-lg">
+            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-blue-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+              <CardHeader className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
                     <Search className="w-4 h-4" />
@@ -456,8 +456,8 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-green-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-              <CardHeader className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-t-lg">
+            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-green-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+              <CardHeader className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white">
                     <Wand2 className="w-4 h-4" />
