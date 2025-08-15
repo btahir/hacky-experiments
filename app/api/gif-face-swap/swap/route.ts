@@ -1,9 +1,34 @@
 import { NextRequest } from "next/server";
+import { gifFaceSwapRatelimit } from "@/lib/redis";
 
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting check - global limit
+    const identifier = "gif-face-swap-global";
+    const { success, limit, reset, remaining } = await gifFaceSwapRatelimit.limit(identifier);
+    
+    if (!success) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Rate limit exceeded", 
+          details: `Daily limit reached (5 swaps per day). Try again tomorrow.`,
+          limit,
+          remaining: 0,
+          reset
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            "Content-Type": "application/json",
+            "X-RateLimit-Limit": limit.toString(),
+            "X-RateLimit-Remaining": remaining.toString(),
+            "X-RateLimit-Reset": reset.toString()
+          } 
+        }
+      );
+    }
     const FAL_API_KEY = process.env.FAL_API_KEY;
     if (!FAL_API_KEY) {
       return new Response(
@@ -73,7 +98,15 @@ export async function POST(req: NextRequest) {
 
     return new Response(
       JSON.stringify({ image: { url: imageUrl }, raw: falJson }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      { 
+        status: 200, 
+        headers: { 
+          "Content-Type": "application/json",
+          "X-RateLimit-Limit": limit.toString(),
+          "X-RateLimit-Remaining": remaining.toString(),
+          "X-RateLimit-Reset": reset.toString()
+        } 
+      }
     );
   } catch (err: any) {
     console.error("/api/gif-face-swap POST error", err);

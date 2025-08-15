@@ -16,3 +16,8 @@ export const geminiPhotoRatelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(100, '15 m'),
 })
+
+export const gifFaceSwapRatelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, '24 h'), // 5 swaps per 24 hours globally
+})

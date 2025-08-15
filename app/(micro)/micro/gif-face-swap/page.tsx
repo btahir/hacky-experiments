@@ -162,6 +162,11 @@ export default function GifFaceSwapPage() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
+        if (res.status === 429) {
+          // Rate limit error - show more helpful message
+          const details = err?.details || "Too many requests. Please try again later.";
+          throw new Error(`Rate limit exceeded: ${details}`);
+        }
         throw new Error(err?.error || "Swap failed");
       }
 
