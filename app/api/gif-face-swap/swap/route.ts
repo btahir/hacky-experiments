@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       return new Response(
         JSON.stringify({ 
           error: "Rate limit exceeded", 
-          details: `Daily limit reached (5 swaps per day). Try again tomorrow.`,
+          details: `Daily limit reached. Try again tomorrow.`,
           limit,
           remaining: 0,
           reset
