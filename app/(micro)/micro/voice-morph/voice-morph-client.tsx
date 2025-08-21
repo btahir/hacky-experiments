@@ -14,14 +14,18 @@ import {
 	Video,
 	AlertCircle,
 	CheckCircle2,
+	AlertTriangle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
 interface ProcessingResult {
-	videoUrl: string;
+	videoUrl: string | null;
 	audioUrl: string;
 	processingTime: number;
+	message?: string;
+	partialSuccess?: boolean;
+	error?: string;
 }
 
 export default function VoiceMorphClient() {
@@ -93,7 +97,7 @@ export default function VoiceMorphClient() {
 
 			clearInterval(progressInterval);
 
-			if (!response.ok) {
+			if (!response.ok && response.status !== 207) {
 				const errorText = await response.text();
 				throw new Error(`Processing failed: ${response.status} ${errorText}`);
 			}
@@ -101,7 +105,13 @@ export default function VoiceMorphClient() {
 			const resultData = await response.json();
 			setProgress(100);
 			setResult(resultData);
-			toast.success("Voice morphing completed successfully!");
+
+			// Handle partial success (status 207)
+			if (response.status === 207 || resultData.partialSuccess) {
+				toast.warning("Voice conversion completed, but video merge failed. Check results below.");
+			} else {
+				toast.success("Voice morphing completed successfully!");
+			}
 
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "An error occurred");
@@ -269,75 +279,77 @@ export default function VoiceMorphClient() {
 						</div>
 
 						<div className="flex flex-col items-center space-y-6">
-							{/* Main Action Button */}
-							<motion.div
-								whileHover={!isProcessing && videoFile && audioFile ? { scale: 1.05 } : {}}
-								whileTap={!isProcessing && videoFile && audioFile ? { scale: 0.95 } : {}}
-								className="relative"
-							>
-								<Button
-									onClick={processFiles}
-									disabled={!videoFile || !audioFile || isProcessing}
-									size="lg"
-									className={`relative px-8 py-6 text-lg font-semibold transition-all duration-300 touch-manipulation ${isProcessing
+							<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+								{/* Main Action Button */}
+								<motion.div
+									whileHover={!isProcessing && videoFile && audioFile ? { scale: 1.05 } : {}}
+									whileTap={!isProcessing && videoFile && audioFile ? { scale: 0.95 } : {}}
+									className="relative"
+								>
+									<Button
+										onClick={processFiles}
+										disabled={!videoFile || !audioFile || isProcessing}
+										size="lg"
+										className={`relative px-8 py-6 text-lg font-semibold transition-all duration-300 touch-manipulation ${isProcessing
 											? 'bg-slate-400 cursor-not-allowed'
 											: videoFile && audioFile
 												? 'bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95'
 												: 'bg-slate-300 cursor-not-allowed'
-										}`}
-								>
-									{isProcessing ? (
-										<motion.div
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											className="flex items-center gap-3"
-										>
+											}`}
+									>
+										{isProcessing ? (
 											<motion.div
-												animate={{ rotate: 360 }}
-												transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-												className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-											/>
-											<span>Transforming Your Video...</span>
-										</motion.div>
-									) : (
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 1 }}
+												className="flex items-center gap-3"
+											>
+												<motion.div
+													animate={{ rotate: 360 }}
+													transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+													className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+												/>
+												<span>Transforming Your Video...</span>
+											</motion.div>
+										) : (
+											<motion.div
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 1 }}
+												className="flex items-center gap-3"
+											>
+												<Wand2 className="w-5 h-5" />
+												<span>Start Voice Morphing</span>
+											</motion.div>
+										)}
+									</Button>
+
+									{/* Pulsing ring animation when ready */}
+									{videoFile && audioFile && !isProcessing && (
 										<motion.div
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											className="flex items-center gap-3"
-										>
-											<Wand2 className="w-5 h-5" />
-											<span>Start Voice Morphing</span>
-										</motion.div>
+											initial={{ scale: 1, opacity: 0.5 }}
+											animate={{ scale: 1.2, opacity: 0 }}
+											transition={{ duration: 1.5, repeat: Infinity }}
+											className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 pointer-events-none"
+										/>
 									)}
-								</Button>
+								</motion.div>
 
-								{/* Pulsing ring animation when ready */}
-								{videoFile && audioFile && !isProcessing && (
-									<motion.div
-										initial={{ scale: 1, opacity: 0.5 }}
-										animate={{ scale: 1.2, opacity: 0 }}
-										transition={{ duration: 1.5, repeat: Infinity }}
-										className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 pointer-events-none"
-									/>
-								)}
-							</motion.div>
-
-							{/* Reset Button */}
-							<motion.div
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{ delay: 0.2 }}
-							>
-								<Button
-									onClick={resetFiles}
-									variant="outline"
-									disabled={isProcessing}
-									size="lg"
-									className="px-6 py-3 border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-all duration-300"
+								{/* Reset Button */}
+								<motion.div
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									transition={{ delay: 0.2 }}
 								>
-									Reset Files
-								</Button>
-							</motion.div>
+									<Button
+										onClick={resetFiles}
+										variant="outline"
+										disabled={isProcessing}
+										size="lg"
+										className="p-6 border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-all duration-300"
+									>
+										Reset Files
+									</Button>
+								</motion.div>
+							</div>
 
 							{/* Progress Section */}
 							{isProcessing && (
@@ -456,9 +468,25 @@ export default function VoiceMorphClient() {
 										<div>
 											<h4 className="font-semibold mb-3">Results</h4>
 											<div className="space-y-3">
-												<Badge variant="outline" className="text-green-600 border-green-300">
-													Processing Time: {(result.processingTime / 1000).toFixed(1)}s
-												</Badge>
+												<div className="flex flex-wrap items-center gap-2">
+													<Badge variant="outline" className="text-green-600 border-green-300">
+														Processing Time: {(result.processingTime / 1000).toFixed(1)}s
+													</Badge>
+													<motion.div
+														initial={{ scale: 0 }}
+														animate={{ scale: 1 }}
+														transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
+														className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium"
+													>
+														<CheckCircle2 className="w-4 h-4" />
+														Processing Complete!
+													</motion.div>
+													{result.partialSuccess && (
+														<Badge variant="outline" className="text-orange-600 border-orange-300">
+															⚠️ Partial Success - Audio Only
+														</Badge>
+													)}
+												</div>
 												{/* Video Preview */}
 												<motion.div
 													initial={{ opacity: 0, scale: 0.9 }}
@@ -466,41 +494,45 @@ export default function VoiceMorphClient() {
 													transition={{ duration: 0.6, delay: 0.2 }}
 													className="space-y-6"
 												>
-													<div className="text-center mb-6">
-														<motion.div
-															initial={{ scale: 0 }}
-															animate={{ scale: 1 }}
-															transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-															className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium"
-														>
-															<CheckCircle2 className="w-4 h-4" />
-															Processing Complete!
-														</motion.div>
-													</div>
 
-													<div className="relative group">
-														<div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
-														<div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
-															<video
-																controls
-																className="w-full h-auto max-h-[500px] object-contain"
-																preload="metadata"
-																poster="/api/placeholder-video-poster"
-															>
-																<source src={result.videoUrl} type="video/mp4" />
-																Your browser does not support the video tag.
-															</video>
-
-
+													{result.videoUrl ? (
+														<div className="relative group">
+															<div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
+															<div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
+																<video
+																	controls
+																	className="w-full h-auto max-h-[500px] object-contain"
+																	preload="metadata"
+																>
+																	<source src={result.videoUrl} type="video/mp4" />
+																	Your browser does not support the video tag.
+																</video>
+															</div>
 														</div>
-													</div>
+													) : (
+														<div className="relative bg-gradient-to-r from-orange-100 to-yellow-100 rounded-2xl p-8 text-center">
+															<div className="text-orange-600 mb-4">
+																<AlertTriangle className="w-12 h-12 mx-auto" />
+															</div>
+															<h3 className="text-lg font-semibold text-orange-800 mb-2">
+																Video Merge Failed
+															</h3>
+															<p className="text-orange-700">
+																The voice conversion was successful, but we couldn't merge the audio with your video.
+																You can download the processed audio below and merge it manually with your video.
+															</p>
+														</div>
+													)}
 
 													<div className="text-center">
 														<p className="text-lg font-medium text-slate-700 mb-2">
-															🎬 Your Voice-Morphed Video
+															{result.videoUrl ? "🎬 Your Voice-Morphed Video" : "🎵 Your Processed Audio"}
 														</p>
 														<p className="text-slate-600 text-sm">
-															The audio has been successfully transformed while preserving the original video quality
+															{result.videoUrl
+																? "The audio has been successfully transformed while preserving the original video quality"
+																: "The voice conversion was successful! Download the processed audio below."
+															}
 														</p>
 													</div>
 												</motion.div>
@@ -521,27 +553,29 @@ export default function VoiceMorphClient() {
 														</p>
 													</div>
 
-													<div className="grid sm:grid-cols-2 gap-4">
-														<motion.div
-															whileHover={{ scale: 1.02 }}
-															whileTap={{ scale: 0.98 }}
-														>
-															<Button
-																asChild
-																size="lg"
-																className="w-full h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+													<div className={`grid gap-4 ${result.videoUrl ? 'sm:grid-cols-2' : 'sm:grid-cols-1 max-w-md mx-auto'}`}>
+														{result.videoUrl && (
+															<motion.div
+																whileHover={{ scale: 1.02 }}
+																whileTap={{ scale: 0.98 }}
 															>
-																<a href={result.videoUrl} download="voice-morphed-video.mp4" target="_blank">
-																	<div className="flex items-center justify-center gap-2">
-																		<Download className="w-5 h-5" />
-																		<span>Full Video</span>
-																	</div>
-																	<div className="text-xs opacity-90 mt-1">
-																		(with new voice)
-																	</div>
-																</a>
-															</Button>
-														</motion.div>
+																<Button
+																	asChild
+																	size="lg"
+																	className="w-full h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+																>
+																	<a href={result.videoUrl} download="voice-morphed-video.mp4" target="_blank">
+																		<div className="flex items-center justify-center gap-2">
+																			<Download className="w-5 h-5" />
+																			<span>Full Video</span>
+																		</div>
+																		<div className="text-xs opacity-90 mt-1">
+																			(with new voice)
+																		</div>
+																	</a>
+																</Button>
+															</motion.div>
+														)}
 
 														<motion.div
 															whileHover={{ scale: 1.02 }}
@@ -574,7 +608,10 @@ export default function VoiceMorphClient() {
 
 									<div className="text-center">
 										<p className="text-sm text-gray-600 mb-4">
-											🎉 Your voice-morphed video is ready! Preview it above or download to save. The audio has been successfully replaced using ChatterboxHD AI while preserving the original video quality.
+											{result.videoUrl
+												? "🎉 Your voice-morphed video is ready! Preview it above or download to save. The audio has been successfully replaced using ChatterboxHD AI while preserving the original video quality."
+												: "🎉 Your voice conversion is ready! The audio has been successfully transformed using ChatterboxHD AI. Download the processed audio above."
+											}
 										</p>
 										<Button onClick={resetFiles} variant="outline">
 											Create Another Video
@@ -585,7 +622,7 @@ export default function VoiceMorphClient() {
 						</motion.div>
 					)}
 				</div>
-				</div>
+			</div>
 		</main>
 	);
 }

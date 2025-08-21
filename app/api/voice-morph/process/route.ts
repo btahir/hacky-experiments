@@ -121,10 +121,20 @@ export async function POST(request: NextRequest) {
 
     if (!mergeRes.ok) {
       const text = await mergeRes.text().catch(() => "");
-      return NextResponse.json(
-        { error: `FAL FFmpeg merge error: ${mergeRes.status} ${text}` },
-        { status: 502 }
-      );
+      console.error('FFmpeg merge failed:', { status: mergeRes.status, text });
+
+      // Return partial success with processed audio
+      const processingTime = Date.now() - startTime;
+      return NextResponse.json({
+        videoUrl: null, // No merged video available
+        audioUrl: processedAudioUrl, // But we have the processed audio
+        processingTime: processingTime,
+        message: 'Voice conversion completed, but video merge failed. You can download the processed audio and manually merge it with your video.',
+        partialSuccess: true,
+        error: `Video merge failed: ${mergeRes.status} ${text}. The voice conversion was successful - you can download the processed audio below.`
+      }, {
+        status: 207 // Multi-Status for partial success
+      });
     }
 
     const mergeData = await mergeRes.json();
