@@ -14,6 +14,7 @@ import {
 	AlertCircle,
 	CheckCircle2,
 	AlertTriangle,
+	Wand2
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
