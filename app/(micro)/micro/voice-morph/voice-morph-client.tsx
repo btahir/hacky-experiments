@@ -9,7 +9,6 @@ import { Separator } from "@/components/ui/separator";
 import {
 	Upload,
 	Download,
-	Wand2,
 	Mic,
 	Video,
 	AlertCircle,
@@ -149,20 +148,11 @@ export default function VoiceMorphClient() {
 						transition={{ duration: 0.8, ease: "easeOut" }}
 						className="text-center mb-16"
 					>
-						<motion.div
-							initial={{ scale: 0, rotate: -180 }}
-							animate={{ scale: 1, rotate: 0 }}
-							transition={{ duration: 1, delay: 0.2, type: "spring", bounce: 0.3 }}
-							className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-600/25"
-						>
-							<Wand2 className="w-12 h-12 text-white" />
-						</motion.div>
-
 						<motion.h1
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.4 }}
-							className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6 leading-tight"
+							className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6 leading-tight"
 						>
 							VoiceMorph Studio
 						</motion.h1>
