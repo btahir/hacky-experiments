@@ -49,6 +49,15 @@ const microExperiments: any = [
     tags: ["Search", "Document"],
     path: "/jfk",
   },
+  {
+    id: "voice-morph",
+    title: "VoiceMorph Studio",
+    description:
+      "Transform any video by replacing its audio with a target voice using advanced AI speech-to-speech conversion.",
+    icon: "🎤",
+    tags: ["AI", "Audio", "Video"],
+    path: "/voice-morph",
+  },
 ];
 
 export default function MicroExperimentsPage() {

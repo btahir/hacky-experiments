@@ -21,3 +21,8 @@ export const gifFaceSwapRatelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(1, '24 h'),
 })
+
+export const voiceMorphRatelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(1, '24 h'),
+})
