@@ -44,12 +44,18 @@ export default function FlipBookClient() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Helpers
-  const loadHTMLImage = useCallback(async (url: string) => {
+  const loadHTMLImage = useCallback(async (url: string): Promise<HTMLImageElement> => {
     const img = new Image();
-    img.decoding = "async";
     img.src = url;
-    await img.decode();
-    return img;
+    
+    if (img.complete && img.naturalWidth > 0) {
+      return img;
+    }
+    
+    return new Promise((resolve, reject) => {
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("Failed to load image"));
+    });
   }, []);
 
   const onFilesChosen = useCallback(async (files: File[]) => {
@@ -95,20 +101,29 @@ export default function FlipBookClient() {
   const goToPrevious = useCallback(() => {
     if (images.length === 0) return;
     setIsPlaying(false);
-    setCurrentIndex(prev => (prev - 1 + images.length) % images.length);
+    setCurrentIndex(prev => {
+      const newIndex = (prev - 1 + images.length) % images.length;
+      return Math.max(0, Math.min(newIndex, images.length - 1));
+    });
   }, [images.length]);
 
   const goToNext = useCallback(() => {
     if (images.length === 0) return;
     setIsPlaying(false);
-    setCurrentIndex(prev => (prev + 1) % images.length);
+    setCurrentIndex(prev => {
+      const newIndex = (prev + 1) % images.length;
+      return Math.max(0, Math.min(newIndex, images.length - 1));
+    });
   }, [images.length]);
 
   // Auto play
   useEffect(() => {
     if (isPlaying && images.length > 1) {
       const id = window.setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % images.length);
+        setCurrentIndex(prev => {
+          const newIndex = (prev + 1) % images.length;
+          return Math.max(0, Math.min(newIndex, images.length - 1));
+        });
       }, Math.max(10, Math.floor(1000 / fps[0])));
       intervalRef.current = id;
     } else if (intervalRef.current) {
@@ -120,12 +135,9 @@ export default function FlipBookClient() {
     };
   }, [isPlaying, fps, images.length]);
 
-  // Cleanup URLs on unmount
-  useEffect(() => {
-    return () => {
-      images.forEach(i => URL.revokeObjectURL(i.url));
-    };
-  }, [images]);
+
+
+
 
   // Draw with fit
   const drawToCanvas = useCallback(
@@ -185,13 +197,22 @@ export default function FlipBookClient() {
         throw new Error("Failed to load gif.js library");
       }
 
-      // Preload all images first
-      const htmlImgs = await Promise.all(images.map(i => loadHTMLImage(i.url)));
-      setGifProgress(20);
+      // Use stored dimensions from when images were uploaded
+      const maxWidth = Math.max(...images.map(img => img.width || 800));
+      const maxHeight = Math.max(...images.map(img => img.height || 600));
+      
+      // Use reasonable canvas size
+      const width = Math.min(maxWidth, 1920);
+      const height = Math.min(maxHeight, 1080);
 
-      // Use first image dimensions for consistency
-      const width = htmlImgs[0].width;
-      const height = htmlImgs[0].height;
+      // Create image elements from current images
+      const htmlImgs: HTMLImageElement[] = [];
+      for (const imgData of images) {
+        const img = new Image();
+        img.src = imgData.url;
+        htmlImgs.push(img);
+      }
+      setGifProgress(20);
 
       // Create GIF encoder with DEFAULT worker (don't specify workerScript)
       const gif = new GIF({
@@ -210,32 +231,50 @@ export default function FlipBookClient() {
 
       // Handle completion
       gif.on('finished', (blob: Blob) => {
-        console.log('GIF created, size:', blob.size);
+        try {
+          console.log('GIF created, size:', blob.size);
 
-        if (blob.size === 0) {
-          toast.error("Failed to create GIF");
+          if (!blob || blob.size === 0) {
+            throw new Error("GIF generation produced empty result");
+          }
+
+          // Validate blob type
+          if (blob.type && !blob.type.includes('gif')) {
+            console.warn('Unexpected blob type:', blob.type);
+          }
+
+          // Download the blob
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `flipbook-${Date.now()}.gif`;
+          document.body.appendChild(a);
+          a.click();
+
+          setTimeout(() => {
+            if (document.body.contains(a)) {
+              document.body.removeChild(a);
+            }
+            URL.revokeObjectURL(url);
+          }, 100);
+
+          setGifProgress(100);
+          setTimeout(() => {
+            setIsGeneratingGif(false);
+            toast.success("GIF downloaded!");
+          }, 500);
+        } catch (finishErr) {
+          console.error('Error in finished handler:', finishErr);
+          toast.error("Failed to download GIF: " + (finishErr as Error).message);
           setIsGeneratingGif(false);
-          return;
         }
+      });
 
-        // Download the blob
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `flipbook-${Date.now()}.gif`;
-        document.body.appendChild(a);
-        a.click();
-
-        setTimeout(() => {
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        }, 100);
-
-        setGifProgress(100);
-        setTimeout(() => {
-          setIsGeneratingGif(false);
-          toast.success("GIF downloaded!");
-        }, 500);
+      // Handle errors
+      gif.on('abort', () => {
+        console.error('GIF generation aborted');
+        toast.error("GIF generation was aborted");
+        setIsGeneratingGif(false);
       });
 
       // Calculate frame delay
@@ -252,18 +291,18 @@ export default function FlipBookClient() {
       }
 
       // Add each frame
-      console.log(`Creating GIF with ${htmlImgs.length} frames at ${fps[0]} FPS`);
+      console.log(`Creating GIF with ${htmlImgs.length} frames at ${fps[0]} FPS (${width}x${height})`);
 
       for (let i = 0; i < htmlImgs.length; i++) {
-        // Clear and draw frame
+        // Clear canvas
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
 
-        // Draw image with selected fit mode
-        drawToCanvas(ctx, htmlImgs[i], width, height);
+        // Draw image
+        const img = htmlImgs[i];
+        drawToCanvas(ctx, img, width, height);
 
         // Add frame to GIF
-        // IMPORTANT: Pass the context, with copy: true
         gif.addFrame(ctx, {
           copy: true,
           delay: delay
@@ -274,7 +313,7 @@ export default function FlipBookClient() {
       }
 
       // Start rendering
-      console.log('Starting GIF render...');
+      console.log(`Starting GIF render with ${htmlImgs.length} frames...`);
       gif.render();
 
     } catch (err) {
@@ -286,28 +325,53 @@ export default function FlipBookClient() {
 
   const removeImage = useCallback(
     (index: number) => {
-      setImages(prev => {
-        const next = prev.slice();
-        const [removed] = next.splice(index, 1);
-        if (removed) URL.revokeObjectURL(removed.url);
-        if (next.length === 0) {
-          setCurrentIndex(0);
-          setIsPlaying(false);
-        } else if (currentIndex >= next.length) {
-          setCurrentIndex(next.length - 1);
-        }
-        return next;
-      });
+      if (index < 0 || index >= images.length) {
+        return;
+      }
+
+      // Stop playback
+      setIsPlaying(false);
+
+      // Get the image to remove and clean up its URL
+      const imageToRemove = images[index];
+      if (imageToRemove) {
+        URL.revokeObjectURL(imageToRemove.url);
+      }
+
+      // Remove the item from the array
+      const newImages = images.filter((_, i) => i !== index);
+      setImages(newImages);
+
+      // Update currentIndex
+      if (newImages.length === 0) {
+        setCurrentIndex(0);
+      } else if (currentIndex >= newImages.length) {
+        setCurrentIndex(newImages.length - 1);
+      } else if (index < currentIndex) {
+        setCurrentIndex(currentIndex - 1);
+      }
     },
-    [currentIndex]
+    [images, currentIndex]
   );
 
   const clearAll = useCallback(() => {
-    images.forEach(i => URL.revokeObjectURL(i.url));
+    // Clean up all URLs
+    images.forEach(i => {
+      try {
+        URL.revokeObjectURL(i.url);
+      } catch (err) {
+        // Ignore errors for already revoked URLs
+      }
+    });
+    
+    // Reset all state
     setImages([]);
     setCurrentIndex(0);
     setIsPlaying(false);
-    toast.success("Cleared");
+    setIsGeneratingGif(false);
+    setGifProgress(0);
+    
+    toast.success("Cleared all images");
   }, [images]);
 
   // UI
@@ -350,15 +414,23 @@ export default function FlipBookClient() {
                 ) : (
                   <div className="absolute inset-0 p-2">
                     <div className="w-full h-full flex items-center justify-center">
-                      <img
-                        src={images[currentIndex]?.url}
-                        alt={`Frame ${currentIndex + 1}`}
-                        className={
-                          fit === "stretch" ? "w-full h-full object-fill" :
-                            fit === "cover" ? "w-full h-full object-cover" :
-                              "max-w-full max-h-full object-contain"
-                        }
-                      />
+                      {images[currentIndex] ? (
+                        <img
+                          src={images[currentIndex].url}
+                          alt={`Frame ${currentIndex + 1}`}
+                          className={
+                            fit === "stretch" ? "w-full h-full object-fill" :
+                              fit === "cover" ? "w-full h-full object-cover" :
+                                "max-w-full max-h-full object-contain"
+                          }
+                        />
+                      ) : (
+                        <div className="text-center text-white/80">
+                          <ImageIcon className="w-14 h-14 mx-auto mb-3 opacity-70" />
+                          <p className="mb-2">Invalid frame</p>
+                          <p className="text-xs text-white/50">Please refresh or re-upload images</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
