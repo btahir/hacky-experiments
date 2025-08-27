@@ -1,4 +1,3 @@
-// lib/loadGifJs.ts
 let loading: Promise<void> | null = null;
 
 export async function loadGifJs() {
