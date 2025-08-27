@@ -359,7 +359,7 @@ export default function FlipBookClient() {
     images.forEach(i => {
       try {
         URL.revokeObjectURL(i.url);
-      } catch (err) {
+      } catch {
         // Ignore errors for already revoked URLs
       }
     });
@@ -641,7 +641,7 @@ export default function FlipBookClient() {
                 <ul className="text-white/80 text-sm space-y-2">
                   <li>• Use photos with same resolution for the cleanest result</li>
                   <li>• 4-8 FPS works best for natural motion, 2-4 FPS for dramatic effect</li>
-                  <li>• "Cover" fit mode fills frame, "Contain" shows entire image</li>
+                  <li>• &ldquo;Cover&rdquo; fit mode fills frame, &ldquo;Contain&rdquo; shows entire image</li>
                 </ul>
               </CardContent>
             </Card>
