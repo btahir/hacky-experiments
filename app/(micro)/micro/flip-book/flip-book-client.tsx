@@ -639,9 +639,9 @@ export default function FlipBookClient() {
               </CardHeader>
               <CardContent>
                 <ul className="text-white/80 text-sm space-y-2">
-                  <li>• Bigger buttons and stronger contrast for mobile usability</li>
-                  <li>• Thumbnails scroll horizontally with snap on mobile</li>
-                  <li>• Fit mode picks how each frame maps to the canvas</li>
+                  <li>• Use photos with same resolution for the cleanest result</li>
+                  <li>• 4-8 FPS works best for natural motion, 2-4 FPS for dramatic effect</li>
+                  <li>• "Cover" fit mode fills frame, "Contain" shows entire image</li>
                 </ul>
               </CardContent>
             </Card>
