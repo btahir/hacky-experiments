@@ -11,7 +11,6 @@ import {
   Download,
   Play,
   Pause,
-  RotateCcw,
   ChevronLeft,
   ChevronRight,
   Trash2,
@@ -84,20 +83,6 @@ export default function FlipBookClient() {
     },
     [onFilesChosen]
   );
-
-  const onDrop = useCallback(
-    async (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      const files = Array.from(e.dataTransfer.files || []);
-      await onFilesChosen(files);
-    },
-    [onFilesChosen]
-  );
-
-  const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  }, []);
-
   // Playback controls
   const togglePlay = useCallback(() => {
     if (images.length < 2) {
@@ -142,13 +127,6 @@ export default function FlipBookClient() {
     };
   }, [images]);
 
-  // Output size = first frame size
-  const outSize = useMemo(() => {
-    if (images.length === 0) return { w: 0, h: 0 };
-    const f = images[0];
-    return { w: f.width || 0, h: f.height || 0 };
-  }, [images]);
-
   // Draw with fit
   const drawToCanvas = useCallback(
     (ctx: CanvasRenderingContext2D, img: HTMLImageElement, W: number, H: number) => {
@@ -159,7 +137,7 @@ export default function FlipBookClient() {
         ctx.drawImage(img, 0, 0, W, H);
         return;
       }
-      const rCanvas = W / H;
+      
       const rImg = img.width / img.height;
 
       if (fit === "contain") {
