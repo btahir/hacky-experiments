@@ -17,7 +17,7 @@ import {
   Trash2,
   Image as ImageIcon,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { loadGifJs } from "./loadGif";
 
@@ -35,7 +35,7 @@ export default function FlipBookClient() {
   const [images, setImages] = useState<UploadedImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [fps, setFps] = useState([12]);
+  const [fps, setFps] = useState([4]);
   const [isGeneratingGif, setIsGeneratingGif] = useState(false);
   const [gifProgress, setGifProgress] = useState(0);
   const [fit, setFit] = useState<FitMode>("contain");
@@ -106,11 +106,6 @@ export default function FlipBookClient() {
     }
     setIsPlaying(v => !v);
   }, [images.length]);
-
-  const reset = useCallback(() => {
-    setIsPlaying(false);
-    setCurrentIndex(0);
-  }, []);
 
   const goToPrevious = useCallback(() => {
     if (images.length === 0) return;
@@ -238,7 +233,7 @@ export default function FlipBookClient() {
       // Handle completion
       gif.on('finished', (blob: Blob) => {
         console.log('GIF created, size:', blob.size);
-        
+
         if (blob.size === 0) {
           toast.error("Failed to create GIF");
           setIsGeneratingGif(false);
@@ -252,12 +247,12 @@ export default function FlipBookClient() {
         a.download = `flipbook-${Date.now()}.gif`;
         document.body.appendChild(a);
         a.click();
-        
+
         setTimeout(() => {
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
         }, 100);
-        
+
         setGifProgress(100);
         setTimeout(() => {
           setIsGeneratingGif(false);
@@ -273,29 +268,29 @@ export default function FlipBookClient() {
       canvas.width = width;
       canvas.height = height;
       const ctx = canvas.getContext('2d');
-      
+
       if (!ctx) {
         throw new Error("Failed to get canvas context");
       }
 
       // Add each frame
       console.log(`Creating GIF with ${htmlImgs.length} frames at ${fps[0]} FPS`);
-      
+
       for (let i = 0; i < htmlImgs.length; i++) {
         // Clear and draw frame
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
-        
+
         // Draw image with selected fit mode
         drawToCanvas(ctx, htmlImgs[i], width, height);
-        
+
         // Add frame to GIF
         // IMPORTANT: Pass the context, with copy: true
         gif.addFrame(ctx, {
           copy: true,
           delay: delay
         });
-        
+
         const frameProgress = 20 + Math.round((i / htmlImgs.length) * 20);
         setGifProgress(frameProgress);
       }
@@ -345,6 +340,7 @@ export default function FlipBookClient() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
+          className="my-6 sm:my-8"
         >
           <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
             Flip Book Studio
@@ -364,40 +360,30 @@ export default function FlipBookClient() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div
-                onDrop={onDrop}
-                onDragOver={onDragOver}
-                className="relative rounded-lg border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950"
-                aria-label="Drop images here"
-              >
-                {/* Taller aspect on mobile for comfort, 16:9 on large */}
-                <div className="aspect-[3/4] sm:aspect-video min-h-[360px] sm:min-h-[420px] flex items-center justify-center">
-                  {images.length === 0 ? (
-                    <div className="text-white/80 text-center p-6">
+              <div className="w-full rounded-lg border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 aspect-[3/4] sm:aspect-video min-h-[360px] sm:min-h-[420px] relative overflow-hidden">
+                {images.length === 0 ? (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center text-white/80">
                       <ImageIcon className="w-14 h-14 mx-auto mb-3 opacity-70" />
-                      <p className="mb-2">Drag and drop images here</p>
-                      <p className="text-xs text-white/50">or use the picker below</p>
+                      <p className="mb-2">No images uploaded</p>
+                      <p className="text-xs text-white/50">Use the picker below to add images</p>
                     </div>
-                  ) : (
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentIndex}
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 p-2">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
                         src={images[currentIndex]?.url}
                         alt={`Frame ${currentIndex + 1}`}
-                        className="w-full h-full object-contain"
-                        style={{
-                          maxWidth: '100%',
-                          maxHeight: '100%',
-                          objectFit: fit === "stretch" ? "fill" : fit === "cover" ? "cover" : "contain"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.08 }}
+                        className={
+                          fit === "stretch" ? "w-full h-full object-fill" :
+                            fit === "cover" ? "w-full h-full object-cover" :
+                              "max-w-full max-h-full object-contain"
+                        }
                       />
-                    </AnimatePresence>
-                  )}
-                </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Status bar */}
@@ -414,11 +400,10 @@ export default function FlipBookClient() {
                         <button
                           key={opt}
                           onClick={() => setFit(opt)}
-                          className={`px-3 py-1.5 text-xs ${
-                            fit === opt
-                              ? "bg-sky-500 text-slate-900"
-                              : "bg-white/5 text-white/80 hover:bg-white/10"
-                          } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400`}
+                          className={`px-3 py-1.5 text-xs ${fit === opt
+                            ? "bg-sky-500 text-slate-900"
+                            : "bg-white/5 text-white/80 hover:bg-white/10"
+                            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400`}
                           aria-pressed={fit === opt}
                         >
                           {opt}
@@ -461,14 +446,13 @@ export default function FlipBookClient() {
                           setCurrentIndex(index);
                           setIsPlaying(false);
                         }}
-                        className={`relative shrink-0 w-20 h-20 rounded-md overflow-hidden snap-start ${
-                          index === currentIndex
-                            ? "ring-2 ring-sky-400"
-                            : "ring-1 ring-white/15 hover:ring-white/30"
-                        }`}
+                        className={`relative shrink-0 w-20 h-20 rounded-md overflow-hidden snap-start ${index === currentIndex
+                          ? "ring-2 ring-sky-400"
+                          : "ring-1 ring-white/15 hover:ring-white/30"
+                          }`}
                         title={image.name}
                       >
-                        <img src={image.url} alt={`Frame ${index + 1}`} className="w-full h-full object-cover" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                        <img src={image.url} alt={`Frame ${index + 1}`} className="w-full h-full object-cover" />
                         <span className="absolute top-1 left-1 text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white/90">
                           {index + 1}
                         </span>
@@ -562,19 +546,11 @@ export default function FlipBookClient() {
                       </>
                     )}
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={reset}
-                    disabled={images.length === 0}
-                    className="bg-white/10 text-white hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-sky-400"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                  </Button>
                 </div>
 
                 <div className="space-y-3">
                   <label className="text-white font-medium">Speed: {fps[0]} FPS</label>
-                  <Slider value={fps} onValueChange={setFps} min={1} max={30} step={1} className="w-full" />
+                  <Slider value={fps} onValueChange={setFps} min={1} max={30} step={1} className="w-full mt-4" />
                   <div className="flex justify-between text-sm text-white/70">
                     <span>Slow</span>
                     <span>Fast</span>
