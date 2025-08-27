@@ -58,6 +58,15 @@ const microExperiments: any = [
     tags: ["AI", "Audio", "Video"],
     path: "/voice-morph",
   },
+  {
+    id: "flip-book",
+    title: "Flip Book Generator",
+    description:
+      "Create animated flip books from your images. Upload multiple photos, adjust playback speed, and generate GIF animations.",
+    icon: "📖",
+    tags: ["Animation", "Images", "GIF"],
+    path: "/flip-book",
+  },
 ];
 
 export default function MicroExperimentsPage() {
