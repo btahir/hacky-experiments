@@ -67,6 +67,15 @@ const microExperiments: any = [
     tags: ["Animation", "Images", "GIF"],
     path: "/flip-book",
   },
+  {
+    id: "time-traveler",
+    title: "Time Traveler",
+    description:
+      "Create aged versions of photos with AI-powered age progression in 10-year increments. Generate realistic aging effects and customize individual results.",
+    icon: "⏳",
+    tags: ["AI", "Gemini", "Photos"],
+    path: "/time-traveler",
+  },
 ];
 
 export default function MicroExperimentsPage() {
