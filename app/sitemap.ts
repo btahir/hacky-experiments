@@ -5,7 +5,7 @@ import { fetchAllPosts } from '@/lib/contentful'
 import { getAllPosts } from '@/lib/mdx'
 import { absoluteUrl } from '@/lib/site-config'
 
-export const revalidate = 60 * 60
+export const revalidate = 3600
 
 const staticPages = ['/', '/about', '/blog', '/experiments', '/micro']
 

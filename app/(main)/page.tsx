@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Beaker, Code, Package, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 
@@ -27,12 +26,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Badge className='mb-2 py-1 px-3 bg-primary/10 text-primary font-mono text-xs tracking-wider'>
-              // digital playground
-            </Badge>
             <h1 className='font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter text-foreground'>
               Welcome to my{' '}
-              <span className='line-through decoration-muted-foreground/40'>graveyard</span>{' '}
+              <span className='line-through decoration-muted-primary/60'>graveyard</span>{' '}
               portfolio of{' '}
               <span className='text-primary'>hacky experiments!</span>
             </h1>
