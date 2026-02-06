@@ -160,7 +160,7 @@ export default function GeminiStory() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg">
+      <div className="bg-primary text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg">
         <div className="max-w-4xl mx-auto text-center">
           <BookOpen className="h-16 w-16 mx-auto mb-4" />
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4">
@@ -174,12 +174,12 @@ export default function GeminiStory() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-2xl mx-auto shadow-lg border-purple-100 dark:border-purple-900 pt-0">
-          <CardHeader className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-t-lg">
-            <CardTitle className="text-2xl text-purple-800 dark:text-purple-300">
+        <Card className="max-w-2xl mx-auto shadow-lg border-primary/10 dark:border-red-900 pt-0">
+          <CardHeader className="p-4 bg-gradient-to-r from-red-50 to-amber-50 dark:from-red-950/30 dark:to-amber-950/30 rounded-t-lg">
+            <CardTitle className="text-2xl text-primary dark:text-red-300">
               Create Your Story
             </CardTitle>
-            <CardDescription className="text-purple-600 dark:text-purple-400">
+            <CardDescription className="text-primary dark:text-primary">
               Describe your story idea and watch as Gemini brings it to life
               with vivid scenes and matching imagery.
             </CardDescription>
@@ -201,7 +201,7 @@ export default function GeminiStory() {
                       <FormControl>
                         <Textarea
                           placeholder="Enter a detailed story prompt, e.g. 'Create a fantasy story about a young wizard discovering ancient magic in a forgotten forest'"
-                          className="h-32 resize-none focus:ring-purple-500 focus:border-purple-500"
+                          className="h-32 resize-none focus:ring-red-500 focus:border-primary"
                           {...field}
                         />
                       </FormControl>
@@ -216,7 +216,7 @@ export default function GeminiStory() {
                 <Button
                   type="submit"
                   disabled={isGeneratingStory}
-                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                  className="w-full bg-primary hover:from-red-700 hover:to-amber-700"
                 >
                   {isGeneratingStory ? (
                     <>
@@ -244,7 +244,7 @@ export default function GeminiStory() {
         {storyScenes.length > 0 && (
           <div className="mt-16 max-w-6xl mx-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-3xl font-bold text-purple-800 dark:text-purple-300">
+              <h2 className="text-3xl font-bold text-primary dark:text-red-300">
                 Your Story
               </h2>
               <div className="flex items-center gap-4">
@@ -253,8 +253,8 @@ export default function GeminiStory() {
                   size="sm"
                   onClick={toggleAutoSlide}
                   className={cn(
-                    "border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300",
-                    autoSlide && "bg-purple-100 dark:bg-purple-900/30"
+                    "border-primary/30 text-primary dark:border-red-700 dark:text-red-300",
+                    autoSlide && "bg-primary/10 dark:bg-red-900/30"
                   )}
                 >
                   {autoSlide ? "Pause Auto-Play" : "Auto-Play"}
@@ -266,7 +266,7 @@ export default function GeminiStory() {
             </div>
 
             {/* Slideshow Container with Fixed Height */}
-            <div className="relative bg-white dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden">
+            <div className="relative bg-card dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden">
               {/* Current Scene - Fixed Height Container */}
               <div className="relative h-[500px]">
                 <div className="h-full md:flex">
@@ -287,10 +287,10 @@ export default function GeminiStory() {
                       {/* Text Container with ScrollArea for overflow */}
                       <div className="md:w-1/2 h-[250px] md:h-full overflow-hidden">
                         <ScrollArea className="h-full p-6 md:p-8">
-                          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-purple-800 bg-purple-100 rounded-full dark:bg-purple-900/50 dark:text-purple-200">
+                          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary bg-primary/10 rounded-full dark:bg-red-900/50 dark:text-red-200">
                             Scene {currentSceneIndex + 1}
                           </div>
-                          <div className="prose dark:prose-invert prose-purple max-w-none">
+                          <div className="pred dark:pred-invert pred-yellow max-w-none">
                             <ReactMarkdown>
                               {storyScenes[currentSceneIndex].text}
                             </ReactMarkdown>
@@ -302,12 +302,12 @@ export default function GeminiStory() {
                     <div className="w-full h-full overflow-hidden">
                       <ScrollArea className="h-full p-8">
                         <div className="flex items-center gap-2 mb-4">
-                          <ImageIcon className="text-purple-400" />
-                          <div className="inline-block px-3 py-1 text-xs font-medium text-purple-800 bg-purple-100 rounded-full dark:bg-purple-900/50 dark:text-purple-200">
+                          <ImageIcon className="text-primary" />
+                          <div className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full dark:bg-red-900/50 dark:text-red-200">
                             Scene {currentSceneIndex + 1} (No Image)
                           </div>
                         </div>
-                        <div className="prose dark:prose-invert prose-purple max-w-none">
+                        <div className="pred dark:pred-invert pred-yellow max-w-none">
                           <ReactMarkdown>
                             {storyScenes[currentSceneIndex].text}
                           </ReactMarkdown>
@@ -321,7 +321,7 @@ export default function GeminiStory() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 rounded-full shadow-md z-10"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-card/80 dark:bg-slate-800/80 hover:bg-card dark:hover:bg-slate-700 rounded-full shadow-md z-10"
                   onClick={goToPrevScene}
                 >
                   <ChevronLeft className="h-6 w-6" />
@@ -331,7 +331,7 @@ export default function GeminiStory() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 rounded-full shadow-md z-10"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-card/80 dark:bg-slate-800/80 hover:bg-card dark:hover:bg-slate-700 rounded-full shadow-md z-10"
                   onClick={goToNextScene}
                 >
                   <ChevronRight className="h-6 w-6" />
@@ -347,8 +347,8 @@ export default function GeminiStory() {
                     className={cn(
                       "w-2.5 h-2.5 rounded-full transition-all",
                       index === currentSceneIndex
-                        ? "bg-purple-600 w-6"
-                        : "bg-slate-300 dark:bg-slate-600 hover:bg-purple-400 dark:hover:bg-purple-700"
+                        ? "bg-primary w-6"
+                        : "bg-slate-300 dark:bg-slate-600 hover:bg-primary-hover dark:hover:bg-primary-hover"
                     )}
                     onClick={() => setCurrentSceneIndex(index)}
                     aria-label={`Go to scene ${index + 1}`}

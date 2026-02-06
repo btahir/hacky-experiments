@@ -1,24 +1,29 @@
-import Link from 'next/link'
-import { fetchAllPosts } from '@/lib/contentful'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { formatDate } from '@/lib/utils'
+import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { SearchBar } from './search-bar'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { formatDate } from '@/lib/utils'
+import { fetchAllPosts } from '@/lib/contentful'
+import { absoluteUrl, siteConfig } from '@/lib/site-config'
 
 // Define how many posts per page
 const POSTS_PER_PAGE = 6
 
 // Generate static metadata for the page
-export const metadata = {
+const description = 'Browse through all our experiments and projects'
+
+export const metadata: Metadata = {
   title: 'Experiments',
-  description: 'Browse through all our experiments and projects',
+  description,
+  alternates: {
+    canonical: '/experiments',
+  },
+  openGraph: {
+    title: `Experiments | ${siteConfig.name}`,
+    description,
+    url: '/experiments',
+  },
 }
 
 export default async function ExperimentsPage({
@@ -52,12 +57,30 @@ export default async function ExperimentsPage({
   const endIndex = startIndex + POSTS_PER_PAGE
   const paginatedPosts = filteredPosts.slice(startIndex, endIndex)
 
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${siteConfig.name} Experiments`,
+    description,
+    url: absoluteUrl('/experiments'),
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: totalPosts,
+      itemListElement: paginatedPosts.map((post, index) => ({
+        '@type': 'ListItem',
+        position: startIndex + index + 1,
+        url: absoluteUrl(`/experiments/${post.slug}`),
+        name: post.title,
+      })),
+    },
+  }
+
   return (
-    <div className='bg-yellow-50'>
+    <div>
       <div className='container mx-auto py-10 px-4 sm:px-6 lg:px-8'>
         <div className='text-center mb-12'>
           <h1 className='text-4xl font-bold mb-8'>
-            My <span className='text-red-500'>Experiments</span>
+            My <span className='text-primary'>Experiments</span>
           </h1>
           <p className='text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto'>
             Some experiments, I did.
@@ -71,7 +94,7 @@ export default async function ExperimentsPage({
 
         {filteredPosts.length === 0 ? (
           <div className='text-center py-12'>
-            <p className='text-lg text-gray-600'>
+            <p className='text-lg text-muted-foreground'>
               No experiments found matching &quot;{searchQuery}&quot;
             </p>
             <Link
@@ -90,7 +113,7 @@ export default async function ExperimentsPage({
                   key={post.sys.id}
                   className='group'
                 >
-                  <Card className='h-full flex flex-col transition-all duration-200 hover:shadow-lg pt-0'>
+                  <Card className='h-full flex flex-col surface-card surface-card-hover pt-0'>
                     {post.heroImage?.url && (
                       <div className='relative w-full h-64 overflow-hidden rounded-t-lg'>
                         <Image
@@ -107,53 +130,55 @@ export default async function ExperimentsPage({
                     <CardHeader>
                       <CardTitle>{post.title}</CardTitle>
                       {post.publishDate && (
-                        <CardDescription>
-                          Published on {formatDate(post.publishDate)}
-                        </CardDescription>
+                        <p className='font-mono text-xs text-muted-foreground'>
+                          {formatDate(post.publishDate)}
+                        </p>
                       )}
                     </CardHeader>
                     <CardContent className='flex-grow'>
-                      <p className='text-gray-600 dark:text-gray-300'>
+                      <p className='text-foreground/70 text-sm'>
                         {post.description}
                       </p>
                     </CardContent>
-                    <CardFooter className='text-sm text-gray-500'>
-                      Read more →
+                    <CardFooter className='font-mono text-xs text-muted-foreground'>
+                      read more &rarr;
                     </CardFooter>
                   </Card>
                 </Link>
               ))}
             </div>
 
-            {/* Server-side pagination - simplified to just next/previous */}
+            {/* Pagination */}
             {totalPages > 1 && (
               <div className='mt-12 flex justify-center'>
                 <nav className='flex items-center gap-4'>
                   {currentPage > 1 && (
                     <Link
                       href={`/experiments?page=${currentPage - 1}${
-                        searchQuery ? `&search=${searchQuery}` : ''
+                        searchQuery
+                          ? `&search=${encodeURIComponent(searchQuery)}`
+                          : ''
                       }`}
-                      className='inline-flex items-center gap-1 px-3 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
+                      className='inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 font-mono text-sm text-foreground/70 transition-colors hover:bg-accent hover:text-foreground'
                     >
-                      <span>←</span>
-                      <span>Previous</span>
+                      &larr; Previous
                     </Link>
                   )}
 
-                  <div className='text-sm font-medium'>
-                    Page {currentPage} of {totalPages}
+                  <div className='font-mono text-sm text-muted-foreground'>
+                    {currentPage} / {totalPages}
                   </div>
 
                   {currentPage < totalPages && (
                     <Link
                       href={`/experiments?page=${currentPage + 1}${
-                        searchQuery ? `&search=${searchQuery}` : ''
+                        searchQuery
+                          ? `&search=${encodeURIComponent(searchQuery)}`
+                          : ''
                       }`}
-                      className='inline-flex items-center gap-1 px-3 py-2 border rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800'
+                      className='inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 font-mono text-sm text-foreground/70 transition-colors hover:bg-accent hover:text-foreground'
                     >
-                      <span>Next</span>
-                      <span>→</span>
+                      Next &rarr;
                     </Link>
                   )}
                 </nav>
@@ -162,6 +187,13 @@ export default async function ExperimentsPage({
           </>
         )}
       </div>
+
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionSchema).replace(/</g, '\\u003c'),
+        }}
+      />
     </div>
   )
 }

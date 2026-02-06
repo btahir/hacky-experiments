@@ -81,10 +81,10 @@ export default function JFKClient() {
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="outline" className="mb-4 border-amber-500 text-amber-400">
+            <Badge variant="outline" className="mb-4 border-primary text-primary">
               DECLASSIFIED 2025
             </Badge>
-            <h1 className="mb-2 font-serif text-5xl font-bold tracking-tight text-amber-400 drop-shadow-lg">
+            <h1 className="mb-2 font-serif text-5xl font-bold tracking-tight text-primary drop-shadow-lg">
               The JFK Files
             </h1>
             <p className="mb-8 text-xl text-gray-300">
@@ -97,7 +97,7 @@ export default function JFKClient() {
             <div className="mx-auto mb-8 flex w-full max-w-3xl gap-2 rounded-lg bg-gray-800/80 p-1 backdrop-blur-sm">
               <div className="relative flex-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <FileSearch className="h-5 w-5 text-amber-500" />
+                  <FileSearch className="h-5 w-5 text-primary" />
                 </div>
                 <Input
                   ref={searchInputRef}
@@ -106,12 +106,12 @@ export default function JFKClient() {
                   value={searchQuery}
                   onChange={handleSearchInputChange}
                   onKeyDown={handleKeyPress}
-                  className="w-full border-gray-700 bg-gray-800 py-6 pl-10 pr-4 text-gray-100 placeholder:text-gray-400 focus:border-amber-500 focus:ring-amber-500"
+                  className="w-full border-gray-700 bg-gray-800 py-6 pl-10 pr-4 text-gray-100 placeholder:text-gray-400 focus:border-primary focus:ring-amber-500"
                 />
               </div>
               <Button
                 onClick={handleSearchClick}
-                className="flex-shrink-0 bg-amber-600 py-6 text-gray-900 hover:bg-amber-500"
+                className="flex-shrink-0 bg-primary py-6 text-gray-900 hover:bg-primary"
               >
                 <Search className="mr-2 h-4 w-4" />
                 Investigate
@@ -120,11 +120,11 @@ export default function JFKClient() {
 
             <div className="flex items-center justify-center space-x-6 text-sm text-gray-400">
               <div className="flex items-center">
-                <Clock className="mr-2 h-4 w-4 text-amber-500" />
+                <Clock className="mr-2 h-4 w-4 text-primary" />
                 <span>Declassified March 2025</span>
               </div>
               <div className="flex items-center">
-                <AlertCircle className="mr-2 h-4 w-4 text-amber-500" />
+                <AlertCircle className="mr-2 h-4 w-4 text-primary" />
                 <span>2,000+ Documents</span>
               </div>
             </div>
@@ -137,7 +137,7 @@ export default function JFKClient() {
         {!hasSearched && (
           <div className="my-12 text-center text-gray-400">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800">
-              <FileSearch className="h-8 w-8 text-amber-500" />
+              <FileSearch className="h-8 w-8 text-primary" />
             </div>
             <p className="text-lg">Enter a search term to begin your investigation</p>
             <p className="mt-2 text-sm text-gray-500">
@@ -165,7 +165,7 @@ export default function JFKClient() {
         {!isLoading && hasSearched && results.length === 0 && (
           <div className="my-12 text-center text-gray-400">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800">
-              <AlertCircle className="h-8 w-8 text-amber-500" />
+              <AlertCircle className="h-8 w-8 text-primary" />
             </div>
             <p className="text-lg">No evidence found for &quot;{searchQuery}&quot;</p>
             <p className="mt-2 text-sm text-gray-500">
@@ -176,7 +176,7 @@ export default function JFKClient() {
 
         {!isLoading && results.length > 0 && (
           <>
-            <h2 className="mb-6 font-serif text-2xl font-bold text-amber-400">
+            <h2 className="mb-6 font-serif text-2xl font-bold text-primary">
               Evidence Files{' '}
               <span className="text-gray-400">({results.length} documents found)</span>
             </h2>
@@ -200,8 +200,8 @@ function DocumentCard({ document }: { document: JFKDocument }) {
   return (
     <>
       <Card className="overflow-hidden border-gray-700 bg-gray-800 transition-all duration-200 hover:shadow-[0_0_15px_rgba(251,191,36,0.3)]">
-        <div className="border-l-4 border-amber-600 px-4 py-3">
-          <h3 className="font-mono text-sm text-amber-400">{document.id}</h3>
+        <div className="border-l-4 border-primary px-4 py-3">
+          <h3 className="font-mono text-sm text-primary">{document.id}</h3>
         </div>
         <CardContent className="p-4">
           <p className="line-clamp-5 text-sm text-gray-300">{document.chunk_text}</p>
@@ -212,7 +212,7 @@ function DocumentCard({ document }: { document: JFKDocument }) {
               href={`https://www.archives.gov/files/research/jfk/releases/2025/0318/${filenameWithoutExt}.pdf`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm font-medium text-amber-400 hover:text-amber-300"
+              className="flex items-center text-sm font-medium text-primary hover:text-amber-300"
             >
               <FileText className="mr-1 h-4 w-4" />
               PDF
@@ -224,7 +224,7 @@ function DocumentCard({ document }: { document: JFKDocument }) {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm font-medium text-amber-400 hover:text-amber-300"
+              className="flex items-center text-sm font-medium text-primary hover:text-amber-300"
             >
               <FileSearch className="mr-1 h-4 w-4" />
               Markdown

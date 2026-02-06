@@ -6,6 +6,10 @@ const GOOGLE_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID || ''
 
 export function Analytics() {
+  if (!GOOGLE_MEASUREMENT_ID) {
+    return null
+  }
+
   return (
     <Script
       src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_MEASUREMENT_ID}`}

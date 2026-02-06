@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Github, Twitter, Linkedin } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
+import { siteConfig } from '@/lib/site-config'
 
 export default function AboutPage() {
   const fadeIn = {
@@ -14,7 +15,7 @@ export default function AboutPage() {
   }
 
   return (
-    <main className='min-h-screen bg-yellow-50 py-20'>
+    <main className='min-h-screen py-20'>
       <div className='container mx-auto px-4 sm:px-6 max-w-5xl'>
         {/* Hero Section */}
         <div className='flex flex-col items-center mb-16'>
@@ -25,13 +26,13 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
           >
             <div className='relative'>
-              <div className='absolute -inset-1 rounded-full bg-gradient-to-tl from-red-500 to-yellow-400 opacity-70 blur'></div>
+              <div className='absolute -inset-1 rounded-full bg-gradient-to-tl from-primary/70 to-primary/30 opacity-70 blur'></div>
               <Image
                 src='/me.png'
                 alt="Bilal's profile photo"
                 width={800}
                 height={800}
-                className='relative w-48 h-48 sm:w-56 sm:h-56 object-cover rounded-full border-4 border-white'
+                className='relative w-48 h-48 sm:w-56 sm:h-56 object-cover rounded-full border-4 border-card'
               />
             </div>
           </motion.div>
@@ -42,7 +43,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <span className='text-red-500'>Hello,</span> I&apos;m Bilal
+            <span className='text-primary'>Hello,</span> I&apos;m Bilal
           </motion.h1>
 
           <motion.div
@@ -51,18 +52,14 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Badge className='bg-red-100 text-red-700 hover:bg-red-200'>
-              Builder
-            </Badge>
-            <Badge className='bg-yellow-100 text-yellow-700 hover:bg-yellow-200'>
-              Creator
-            </Badge>
-            <Badge className='bg-blue-100 text-blue-700 hover:bg-blue-200'>
-              Developer
-            </Badge>
-            <Badge className='bg-green-100 text-green-700 hover:bg-green-200'>
-              (Over) Thinker
-            </Badge>
+            {['Builder', 'Creator', 'Developer', '(Over) Thinker'].map((label) => (
+              <Badge
+                key={label}
+                className='bg-primary/8 text-primary font-mono text-xs tracking-wider'
+              >
+                {label}
+              </Badge>
+            ))}
           </motion.div>
 
           <motion.div
@@ -72,48 +69,48 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <a
-              href='https://twitter.com/deepwhitman'
+              href={siteConfig.socials.x}
               target='_blank'
               rel='noreferrer'
-              className='p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
+              className='p-2 bg-card rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
               aria-label='Twitter'
             >
-              <Twitter size={20} className='text-blue-400' />
+              <Twitter size={20} className='text-primary' />
             </a>
             <a
-              href='https://github.com/btahir'
+              href={siteConfig.socials.github}
               target='_blank'
               rel='noreferrer'
-              className='p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
+              className='p-2 bg-card rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
               aria-label='GitHub'
             >
-              <Github size={20} className='text-gray-800' />
+              <Github size={20} className='text-foreground' />
             </a>
             <a
-              href='https://www.linkedin.com/in/biltahir/'
+              href={siteConfig.socials.linkedin}
               target='_blank'
               rel='noreferrer'
-              className='p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
+              className='p-2 bg-card rounded-full shadow-md hover:shadow-lg transition-shadow duration-300'
               aria-label='Linkedin'
             >
-              <Linkedin size={20} className='text-blue-500' />
+              <Linkedin size={20} className='text-primary' />
             </a>
           </motion.div>
         </div>
 
         {/* Quote Section */}
         <motion.div
-          className='rounded-xl bg-white p-8 mb-12 shadow-md'
+          className='rounded-xl border border-border/60 bg-card/80 p-8 mb-12'
           initial='hidden'
           animate='visible'
           variants={fadeIn}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <blockquote className='text-2xl sm:text-3xl italic text-gray-700 text-center'>
+          <blockquote className='text-2xl sm:text-3xl italic text-foreground/70 text-center'>
             &quot;All life is an experiment. The more experiments you make the
             better.&quot;
           </blockquote>
-          <p className='text-lg text-gray-500 mt-4 text-center'>
+          <p className='font-mono text-sm text-muted-foreground mt-4 text-center'>
             — Ralph Waldo Emerson
           </p>
         </motion.div>
@@ -126,7 +123,7 @@ export default function AboutPage() {
           variants={fadeIn}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className='text-lg text-gray-700 space-y-6'>
+          <div className='text-lg text-foreground/80 space-y-6'>
             <p>
               Hello! I&apos;m Bilal. I like to build things and try out some
               weird hacky experiments. I&apos;m at my happiest in the thick of
@@ -141,7 +138,7 @@ export default function AboutPage() {
               You can find some of my experiments{' '}
               <Link
                 href='/experiments'
-                className='text-red-500 hover:text-red-700 font-medium underline underline-offset-2'
+                className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
               >
                 here
               </Link>
@@ -149,13 +146,13 @@ export default function AboutPage() {
               about my process{' '}
               <Link
                 href='/process'
-                className='text-red-500 hover:text-red-700 font-medium underline underline-offset-2'
+                className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
               >
                 here
               </Link>
               .
             </p>
-            <p>Happy travels! 😀</p>
+            <p>Happy travels!</p>
             <p className='font-medium'>— Bilal</p>
           </div>
         </motion.div>
@@ -168,18 +165,18 @@ export default function AboutPage() {
           variants={fadeIn}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <Card className='bg-gradient-to-r from-red-500 to-yellow-500 text-white shadow-lg'>
+          <Card className='bg-primary text-primary-foreground shadow-lg'>
             <CardContent className='p-8'>
               <h3 className='text-2xl font-bold mb-4'>Let&apos;s Connect!</h3>
-              <p className='mb-6'>
+              <p className='mb-6 text-primary-foreground/80'>
                 Follow me on Twitter to catch the latest shenanigans I&apos;m
                 getting myself into.
               </p>
               <a
-                href='https://twitter.com/deepwhitman'
+                href={siteConfig.socials.x}
                 target='_blank'
                 rel='noreferrer'
-                className='inline-flex items-center bg-white text-blue-500 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors duration-300'
+                className='inline-flex items-center bg-primary-foreground text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary-foreground/90 transition-colors duration-300'
               >
                 <Twitter size={18} className='mr-2' />
                 Follow @deepwhitman

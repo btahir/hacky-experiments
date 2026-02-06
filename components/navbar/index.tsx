@@ -1,126 +1,125 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Github, Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { MobileMenu } from './mobile-menu'
+import { mainNavLinks, siteConfig } from '@/lib/site-config'
 
 export function NavBar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Handle scroll event to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 18)
     }
 
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Handle escape key to close mobile menu
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false)
       }
     }
-    
+
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Experiments', path: '/experiments' },
-    { name: 'Micro', path: '/micro' },
-  ]
-
-  const handleMenuToggle = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setMobileMenuOpen(true)
-  }
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4',
-          isScrolled
-            ? 'bg-background/80 backdrop-blur-md shadow-sm'
-            : 'bg-transparent'
-        )}
-      >
-        <div className='container mx-auto px-4 flex items-center justify-between'>
-          {/* Logo */}
-          <Link
-            href='/'
-            className='font-bold text-xl flex items-center text-yellow-950'
+      <header className='fixed left-0 right-0 top-0 z-50 px-3 pt-3 sm:px-4'>
+        <div className='mx-auto max-w-6xl'>
+          <div
+            className={cn(
+              'flex items-center justify-between rounded-xl border px-4 py-2 transition-all duration-300 sm:px-5',
+              isScrolled
+                ? 'border-border/70 bg-card/92 shadow-[0_8px_30px_-12px_oklch(0.3_0.02_50_/_0.2)] backdrop-blur-lg'
+                : 'border-border/40 bg-card/60 backdrop-blur-md'
+            )}
           >
-            <img
-              src='/icon.svg'
-              alt='Hacky Experiments'
-              className='w-8 h-8 mr-2'
-            />
-            <span className='text-red-500 mr-1'>Hacky</span>Experiments
-          </Link>
+            <Link href='/' className='flex items-center gap-2.5'>
+              <Image
+                src='/icon.svg'
+                alt={siteConfig.name}
+                width={32}
+                height={32}
+                className='rounded-md'
+                priority
+              />
+              <div className='leading-none'>
+                <p className='font-mono text-[10px] tracking-widest uppercase text-muted-foreground'>
+                  {siteConfig.creator.name}
+                </p>
+                <p className='text-base font-bold tracking-tight text-foreground'>
+                  <span className='text-primary'>Hacky</span> Experiments
+                </p>
+              </div>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className='hidden md:flex items-center space-x-1'>
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                href={link.path}
-                className={cn(
-                  'px-3 py-2 rounded-md text-sm font-medium transition-colors',
-                  pathname === link.path
-                    ? 'bg-yellow-100 text-yellow-700'
-                    : 'text-foreground/70 hover:text-foreground hover:bg-yellow-50'
-                )}
+            <nav className='hidden items-center gap-0.5 md:flex'>
+              {mainNavLinks.map((link) => {
+                const isActive = pathname === link.path
+                return (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={cn(
+                      'rounded-lg px-3 py-1.5 font-mono text-sm tracking-wide transition-colors',
+                      isActive
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'text-foreground/60 hover:text-foreground hover:bg-accent/50'
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              })}
+              <a
+                href={siteConfig.socials.github}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='ml-2 inline-flex items-center justify-center rounded-lg p-2 text-foreground/60 transition-colors hover:text-foreground hover:bg-accent/50'
+                aria-label='View source on GitHub'
               >
-                {link.name}
-              </Link>
-            ))}
-            <a
-              href='https://github.com/btahir/hacky-experiments'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='ml-2 p-2 rounded-md text-foreground/70 hover:text-foreground hover:bg-muted transition-colors'
-              aria-label='GitHub Repository'
-            >
-              <Github size={20} />
-            </a>
-          </nav>
+                <Github className='size-4' />
+              </a>
+            </nav>
 
-          {/* Mobile Navigation Toggle */}
-          <div className='md:hidden flex items-center'>
             <Button
               variant='ghost'
               size='icon'
-              className='text-foreground relative z-50'
-              onClick={handleMenuToggle}
-              aria-label='Open Menu'
-              type="button"
+              className='md:hidden'
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label='Open navigation menu'
               aria-expanded={mobileMenuOpen}
+              aria-controls='mobile-navigation'
+              type='button'
             >
-              <Menu size={24} />
+              <Menu className='size-5' />
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
-        navLinks={navLinks}
+        navLinks={mainNavLinks}
       />
     </>
   )

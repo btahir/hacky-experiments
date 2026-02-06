@@ -1,4 +1,5 @@
 import { NavBar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
 import { Toaster } from 'sonner'
 
 export default function MainLayout({
@@ -9,10 +10,11 @@ export default function MainLayout({
   return (
     <>
       <NavBar />
-      <main className='pt-20'>
+      <div id='main-content' className='pt-24'>
         {children}
         <Toaster />
-      </main>
+      </div>
+      <Footer />
     </>
   )
 }

@@ -8,22 +8,18 @@ interface MdxLayoutProps {
 
 export default function MdxLayout({ children }: MdxLayoutProps) {
   return (
-    <div>
-      <div className='px-4 py-8 bg-yellow-50'>
+    <main className='mx-auto max-w-4xl px-4 pb-24 sm:px-6 lg:px-8'>
+      <div className='surface-card rounded-2xl px-4 py-3'>
         <Link
           href='/blog'
-          className='inline-flex items-center text-sm font-medium text-red-900 hover:text-red-800'
+          className='inline-flex items-center text-sm font-medium text-primary hover:text-primary/85'
         >
           <ArrowLeft className='mr-2 size-4' />
           Back to Blog
         </Link>
       </div>
 
-      <div className='container mx-auto px-4 pb-24'>
-        <article className='prose prose-yellow max-w-3xl mx-auto'>
-          {children}
-        </article>
-      </div>
-    </div>
+      <article className='surface-card mt-6 p-6 sm:p-8 lg:p-10'>{children}</article>
+    </main>
   )
 }

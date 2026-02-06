@@ -141,7 +141,7 @@ export default function LinkedinPhotoConverter() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg">
+      <div className="bg-primary text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg">
         <div className="max-w-4xl mx-auto text-center">
           <Camera className="h-16 w-16 mx-auto mb-4" />
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4">
@@ -157,12 +157,12 @@ export default function LinkedinPhotoConverter() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Upload Section */}
-          <Card className="shadow-lg border-purple-100 dark:border-purple-900 pt-0">
-            <CardHeader className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-t-lg">
-              <CardTitle className="text-2xl text-purple-800 dark:text-purple-300">
+          <Card className="shadow-lg border-primary/10 dark:border-red-900 pt-0">
+            <CardHeader className="p-4 bg-gradient-to-r from-red-50 to-amber-50 dark:from-red-950/30 dark:to-amber-950/30 rounded-t-lg">
+              <CardTitle className="text-2xl text-primary dark:text-red-300">
                 Upload Your Photo
               </CardTitle>
-              <CardDescription className="text-purple-600 dark:text-purple-400">
+              <CardDescription className="text-primary dark:text-primary">
                 Select a photo to enhance for your professional profile
               </CardDescription>
             </CardHeader>
@@ -179,8 +179,8 @@ export default function LinkedinPhotoConverter() {
                 className={cn(
                   "border-2 border-dashed rounded-lg p-8 mb-6 text-center cursor-pointer transition-colors",
                   previewUrl
-                    ? "border-purple-300 bg-purple-50 dark:border-purple-700 dark:bg-purple-900/20"
-                    : "border-gray-300 hover:border-purple-400 hover:bg-purple-50 dark:border-gray-700 dark:hover:border-purple-600 dark:hover:bg-purple-900/10"
+                    ? "border-primary/30 bg-primary/5 dark:border-red-700 dark:bg-red-900/20"
+                    : "border-gray-300 hover:border-primary hover:bg-primary/5 dark:border-gray-700 dark:hover:border-primary dark:hover:bg-red-900/10"
                 )}
                 onClick={handleUploadClick}
               >
@@ -193,13 +193,13 @@ export default function LinkedinPhotoConverter() {
                         className="max-w-full max-h-full object-contain"
                       />
                     </div>
-                    <p className="text-sm text-purple-600 dark:text-purple-400">
+                    <p className="text-sm text-primary dark:text-primary">
                       Click to change photo
                     </p>
                   </div>
                 ) : (
                   <div className="flex flex-col items-center space-y-2">
-                    <Upload className="h-12 w-12 text-purple-500 dark:text-purple-400 mb-2" />
+                    <Upload className="h-12 w-12 text-primary dark:text-primary mb-2" />
                     <p className="text-lg font-medium">
                       Click to upload an image
                     </p>
@@ -229,7 +229,7 @@ export default function LinkedinPhotoConverter() {
                       onChange={(e) =>
                         photoForm.setValue("templateId", e.target.value)
                       }
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
                     >
                       {Object.values(PHOTO_STYLES).map((style) => (
                         <option key={style.id} value={style.id}>
@@ -270,7 +270,7 @@ export default function LinkedinPhotoConverter() {
                       onChange={(e) =>
                         photoForm.setValue("gender", e.target.value)
                       }
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
                     >
                       {Object.values(GENDER_OPTIONS).map((option) => (
                         <option key={option.id} value={option.id}>
@@ -311,7 +311,7 @@ export default function LinkedinPhotoConverter() {
                       onChange={(e) =>
                         photoForm.setValue("backgroundColor", e.target.value)
                       }
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
                     >
                       {Object.values(BACKGROUND_COLORS).map((option) => (
                         <option key={option.id} value={option.id}>
@@ -340,7 +340,7 @@ export default function LinkedinPhotoConverter() {
                 <Button
                   type="submit"
                   disabled={isProcessing || !selectedFile}
-                  className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                  className="w-full bg-primary hover:bg-primary-hover text-white"
                   variant="default"
                 >
                   {isProcessing ? (
@@ -364,12 +364,12 @@ export default function LinkedinPhotoConverter() {
           </Card>
 
           {/* Results Section */}
-          <Card className="shadow-lg border-purple-100 dark:border-purple-900 pt-0">
-            <CardHeader className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-t-lg">
-              <CardTitle className="text-2xl text-purple-800 dark:text-purple-300">
+          <Card className="shadow-lg border-primary/10 dark:border-red-900 pt-0">
+            <CardHeader className="p-4 bg-gradient-to-r from-red-50 to-amber-50 dark:from-red-950/30 dark:to-amber-950/30 rounded-t-lg">
+              <CardTitle className="text-2xl text-primary dark:text-red-300">
                 Enhanced Result
               </CardTitle>
-              <CardDescription className="text-purple-600 dark:text-purple-400">
+              <CardDescription className="text-primary dark:text-primary">
                 Your AI-enhanced professional photo
               </CardDescription>
             </CardHeader>
@@ -377,8 +377,8 @@ export default function LinkedinPhotoConverter() {
               {isProcessing ? (
                 <div className="flex flex-col items-center justify-center h-[500px] border rounded-lg bg-slate-50 dark:bg-slate-800/50">
                   <div className="flex flex-col items-center space-y-4">
-                    <Loader2 className="h-12 w-12 text-purple-500 animate-spin" />
-                    <p className="text-lg text-purple-600 dark:text-purple-400">
+                    <Loader2 className="h-12 w-12 text-primary animate-spin" />
+                    <p className="text-lg text-primary dark:text-primary">
                       Processing your photo...
                     </p>
                   </div>
@@ -395,8 +395,8 @@ export default function LinkedinPhotoConverter() {
                         className={cn(
                           "px-4 py-2 rounded-l-md rounded-r-none border-r transition-all duration-200",
                           compareView
-                            ? "bg-purple-600 text-white hover:bg-purple-700"
-                            : "bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/40 dark:text-purple-100 dark:hover:bg-purple-800/60"
+                            ? "bg-primary text-white hover:bg-primary-hover"
+                            : "bg-primary/10 text-primary hover:bg-primary/20 dark:bg-red-900/40 dark:text-red-100 dark:hover:bg-red-800/60"
                         )}
                       >
                         <span className="flex items-center gap-2">
@@ -411,8 +411,8 @@ export default function LinkedinPhotoConverter() {
                         className={cn(
                           "px-4 py-2 rounded-r-md rounded-l-none transition-all duration-200",
                           !compareView
-                            ? "bg-purple-600 text-white hover:bg-purple-700"
-                            : "bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/40 dark:text-purple-100 dark:hover:bg-purple-800/60"
+                            ? "bg-primary text-white hover:bg-primary-hover"
+                            : "bg-primary/10 text-primary hover:bg-primary/20 dark:bg-red-900/40 dark:text-red-100 dark:hover:bg-red-800/60"
                         )}
                       >
                         <span className="flex items-center gap-2">
@@ -430,7 +430,7 @@ export default function LinkedinPhotoConverter() {
                         <div className="text-gray-600 dark:text-gray-300">
                           Before
                         </div>
-                        <div className="text-purple-600 dark:text-purple-400">
+                        <div className="text-primary dark:text-primary">
                           After
                         </div>
                       </div>
@@ -475,7 +475,7 @@ export default function LinkedinPhotoConverter() {
                     <Button
                       asChild
                       variant="default"
-                      className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white"
+                      className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white"
                     >
                       <a
                         href={enhancedImageUrl}

@@ -79,21 +79,21 @@ export default function BeforeAfterClient() {
         <div className="flex flex-col items-center justify-center my-8">
           <div className="flex items-center gap-3 mb-2">
             <div className="relative">
-              <div className="absolute -inset-1 bg-blue-600 rounded-lg blur opacity-30"></div>
-              <div className="relative bg-white border-2 border-blue-600 rounded-lg p-2">
-                <ArrowRightLeft className="h-6 w-6 text-blue-600" />
+              <div className="absolute -inset-1 bg-primary rounded-lg blur opacity-30"></div>
+              <div className="relative bg-card border-2 border-primary rounded-lg p-2">
+                <ArrowRightLeft className="h-6 w-6 text-primary" />
               </div>
             </div>
             <h1 className="text-4xl font-bold tracking-tight">
               <span className="text-gray-900">Before</span>
               <span className="relative mx-2 inline-block">
-                <span className="absolute inset-x-0 bottom-0 h-3 bg-blue-200 opacity-30"></span>
-                <span className="relative text-blue-600">After</span>
+                <span className="absolute inset-x-0 bottom-0 h-3 bg-primary/20 opacity-30"></span>
+                <span className="relative text-primary">After</span>
               </span>
               <span className="text-gray-900">Shot</span>
             </h1>
           </div>
-          <div className="h-1 w-24 bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
+          <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
         </div>
         <p className="text-gray-600 max-w-xs sm:max-w-lg mx-auto">
           Upload your before and after images to create a beautiful comparison that you can download

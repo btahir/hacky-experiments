@@ -8,7 +8,7 @@ import { fetchAllPosts } from '../lib/contentful'
 const BASE_URL = 'https://hackyexperiments.com' // Replace with your actual domain
 
 // Directory to save the sitemap
-const APP_DIR = path.join(process.cwd(), 'app')
+const OUTPUT_DIR = path.join(process.cwd(), 'public')
 
 // Directory where micro-experiments are stored
 const MICRO_EXPERIMENTS_DIR = path.join(process.cwd(), 'app', '(micro)', 'micro')
@@ -45,8 +45,8 @@ function getMicroExperiments(): string[] {
 async function generateSitemap() {
   try {
     // Ensure public directory exists
-    if (!fs.existsSync(APP_DIR)) {
-      fs.mkdirSync(APP_DIR, { recursive: true })
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true })
     }
 
     // Start XML content
@@ -102,7 +102,7 @@ async function generateSitemap() {
     sitemap += `</urlset>`
 
     // Write sitemap to file
-    fs.writeFileSync(path.join(APP_DIR, 'sitemap.xml'), sitemap)
+    fs.writeFileSync(path.join(OUTPUT_DIR, 'sitemap.xml'), sitemap)
 
     console.log('✅ Sitemap generated successfully!')
   } catch (error) {

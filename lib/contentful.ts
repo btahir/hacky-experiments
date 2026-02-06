@@ -163,6 +163,7 @@ export async function fetchPost(slug: string) {
         items {
           title
           slug
+          description
           heroImage {
             title
             url

@@ -452,7 +452,7 @@ export default function FlipBookClient() {
                           onClick={() => setFit(opt)}
                           className={`px-3 py-1.5 text-xs ${fit === opt
                             ? "bg-sky-500 text-slate-900"
-                            : "bg-white/5 text-white/80 hover:bg-white/10"
+                            : "bg-card/5 text-white/80 hover:bg-card/10"
                             } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400`}
                           aria-pressed={fit === opt}
                         >
@@ -466,7 +466,7 @@ export default function FlipBookClient() {
                       size="sm"
                       onClick={goToPrevious}
                       disabled={images.length <= 1}
-                      className="bg-white/10 text-white hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-sky-400"
+                      className="bg-card/10 text-white hover:bg-card/20 focus-visible:ring-2 focus-visible:ring-sky-400"
                       aria-label="Previous frame"
                     >
                       <ChevronLeft className="w-4 h-4" />
@@ -476,7 +476,7 @@ export default function FlipBookClient() {
                       size="sm"
                       onClick={goToNext}
                       disabled={images.length <= 1}
-                      className="bg-white/10 text-white hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-sky-400"
+                      className="bg-card/10 text-white hover:bg-card/20 focus-visible:ring-2 focus-visible:ring-sky-400"
                       aria-label="Next frame"
                     >
                       <ChevronRight className="w-4 h-4" />
@@ -546,20 +546,20 @@ export default function FlipBookClient() {
                         variant="destructive"
                         size="sm"
                         onClick={clearAll}
-                        className="bg-rose-500 hover:bg-rose-400"
+                        className="bg-primary hover:bg-primary-hover"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
                     <div className="max-h-36 overflow-y-auto space-y-1 pr-2">
                       {images.map((image, index) => (
-                        <div key={index} className="flex items-center justify-between bg-white/5 rounded p-2">
+                        <div key={index} className="flex items-center justify-between bg-card/5 rounded p-2">
                           <span className="text-white text-sm truncate flex-1 mr-2 overflow-hidden">{image.name}</span>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => removeImage(index)}
-                            className="text-rose-400 hover:text-rose-300"
+                            className="text-primary hover:text-primary"
                             aria-label={`Remove ${image.name}`}
                           >
                             <Trash2 className="w-3 h-3" />
@@ -607,7 +607,7 @@ export default function FlipBookClient() {
                   </div>
                 </div>
 
-                <Separator className="bg-white/10" />
+                <Separator className="bg-card/10" />
 
                 <Button
                   onClick={generateGif}

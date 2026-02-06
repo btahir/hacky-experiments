@@ -324,7 +324,7 @@ export default function MemeTailorClient() {
   return (
     <div className='flex flex-col items-center'>
       {/* Purple Header */}
-      <div className='w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg'>
+      <div className='w-full bg-primary text-white py-12 px-4 sm:px-6 lg:px-8 mb-10 rounded-lg'>
         <div className='max-w-4xl mx-auto text-center'>
           <Smile className='h-16 w-16 mx-auto mb-4' />
           <h1 className='text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-4'>
@@ -382,7 +382,7 @@ export default function MemeTailorClient() {
                           className={cn(
                             'p-2 border rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800',
                             selectedTemplate?.id === meme.id &&
-                              'border-purple-500 bg-purple-50 dark:bg-purple-950'
+                              'border-primary bg-primary/5 dark:bg-red-950'
                           )}
                           onClick={() => selectTemplate(meme)}
                         >

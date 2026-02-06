@@ -1,9 +1,9 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getAllPosts } from '@/lib/mdx'
-import { Metadata } from 'next'
 import MdxLayout from '@/components/mdx-layout'
+import { getAllPosts } from '@/lib/mdx'
+import { absoluteUrl, siteConfig } from '@/lib/site-config'
 
-// Define types for metadata
 interface PostMetadata {
   title: string
   date: string
@@ -11,102 +11,153 @@ interface PostMetadata {
   tags?: string[]
 }
 
-// Generate static paths for all blog posts
-export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+function getFallbackMetadata(): PostMetadata {
+  return {
+    title: 'Untitled',
+    date: new Date().toISOString(),
+    excerpt: '',
+    tags: [],
+  }
 }
 
-// Only allow pre-rendered routes
+function validDate(dateValue: string) {
+  const parsedDate = new Date(dateValue)
+  return Number.isNaN(parsedDate.getTime()) ? new Date().toISOString() : dateValue
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({ slug: post.slug }))
+}
+
 export const dynamicParams = false
 
-// Generate metadata for each blog post
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  // Import the blog post dynamically
   const { slug } = await params
+
   try {
-    const PostModule = await import(`@/content/blog/${slug}.mdx`)
-    const metadata = (PostModule.metadata as PostMetadata) || {
-      title: 'Untitled',
-      date: new Date().toISOString(),
-      excerpt: '',
-      tags: [],
-    }
+    const postModule = await import(`@/content/blog/${slug}.mdx`)
+    const metadata = (postModule.metadata as PostMetadata) || getFallbackMetadata()
+    const canonicalPath = `/blog/${slug}`
 
     return {
       title: `${metadata.title || 'Blog Post'} | Hacky Experiments Blog`,
       description: metadata.excerpt || 'Read our latest blog post.',
+      alternates: {
+        canonical: canonicalPath,
+      },
+      openGraph: {
+        type: 'article',
+        url: canonicalPath,
+        title: `${metadata.title} | ${siteConfig.name}`,
+        description: metadata.excerpt || 'Read our latest blog post.',
+        images: [siteConfig.ogImage],
+        publishedTime: validDate(metadata.date),
+        authors: [siteConfig.creator.name],
+        tags: metadata.tags,
+      },
+      twitter: {
+        title: `${metadata.title} | ${siteConfig.name}`,
+        description: metadata.excerpt || 'Read our latest blog post.',
+        images: [siteConfig.ogImage],
+      },
     }
   } catch (error) {
     console.error(`Error generating metadata for ${slug}:`, error)
     return {
-      title: 'Error Loading Post',
-      description: 'There was an error loading this post.',
+      title: 'Post Not Found',
+      description: 'The requested blog post could not be found.',
+      robots: {
+        index: false,
+        follow: false,
+      },
     }
   }
 }
 
-// Blog post page component
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  // Dynamically import the MDX file based on the slug
   const { slug } = await params
-  try {
-    const PostModule = await import(`@/content/blog/${slug}.mdx`)
-    const Post = PostModule.default
 
-    // Access the metadata from the module
-    const metadata = (PostModule.metadata as PostMetadata) || {
-      title: 'Untitled',
-      date: new Date().toISOString(),
-      excerpt: '',
-      tags: [],
+  try {
+    const postModule = await import(`@/content/blog/${slug}.mdx`)
+    const Post = postModule.default
+    const metadata = (postModule.metadata as PostMetadata) || getFallbackMetadata()
+    const canonicalPath = `/blog/${slug}`
+
+    const blogPostingSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: metadata.title,
+      description: metadata.excerpt,
+      datePublished: validDate(metadata.date),
+      dateModified: validDate(metadata.date),
+      author: {
+        '@type': 'Person',
+        name: siteConfig.creator.name,
+      },
+      publisher: {
+        '@type': 'Person',
+        name: siteConfig.creator.name,
+      },
+      mainEntityOfPage: absoluteUrl(canonicalPath),
+      url: absoluteUrl(canonicalPath),
+      keywords: metadata.tags,
+      inLanguage: 'en-US',
     }
 
     return (
       <MdxLayout>
-        <div className='mb-8'>
-          <h1 className='text-4xl font-bold mb-4'>{metadata.title}</h1>
+        <header className='mb-8 border-b border-border/80 pb-6'>
+          <p className='font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground'>
+            Article
+          </p>
+          <h1 className='mt-3 text-4xl font-bold sm:text-5xl'>{metadata.title}</h1>
 
-          <div className='flex items-center text-sm text-foreground/60 mb-6'>
-            <time dateTime={metadata.date}>
+          <div className='mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground'>
+            <time dateTime={metadata.date} className='font-mono text-xs'>
               {new Date(metadata.date).toLocaleDateString('en-US', {
-                month: 'long',
+                month: 'short',
                 day: 'numeric',
                 year: 'numeric',
               })}
             </time>
 
-            {metadata.tags && metadata.tags.length > 0 && (
+            {metadata.tags?.length ? (
               <>
-                <span className='mx-2'>•</span>
-                <div className='flex flex-wrap gap-2'>
-                  {metadata.tags.map((tag: string) => (
-                    <span
+                <span>•</span>
+                <ul className='flex flex-wrap gap-2'>
+                  {metadata.tags.map((tag) => (
+                    <li
                       key={tag}
-                      className='bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-md text-xs'
+                      className='rounded-full border border-border/70 bg-card/90 px-2.5 py-1 text-xs text-foreground/80'
                     >
                       {tag}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </>
-            )}
+            ) : null}
           </div>
-        </div>
+        </header>
 
-        <div className='prose prose-yellow lg:prose-lg'>
+        <div className='prose lg:prose-lg'>
           <Post />
         </div>
+
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(blogPostingSchema).replace(/</g, '\\u003c'),
+          }}
+        />
       </MdxLayout>
     )
   } catch (error) {

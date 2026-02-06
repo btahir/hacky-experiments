@@ -190,11 +190,11 @@ export default function GifFaceSwapPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 dark:from-purple-950 dark:via-pink-950 dark:to-blue-950 opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-red-100 via-yellow-50 to-amber-100 dark:from-red-950 dark:via-yellow-950 dark:to-amber-950 opacity-50" />
 
       {/* Animated gradient orbs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-blue-400 to-cyan-400 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-400 to-yellow-400 rounded-full blur-3xl opacity-20 animate-pulse" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-amber-400 to-yellow-400 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
 
       <div className="container relative mx-auto px-4 py-6 max-w-7xl">
         {/* Header with animation */}
@@ -206,7 +206,7 @@ export default function GifFaceSwapPage() {
         >
           <div className="flex items-center justify-center mb-4">
             <div className="hidden sm:block text-5xl mr-2">🎭</div>
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-red-600 to-yellow-600 bg-clip-text text-transparent">
               GIF Face Swapper
             </h1>
           </div>
@@ -269,10 +269,10 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-purple-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
-              <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-t-lg py-2">
+            <Card className="backdrop-blur-lg bg-card/90 dark:bg-gray-900/90 border-primary/20/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+              <CardHeader className="bg-gradient-to-r from-red-500/10 to-yellow-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white">
                     <Upload className="w-4 h-4" />
                   </div>
                   Step 1: Upload Your Face
@@ -281,7 +281,7 @@ export default function GifFaceSwapPage() {
               <CardContent className="pt-6">
                 <div className="space-y-4">
                   <div
-                    className="relative border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-xl p-8 text-center hover:border-purple-500 transition-colors cursor-pointer group"
+                    className="relative border-2 border-dashed border-primary/30 dark:border-red-700 rounded-xl p-8 text-center hover:border-primary transition-colors cursor-pointer group"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <input
@@ -297,8 +297,8 @@ export default function GifFaceSwapPage() {
                         whileHover={{ scale: 1.05 }}
                         className="flex flex-col items-center gap-3"
                       >
-                        <div className="p-4 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 group-hover:scale-110 transition-transform">
-                          <ImageIcon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                        <div className="p-4 rounded-full bg-gradient-to-br from-red-100 to-yellow-100 dark:from-red-900 dark:to-yellow-900 group-hover:scale-110 transition-transform">
+                          <ImageIcon className="w-8 h-8 text-primary dark:text-primary" />
                         </div>
                         <div>
                           <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Click to upload</p>
@@ -334,7 +334,7 @@ export default function GifFaceSwapPage() {
                   {facePreview && (
                     <Button
                       variant="outline"
-                      className="w-full border-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                      className="w-full border-primary/30 hover:bg-primary/5 dark:hover:bg-red-900/20"
                       onClick={() => {
                         setFaceFile(null);
                         setFacePreview(null);
@@ -355,10 +355,10 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-blue-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
-              <CardHeader className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-t-lg py-2">
+            <Card className="backdrop-blur-lg bg-card/90 dark:bg-gray-900/90 border-primary/20/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+              <CardHeader className="bg-gradient-to-r from-amber-500/10 to-yellow-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-500 text-white">
                     <Search className="w-4 h-4" />
                   </div>
                   Step 2: Choose a GIF
@@ -372,7 +372,7 @@ export default function GifFaceSwapPage() {
                       placeholder="Search GIPHY..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="pl-10 border-blue-200 focus:border-blue-400 transition-colors"
+                      className="pl-10 border-primary/20 focus:border-primary transition-colors"
                     />
                     {search && (
                       <Button
@@ -396,7 +396,7 @@ export default function GifFaceSwapPage() {
                     <div className="grid grid-cols-2 gap-3">
                       {loadingGifs && (
                         <div className="col-span-2 flex flex-col items-center justify-center py-8">
-                          <Loader2 className="w-8 h-8 animate-spin text-blue-500 mb-2" />
+                          <Loader2 className="w-8 h-8 animate-spin text-primary mb-2" />
                           <p className="text-sm text-gray-500">Loading GIFs...</p>
                         </div>
                       )}
@@ -411,8 +411,8 @@ export default function GifFaceSwapPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className={`relative rounded-xl overflow-hidden aspect-square group transition-all ${selectedGif?.id === gif.id
-                              ? "ring-4 ring-blue-500 ring-offset-2 shadow-lg"
-                              : "hover:shadow-xl border-2 border-transparent hover:border-blue-300"
+                              ? "ring-4 ring-amber-500 ring-offset-2 shadow-lg"
+                              : "hover:shadow-xl border-2 border-transparent hover:border-primary/30"
                               }`}
                             onClick={() => handleSelectGif(gif)}
                           >
@@ -432,7 +432,7 @@ export default function GifFaceSwapPage() {
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="absolute top-2 right-2 p-1 rounded-full bg-blue-500 text-white"
+                                className="absolute top-2 right-2 p-1 rounded-full bg-primary text-white"
                               >
                                 <CheckCircle2 className="w-4 h-4" />
                               </motion.div>
@@ -453,7 +453,7 @@ export default function GifFaceSwapPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-green-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
+            <Card className="backdrop-blur-lg bg-card/90 dark:bg-gray-900/90 border-green-200/50 shadow-2xl hover:shadow-3xl transition-shadow duration-300 pt-0">
               <CardHeader className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-t-lg py-2">
                 <CardTitle className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white">
@@ -486,7 +486,7 @@ export default function GifFaceSwapPage() {
                             <motion.div
                               animate={{ rotate: 360 }}
                               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                              className="p-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 w-16 h-16 mx-auto flex items-center justify-center"
+                              className="p-4 rounded-full bg-gradient-to-br from-primary to-primary/80 w-16 h-16 mx-auto flex items-center justify-center"
                             >
                               <Sparkles className="w-8 h-8 text-white" />
                             </motion.div>
@@ -552,7 +552,7 @@ export default function GifFaceSwapPage() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Button
-                      className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg transition-all"
+                      className="w-full bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 text-white shadow-lg transition-all"
                       size="lg"
                       onClick={doSwap}
                       disabled={swapping || !gifImageUrl || !facePreview}

@@ -17,40 +17,37 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className='min-h-screen bg-yellow-50'>
+    <main className='min-h-screen'>
       {/* Hero Section */}
-      <section className='max-w-6xl mx-auto py-8 lg:py-12 px-4 lg:px-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0'>
+      <section className='max-w-6xl mx-auto py-12 lg:py-16 px-4 lg:px-8 flex flex-col lg:flex-row gap-12 lg:gap-8'>
         <div className='w-full lg:w-1/2 flex flex-col justify-center'>
           <motion.div
-            className='max-w-sm lg:max-w-md space-y-6 w-full mx-auto lg:mx-0 text-center lg:text-left'
+            className='max-w-md space-y-6 w-full mx-auto lg:mx-0 text-center lg:text-left'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Badge className='mb-2 text-sm py-1 px-3 bg-yellow-100 text-yellow-800 hover:bg-yellow-200'>
-              Welcome to my digital playground
+            <Badge className='mb-2 py-1 px-3 bg-primary/10 text-primary font-mono text-xs tracking-wider'>
+              // digital playground
             </Badge>
-            <h1 className='font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight text-foreground'>
-              Welcome to my <span className='line-through'>graveyard</span>{' '}
+            <h1 className='font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter text-foreground'>
+              Welcome to my{' '}
+              <span className='line-through decoration-muted-foreground/40'>graveyard</span>{' '}
               portfolio of{' '}
-              <span className='text-red-500 font-bold'>hacky experiments!</span>
+              <span className='text-primary'>hacky experiments!</span>
             </h1>
-            <p className='text-muted-foreground text-lg md:text-xl'>
+            <p className='text-muted-foreground text-lg'>
               Here lies the remains of some of my projects. Maybe you&apos;ll
               learn. Mostly you&apos;ll laugh. Definitely you&apos;ll enjoy.
             </p>
-            <div className='flex gap-4 pt-4 justify-center lg:justify-start'>
+            <div className='flex gap-3 pt-2 justify-center lg:justify-start'>
               <Link href='/experiments'>
-                <Button size='lg' className='gap-2 bg-red-500 hover:bg-red-600'>
+                <Button size='lg' className='gap-2 rounded-lg'>
                   See Experiments <ArrowRight size={16} />
                 </Button>
               </Link>
               <Link href='/about'>
-                <Button
-                  size='lg'
-                  variant='outline'
-                  className='border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600'
-                >
+                <Button size='lg' variant='outline' className='rounded-lg'>
                   About Me
                 </Button>
               </Link>
@@ -65,9 +62,9 @@ export default function Home() {
         >
           <div className='relative h-[500px] sm:h-[550px] md:h-[600px]'>
             {/* Decorative elements */}
-            <div className='hidden lg:block absolute -top-6 -left-6 w-20 h-20 bg-yellow-200/50 rounded-full blur-xl'></div>
-            <div className='hidden lg:block absolute -bottom-8 -right-8 w-28 h-28 bg-yellow-200/50 rounded-full blur-xl'></div>
-            <div className='hidden lg:block absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-yellow-200/50 rounded-full blur-lg'></div>
+            <div className='hidden lg:block absolute -top-6 -left-6 w-20 h-20 bg-primary/15 rounded-full blur-xl'></div>
+            <div className='hidden lg:block absolute -bottom-8 -right-8 w-28 h-28 bg-primary/15 rounded-full blur-xl'></div>
+            <div className='hidden lg:block absolute top-1/2 -translate-y-1/2 -left-4 w-8 h-24 bg-primary/15 rounded-full blur-lg'></div>
 
             {/* Nail */}
             <div className='absolute top-0 left-1/2 -translate-x-1/2 z-10'>
@@ -91,7 +88,7 @@ export default function Home() {
               }}
             >
               {/* Frame border */}
-              <div className='bg-yellow-950 p-3 rounded-xl shadow-lg transform rotate-1'>
+              <div className='bg-foreground/85 p-3 rounded-xl shadow-lg transform rotate-1'>
                 {/* White mat border */}
                 <div className='bg-neutral-100 p-3 rounded-lg'>
                   {/* Hero image */}
@@ -112,7 +109,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Content Cards Section - Replacing Tabs */}
+      {/* Content Cards Section */}
       <section className='max-w-6xl mx-auto px-4 lg:px-8 py-16'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -137,9 +134,9 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Link href='/experiments' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
+              <Card className='h-full surface-card surface-card-hover overflow-hidden group'>
                 <CardHeader className='h-32 sm:h-40'>
-                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
+                  <div className='w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3'>
                     <Beaker size={24} />
                   </div>
                   <CardTitle className='text-2xl'>Experiments</CardTitle>
@@ -155,7 +152,7 @@ export default function Home() {
                   </p>
                 </CardContent>
                 <CardFooter className='flex justify-end items-center pt-2'>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -168,9 +165,9 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Link href='/blog' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
+              <Card className='h-full surface-card surface-card-hover overflow-hidden group'>
                 <CardHeader className='h-32 sm:h-40'>
-                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
+                  <div className='w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3'>
                     <Code size={24} />
                   </div>
                   <CardTitle className='text-2xl'>Blog</CardTitle>
@@ -186,7 +183,7 @@ export default function Home() {
                   </p>
                 </CardContent>
                 <CardFooter className='flex justify-end items-center pt-2'>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
@@ -199,9 +196,9 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Link href='/micro' className='block h-full'>
-              <Card className='h-full hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-yellow-200 overflow-hidden group'>
+              <Card className='h-full surface-card surface-card-hover overflow-hidden group'>
                 <CardHeader className='h-32 sm:h-40'>
-                  <div className='w-12 h-12 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center mb-3'>
+                  <div className='w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3'>
                     <Package size={24} />
                   </div>
                   <CardTitle className='text-2xl'>Micro Experiments</CardTitle>
@@ -217,15 +214,13 @@ export default function Home() {
                   </p>
                 </CardContent>
                 <CardFooter className='flex justify-end items-center pt-2'>
-                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-yellow-600 transition-colors duration-300 group-hover:translate-x-1' />
+                  <ArrowRight className='h-5 w-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1' />
                 </CardFooter>
               </Card>
             </Link>
           </motion.div>
         </div>
       </section>
-
-      {/* Keep the other sections as needed */}
     </main>
   )
 }

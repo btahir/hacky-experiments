@@ -143,7 +143,7 @@ export default function TimeTravelerApp() {
           <p className="text-gray-700 text-sm sm:text-base max-w-2xl mx-auto">
             🌟 See yourself age gracefully through the decades! Upload your photo and watch time unfold before your eyes ✨
           </p>
-          <div className="flex items-center justify-center gap-2 text-xs text-amber-600 font-medium">
+          <div className="flex items-center justify-center gap-2 text-xs text-primary font-medium">
             <span>🔮</span>
             <span>AI-Powered Aging Magic</span>
             <span>🔮</span>
@@ -151,9 +151,9 @@ export default function TimeTravelerApp() {
         </div>
 
         {/* Upload Section */}
-        <Card className="shadow-xl bg-white/80 backdrop-blur border-2 border-amber-200/50 pt-0">
+        <Card className="shadow-xl bg-card/80 backdrop-blur border-2 border-primary/20/50 pt-0">
           <CardHeader className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-t-lg">
-            <CardTitle className="flex items-center gap-2 text-amber-800 py-2">
+            <CardTitle className="flex items-center gap-2 text-primary py-2">
               <span className="text-2xl">📷</span>
               <span>Upload Your Photo</span>
             </CardTitle>
@@ -171,7 +171,7 @@ export default function TimeTravelerApp() {
               <Button
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full border-2 border-dashed border-amber-300 hover:border-amber-400 bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-800 font-medium transition-all duration-200"
+                className="w-full border-2 border-dashed border-primary/30 hover:border-primary bg-gradient-to-r from-primary/5 to-primary/8 hover:from-primary/10 hover:to-primary/15 text-primary font-medium transition-all duration-200"
               >
                 <Upload className="w-4 h-4 mr-2" />
                 <span className="truncate">
@@ -179,24 +179,24 @@ export default function TimeTravelerApp() {
                 </span>
               </Button>
             </div>
-            <div className="flex items-center gap-2 justify-center sm:justify-start bg-gradient-to-r from-yellow-100 to-amber-100 p-3 rounded-lg border border-amber-200">
+            <div className="flex items-center gap-2 justify-center sm:justify-start bg-gradient-to-r from-yellow-100 to-amber-100 p-3 rounded-lg border border-primary/20">
               <span className="text-lg">🎂</span>
-              <Label htmlFor="currentAge" className="text-sm font-medium text-amber-800">Current Age:</Label>
+              <Label htmlFor="currentAge" className="text-sm font-medium text-primary">Current Age:</Label>
               <Input
                 id="currentAge"
                 type="number"
                 value={currentAge}
                 onChange={(e) => setCurrentAge(parseInt(e.target.value) || 25)}
-                className="w-20 border-amber-300 focus:border-amber-500 bg-white/90"
+                className="w-20 border-primary/30 focus:border-primary bg-card/90"
                 min="1"
                 max="100"
               />
-              <span className="text-xs text-amber-600">years</span>
+              <span className="text-xs text-primary">years</span>
             </div>
           </div>
 
           {previewUrl && (
-            <div className="flex justify-center p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-dashed border-blue-200">
+            <div className="flex justify-center p-4 bg-gradient-to-r from-amber-50 to-red-50 rounded-lg border-2 border-dashed border-primary/20">
               <div className="relative">
                 <img 
                   src={previewUrl} 
@@ -229,7 +229,7 @@ export default function TimeTravelerApp() {
           </Button>
 
           {error && (
-            <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg border-l-4 border-red-400">
+            <div className="flex items-center gap-2 text-primary text-sm bg-primary/5 p-3 rounded-lg border-l-4 border-primary">
               <span className="text-lg">⚠️</span>
               <span>{error}</span>
             </div>
@@ -239,14 +239,14 @@ export default function TimeTravelerApp() {
 
         {/* Results Section */}
         {generatedPhotos.length > 0 && (
-          <Card className="shadow-2xl bg-white/90 backdrop-blur border-2 border-purple-200/50 pt-0">
-            <CardHeader className="bg-gradient-to-r from-purple-100 via-pink-100 to-amber-100 rounded-t-lg py-2">
-              <CardTitle className="flex items-center gap-2 text-purple-800">
+          <Card className="shadow-2xl bg-card/90 backdrop-blur border-2 border-primary/20/50 pt-0">
+            <CardHeader className="bg-gradient-to-r from-red-100 via-yellow-100 to-amber-100 rounded-t-lg py-2">
+              <CardTitle className="flex items-center gap-2 text-primary">
                 <span className="text-2xl">🕰️</span>
                 <span>Your Aging Journey</span>
                 <span className="text-2xl">👑</span>
               </CardTitle>
-              <p className="text-sm text-purple-700 flex items-center gap-2">
+              <p className="text-sm text-primary flex items-center gap-2">
                 <span>✨</span>
                 <span>Click on any photo to regenerate it with custom magic</span>
                 <span>🎨</span>
@@ -257,7 +257,7 @@ export default function TimeTravelerApp() {
               {generatedPhotos.map((photo, index) => (
                 <div key={index} className="space-y-3 transform transition-all duration-300 hover:scale-105">
                   <div className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
                     <div className="relative">
                       <img 
                         src={photo.image} 
@@ -268,7 +268,7 @@ export default function TimeTravelerApp() {
                       <Button
                         size="sm"
                         variant="secondary"
-                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 hover:bg-white shadow-lg"
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-card/90 hover:bg-card shadow-lg"
                         onClick={(e) => {
                           e.stopPropagation()
                           downloadImage(photo.image, photo.age)
@@ -278,8 +278,8 @@ export default function TimeTravelerApp() {
                       </Button>
                     </div>
                   </div>
-                  <div className="text-center bg-gradient-to-r from-amber-100 to-orange-100 p-2 rounded-lg border border-amber-200">
-                    <p className="text-lg font-bold text-amber-800 flex items-center justify-center gap-1">
+                  <div className="text-center bg-gradient-to-r from-amber-100 to-orange-100 p-2 rounded-lg border border-primary/20">
+                    <p className="text-lg font-bold text-primary flex items-center justify-center gap-1">
                       <span>{photo.age} years</span>                      
                     </p>
                   </div>
@@ -287,10 +287,10 @@ export default function TimeTravelerApp() {
                   {/* Fixed height container to prevent layout shift */}
                   <div className="h-auto lg:h-80">
                     {showPromptEditor[index] ? (
-                      <div className="space-y-3 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-purple-200 shadow-lg h-full">
+                      <div className="space-y-3 p-4 bg-gradient-to-r from-amber-50 to-red-50 rounded-lg border-2 border-primary/20 shadow-lg h-full">
                         <div className="flex items-center gap-2">
                           <span className="text-lg">🎨</span>
-                          <Label className="text-sm font-bold text-purple-800">Custom Aging Magic</Label>
+                          <Label className="text-sm font-bold text-primary">Custom Aging Magic</Label>
                           <span className="text-lg">✨</span>
                         </div>
                         <Textarea
@@ -298,14 +298,14 @@ export default function TimeTravelerApp() {
                           value={customPrompts[index] || ""}
                           onChange={(e) => setCustomPrompts(prev => ({ ...prev, [index]: e.target.value }))}
                           rows={2}
-                          className="text-sm border-purple-300 focus:border-purple-500 bg-white/80"
+                          className="text-sm border-primary/30 focus:border-primary bg-card/80"
                         />
                         <div className="flex flex-col gap-2">
                           <Button
                             size="sm"
                             onClick={() => handleRegenerate(index)}
                             disabled={regeneratingIndex === index}
-                            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
+                            className="bg-primary hover:from-red-600 hover:to-yellow-600 text-white font-medium"
                           >
                             {regeneratingIndex === index ? (
                               <>
@@ -323,7 +323,7 @@ export default function TimeTravelerApp() {
                             size="sm"
                             variant="outline"
                             onClick={() => setShowPromptEditor(prev => ({ ...prev, [index]: false }))}
-                            className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                            className="border-primary/30 text-primary hover:bg-primary/5"
                           >
                             Cancel
                           </Button>

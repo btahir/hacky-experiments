@@ -132,12 +132,12 @@ export default function VoiceMorphClient() {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
+		<main className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-amber-100 relative overflow-hidden">
 			{/* Animated background elements */}
 			<div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-				<div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" />
-				<div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-indigo-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+				<div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-red-400/20 to-amber-400/20 rounded-full blur-3xl animate-pulse" />
+				<div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-amber-400/20 to-red-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-amber-400/10 to-red-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
 			</div>
 
 			<div className="relative z-20 py-8 px-4">
@@ -153,7 +153,7 @@ export default function VoiceMorphClient() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.4 }}
-							className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6 leading-tight"
+							className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-red-600 via-amber-600 to-amber-600 bg-clip-text text-transparent mb-6 leading-tight"
 						>
 							VoiceMorph Studio
 						</motion.h1>
@@ -183,7 +183,7 @@ export default function VoiceMorphClient() {
 							</CardHeader>
 							<CardContent className="space-y-6">
 								{/* Video Upload */}
-								<div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-purple-400 transition-colors">
+								<div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors">
 									<Video className="w-12 h-12 mx-auto mb-4 text-gray-400" />
 									<h3 className="text-lg font-semibold mb-2">Source Video</h3>
 									<p className="text-gray-600 mb-4">
@@ -216,7 +216,7 @@ export default function VoiceMorphClient() {
 								</div>
 
 								{/* Audio Upload */}
-								<div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
+								<div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors">
 									<Mic className="w-12 h-12 mx-auto mb-4 text-gray-400" />
 									<h3 className="text-lg font-semibold mb-2">Target Voice Audio</h3>
 									<p className="text-gray-600 mb-4">
@@ -284,7 +284,7 @@ export default function VoiceMorphClient() {
 										className={`relative px-8 py-6 text-lg font-semibold transition-all duration-300 touch-manipulation ${isProcessing
 											? 'bg-slate-400 cursor-not-allowed'
 											: videoFile && audioFile
-												? 'bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95'
+												? 'bg-gradient-to-r from-red-600 via-amber-600 to-amber-600 hover:from-red-700 hover:via-amber-700 hover:to-amber-700 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 active:scale-95'
 												: 'bg-slate-300 cursor-not-allowed'
 											}`}
 									>
@@ -319,7 +319,7 @@ export default function VoiceMorphClient() {
 											initial={{ scale: 1, opacity: 0.5 }}
 											animate={{ scale: 1.2, opacity: 0 }}
 											transition={{ duration: 1.5, repeat: Infinity }}
-											className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 pointer-events-none"
+											className="absolute inset-0 rounded-full bg-gradient-to-r from-red-600/20 to-amber-600/20 pointer-events-none"
 										/>
 									)}
 								</motion.div>
@@ -350,15 +350,15 @@ export default function VoiceMorphClient() {
 									transition={{ duration: 0.6 }}
 									className="w-full max-w-md space-y-4"
 								>
-									<div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/50">
+									<div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/50">
 										<div className="flex items-center justify-between mb-3">
 											<div className="flex items-center gap-3">
-												<div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
+												<div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
 													<Wand2 className="w-4 h-4 text-white" />
 												</div>
 												<span className="font-semibold text-slate-800">Processing Your Files</span>
 											</div>
-											<span className="text-lg font-bold text-purple-600">{Math.round(progress)}%</span>
+											<span className="text-lg font-bold text-primary">{Math.round(progress)}%</span>
 										</div>
 
 										<div className="space-y-3">
@@ -390,16 +390,16 @@ export default function VoiceMorphClient() {
 							transition={{ duration: 0.4 }}
 							className="mb-8"
 						>
-							<div className="bg-red-50 border border-red-200 rounded-2xl p-6 shadow-lg">
+							<div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 shadow-lg">
 								<div className="flex items-start gap-4">
-									<div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-										<AlertCircle className="w-5 h-5 text-red-600" />
+									<div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+										<AlertCircle className="w-5 h-5 text-primary" />
 									</div>
 									<div className="flex-1">
-										<h4 className="text-lg font-semibold text-red-800 mb-2">
+										<h4 className="text-lg font-semibold text-primary mb-2">
 											Processing Error
 										</h4>
-										<p className="text-red-700 leading-relaxed">
+										<p className="text-primary leading-relaxed">
 											{error}
 										</p>
 										<div className="mt-4">
@@ -407,7 +407,7 @@ export default function VoiceMorphClient() {
 												onClick={() => window.location.reload()}
 												size="sm"
 												variant="outline"
-												className="border-red-300 text-red-700 hover:bg-red-50"
+												className="border-primary/30 text-primary hover:bg-primary/5"
 											>
 												Try Again
 											</Button>
@@ -488,7 +488,7 @@ export default function VoiceMorphClient() {
 
 													{result.videoUrl ? (
 														<div className="relative group">
-															<div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
+															<div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-amber-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
 															<div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
 																<video
 																	controls
@@ -553,7 +553,7 @@ export default function VoiceMorphClient() {
 																<Button
 																	asChild
 																	size="lg"
-																	className="w-full h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+																	className="w-full h-14 bg-gradient-to-r from-red-600 via-amber-600 to-amber-600 hover:from-red-700 hover:via-amber-700 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
 																>
 																	<a href={result.videoUrl} download="voice-morphed-video.mp4" target="_blank">
 																		<div className="flex items-center justify-center gap-2">
@@ -576,7 +576,7 @@ export default function VoiceMorphClient() {
 																asChild
 																size="lg"
 																variant="outline"
-																className="w-full h-14 border-2 border-slate-300 hover:border-indigo-400 hover:bg-indigo-50 transition-all duration-300"
+																className="w-full h-14 border-2 border-slate-300 hover:border-primary hover:bg-primary/5 transition-all duration-300"
 															>
 																<a href={result.audioUrl} download="processed-audio.wav" target="_blank">
 																	<div className="flex items-center justify-center gap-2">

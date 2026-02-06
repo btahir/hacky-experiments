@@ -2,9 +2,9 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
+import { Search, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Search } from 'lucide-react'
+import { Input } from '@/components/ui/input'
 
 interface SearchBarProps {
   initialSearch?: string
@@ -15,18 +15,16 @@ export function SearchBar({ initialSearch = '' }: SearchBarProps) {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault()
 
     startTransition(() => {
-      // Update URL with search parameter, reset to page 1 when searching
       const params = new URLSearchParams()
       if (searchTerm) {
         params.set('search', searchTerm)
       }
-      router.push(
-        `/experiments${params.toString() ? `?${params.toString()}` : ''}`
-      )
+
+      router.push(`/experiments${params.toString() ? `?${params.toString()}` : ''}`)
     })
   }
 
@@ -36,30 +34,35 @@ export function SearchBar({ initialSearch = '' }: SearchBarProps) {
   }
 
   return (
-    <form
-      onSubmit={handleSearch}
-      className='flex gap-2 max-w-xl mx-auto bg-white'
-    >
-      <div className='relative flex-grow'>
-        <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
-          <Search className='size-4 text-gray-400' />
-        </div>
+    <form onSubmit={handleSearch} className='flex flex-col gap-2 sm:flex-row'>
+      <div className='relative flex-1'>
+        <Search className='pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
         <Input
           type='search'
-          placeholder='Search experiments...'
+          placeholder='Search experiments by title or summary'
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className='pl-10'
+          onChange={(event) => setSearchTerm(event.target.value)}
+          className='h-11 rounded-full border-border/85 bg-card/85 pl-10 pr-4 shadow-none'
+          aria-label='Search experiments'
         />
       </div>
-      <Button type='submit' disabled={isPending}>
-        Search
-      </Button>
-      {initialSearch && (
-        <Button variant='outline' type='button' onClick={handleClear}>
-          Clear
+
+      <div className='flex gap-2'>
+        <Button type='submit' disabled={isPending} className='h-11 rounded-full px-5 font-mono text-sm'>
+          Search
         </Button>
-      )}
+        {initialSearch ? (
+          <Button
+            variant='outline'
+            type='button'
+            onClick={handleClear}
+            className='h-11 rounded-full px-4'
+          >
+            <X className='size-4' />
+            Clear
+          </Button>
+        ) : null}
+      </div>
     </form>
   )
 }
