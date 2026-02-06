@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import MdxLayout from '@/components/mdx-layout'
-import { getAllPosts } from '@/lib/mdx'
+import { getAllPosts, type Post } from '@/lib/mdx'
 import { absoluteUrl, siteConfig } from '@/lib/site-config'
 
 interface PostMetadata {
@@ -92,6 +93,27 @@ export default async function BlogPostPage({
     const metadata = (postModule.metadata as PostMetadata) || getFallbackMetadata()
     const canonicalPath = `/blog/${slug}`
 
+    const allPosts = await getAllPosts()
+    const currentTags = metadata.tags || []
+
+    // Find related posts: prioritize shared tags, then chronologically adjacent
+    const otherPosts = allPosts.filter((p) => p.slug !== slug)
+    const relatedPosts = otherPosts
+      .map((p) => {
+        const sharedTags = (p.tags || []).filter((t) => currentTags.includes(t))
+        return { ...p, sharedTags: sharedTags.length }
+      })
+      .sort((a, b) => {
+        if (b.sharedTags !== a.sharedTags) return b.sharedTags - a.sharedTags
+        // Fall back to chronological proximity
+        const currentTime = new Date(metadata.date).getTime()
+        return (
+          Math.abs(new Date(a.date).getTime() - currentTime) -
+          Math.abs(new Date(b.date).getTime() - currentTime)
+        )
+      })
+      .slice(0, 3)
+
     const blogPostingSchema = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
@@ -151,6 +173,31 @@ export default async function BlogPostPage({
         <div className='prose lg:prose-lg'>
           <Post />
         </div>
+
+        {relatedPosts.length > 0 && (
+          <nav className='mt-12 border-t border-border/80 pt-8'>
+            <h2 className='font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground'>
+              Read Next
+            </h2>
+            <ul className='mt-4 space-y-4'>
+              {relatedPosts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className='group block'
+                  >
+                    <p className='text-lg font-semibold group-hover:text-primary transition-colors'>
+                      {post.title}
+                    </p>
+                    <p className='mt-1 text-sm text-muted-foreground line-clamp-1'>
+                      {post.excerpt}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
 
         <script
           type='application/ld+json'

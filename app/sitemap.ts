@@ -7,7 +7,7 @@ import { absoluteUrl } from '@/lib/site-config'
 
 export const revalidate = 3600
 
-const staticPages = ['/', '/about', '/blog', '/experiments', '/micro']
+const staticPages = ['/', '/about', '/blog', '/experiments', '/micro', '/uses', '/now']
 
 async function getMicroPages() {
   const microDir = path.join(process.cwd(), 'app', '(micro)', 'micro')

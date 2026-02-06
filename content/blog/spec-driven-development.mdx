@@ -1,0 +1,149 @@
+export const metadata = {
+  title: 'Spec-Driven Development: The Shift from Writing Code to Writing Requirements',
+  date: '2026-01-30',
+  excerpt: 'The best engineers I know have stopped writing code first. They write specs. Then they let agents do the rest.',
+  tags: ['AI', 'Product Engineering', 'Developer Workflow'],
+}
+
+---
+
+I fell asleep one night with three Claude Code agents running in parallel, each working through a different section of a PRD I'd written that afternoon.
+
+I woke up to 47 commits, a working feature, and one agent politely asking me to clarify a database schema question it had been blocked on since 2 AM.
+
+I call this the Ralph Wiggum Loop. You know the meme — Ralph sitting on the bus, "I'm in danger." That's me, asleep, while agents iterate on my codebase. Except instead of danger, it's... shipping? The analogy breaks down a bit. The name stuck anyway.
+
+This is what spec-driven development looks like in practice. And I think it's the biggest shift in how software gets built since we went from waterfall to agile.
+
+## The Old Loop vs. The New Loop
+
+Here's how I used to build things:
+
+1. Have an idea
+2. Open VS Code
+3. Start coding
+4. Hit a wall
+5. Google it
+6. Stack Overflow
+7. Refactor
+8. Repeat steps 3-7 for days
+
+Here's how I build now:
+
+1. Have an idea
+2. Write a detailed spec — what it does, how it works, edge cases, data models, API shapes
+3. Hand it to agents
+4. Go for a walk (or go to sleep)
+5. Review, refine, ship
+
+**The skill that matters shifted from writing code to writing requirements.**
+
+Abraham Lincoln supposedly said, "Give me six hours to chop down a tree and I will spend the first four sharpening the axe." That quote has never been more relevant. The spec *is* the axe. The sharper your spec, the better the output. Garbage in, garbage out — that hasn't changed. What's changed is what "in" means.
+
+## What a Spec Actually Looks Like
+
+I'm not talking about a Jira ticket that says "Add dark mode." That's not a spec. That's a wish.
+
+A real spec for spec-driven development looks more like this:
+
+- **What**: A theme toggle that switches between light and dark modes site-wide
+- **Where**: Settings page, also accessible from the header nav
+- **How it persists**: localStorage with a `theme` key, falls back to system preference via `prefers-color-scheme`
+- **Components affected**: Every component using color tokens — here's the list
+- **Edge cases**: What happens mid-transition? What about images with white backgrounds? What about code blocks?
+- **Data model**: None needed, this is client-only
+- **Acceptance criteria**: Toggle works, persists across sessions, respects system preference on first visit, no flash of unstyled content
+
+That's a spec an agent can run with. You're not telling it *how* to code. You're telling it *what you want* at a level of detail that eliminates ambiguity.
+
+The irony is that writing a good spec requires you to think like a senior engineer — you need to anticipate edge cases, understand the architecture, know where the bodies are buried. **The skill floor for spec-driven development is actually higher than for writing code directly.** You just get dramatically more leverage from it.
+
+## My Actual Workflow
+
+I'm going to be specific here because I think the tooling details matter.
+
+**Writing the spec:** I use a markdown file. Seriously. Not Notion, not Linear, not some fancy AI PRD tool. A `.md` file in the repo. I usually start by talking through the feature out loud (literally, to myself, on a walk) and then dumping it into the file. Claude is good at helping me flesh out specs too — I'll describe what I want conversationally and have it generate a structured PRD that I then edit.
+
+**The agents:** I run Claude Code, Cursor, and Codex more or less side by side. When I hit rate limits on one, I shift to another. Each has different strengths — Claude Code is best for multi-file refactors and understanding existing codebases, Cursor is great for inline editing within a file, and Codex is solid for greenfield generation. I'm not loyal to any of them. I'm loyal to shipping.
+
+**The loop:** I break the spec into tasks. Each task is small enough that an agent can complete it in one shot — maybe 15-30 minutes of agent time. I queue them up, kick them off, and go do something else. When I come back, I review the diffs. If something's off, I refine the spec (not the code) and re-run.
+
+**The key insight:** I almost never edit the generated code directly anymore. If the output is wrong, the spec was wrong. I fix the spec and regenerate. This sounds wasteful, but it's actually faster because the spec improvement compounds across every future generation.
+
+## Why Senior Engineers Are Adapting Faster
+
+Here's something I've noticed that surprised me: the engineers who are best at spec-driven development aren't the youngest or most "AI-native." They're the seniors and staff engineers who have spent years writing design docs, RFCs, and technical specs.
+
+They already had the skill. They were just applying it to a process where the next step was "hand it to a junior engineer" or "implement it yourself." Now the next step is "hand it to an agent." The output is the same. The speed is 10x.
+
+Junior engineers, on the other hand, sometimes struggle because they've never had to articulate requirements at that level of detail. They're used to thinking in code, not in specifications. **The paradox of AI coding tools is that they make the "soft" skill of communication the hardest and most valuable skill in the stack.**
+
+This isn't going to replace the need to understand code. You still need to review what comes back. You need to know when the agent is hallucinating, taking a bad architectural path, or introducing subtle bugs. Reading code is as important as ever. Writing code from scratch? That's becoming optional for a lot of tasks.
+
+## The Ralph Wiggum Loop in Practice
+
+Let me share a concrete example. Last month I shipped a complete feature — a new experiment page with API integration, a custom UI, rate limiting, error handling, and tests — in under 24 hours. Here's how:
+
+**Hour 0-2:** Wrote the spec. Described the feature, the API shape, the UI components, the edge cases. Drew a rough sketch on paper. Wrote acceptance criteria.
+
+**Hour 2-3:** Broke it into 6 tasks. Kicked off the first 3 in parallel (they were independent — API route, UI component, and utility functions).
+
+**Hour 3-8:** Went to sleep. (The Ralph Wiggum part.)
+
+**Hour 8-9:** Woke up. Reviewed 23 commits. 2 of the 3 tasks were done and correct. The third had a bug in the rate limiting logic — it was checking the wrong Redis key.
+
+**Hour 9-10:** Updated the spec for the rate limiting task with more detail about the key structure. Re-ran. Fixed.
+
+**Hour 10-11:** Kicked off the remaining 3 tasks (integration, error states, tests).
+
+**Hour 11-12:** Lunch.
+
+**Hour 12-13:** Reviewed. Minor tweaks. Shipped.
+
+Total time I spent actively working: maybe 5 hours. Total time from start to deployed: 13 hours. And I slept for 5 of them.
+
+That's the Ralph Wiggum Loop. Write the spec. Kick off agents. Go live your life. Come back. Review. Refine. Repeat.
+
+## What This Means for the Industry
+
+I don't think spec-driven development is a fad. I think it's the new default.
+
+Not for everything — there will always be gnarly debugging sessions, performance optimization rabbit holes, and architecture decisions that require a human brain staring at a whiteboard. But for the **bread-and-butter of software development** — building features, writing tests, creating CRUD operations, implementing designs — the spec-first, agent-executed workflow is just... better.
+
+The implications are wild if you follow them:
+
+**Product managers become more technical** — not because they write code, but because writing specs *is* technical. The line between "product" and "engineering" blurs.
+
+**Code reviews shift** — you're reviewing AI output, which means looking for different things. Hallucinated imports. Over-engineered abstractions. Subtle logical errors that are syntactically perfect.
+
+**Velocity becomes spec-bottlenecked** — the limiting factor isn't how fast you can type or how well you know the framework. It's how clearly and completely you can articulate what you want.
+
+**The 10x engineer becomes real** — not through caffeine and heroics, but through spec quality and agent orchestration. One engineer who writes great specs can ship what used to take a small team.
+
+## How to Start
+
+If you're not doing this yet, here's how I'd start:
+
+**1. Pick a small feature.** Something you'd normally spend a day building.
+
+**2. Write the spec before touching code.** Be specific. Include edge cases. Describe the data model. List the components. Write acceptance criteria.
+
+**3. Hand it to an AI agent.** Claude Code, Cursor, Codex, Copilot Workspace — pick your tool. Give it the spec and see what comes back.
+
+**4. Resist the urge to edit the output directly.** If it's wrong, figure out what was missing from the spec. Update the spec. Regenerate.
+
+**5. Iterate on your spec-writing.** After a few rounds, you'll develop a sense for what level of detail the agents need. You'll learn what they're good at inferring and what they need spelled out.
+
+The first few times will feel slower than just writing the code yourself. Push through that. By the fifth spec, you'll be faster. By the tenth, you won't go back.
+
+## The Sharpened Axe
+
+We're living through a genuine inflection point in software development. The tools are changing. The workflows are changing. The skills that matter are changing.
+
+But the core of it — thinking clearly about problems, articulating requirements precisely, understanding systems deeply enough to know what to build — that hasn't changed at all. If anything, it matters more now than ever.
+
+**The best engineers in 2026 aren't the ones who write the most code. They're the ones who write the best specs.**
+
+Sharpen the axe.
+
+Bilal

@@ -1,0 +1,98 @@
+export const metadata = {
+  title: 'The GPT-3.5 Problem: Why Great Tech Fails Without the Right Interface',
+  date: '2026-01-27',
+  excerpt: 'The gap between capability and adoption is almost never about the tech. It\'s about the interface.',
+  tags: ['Product Engineering', 'AI', 'Thought Piece'],
+}
+
+---
+
+In March 2022, OpenAI quietly released GPT-3.5.
+
+If you were paying attention, you noticed. Researchers wrote papers about it. Tech Twitter had its usual 48-hour discourse cycle. A few blog posts made the rounds. The consensus was clear: this was a meaningful leap in language model capability.
+
+And then... nothing happened. The world moved on. People went back to their jobs, their Slack channels, their existing workflows. GPT-3.5 sat there, accessible via API, powerful and mostly ignored.
+
+Eight months later, someone at OpenAI had a deceptively simple idea: **what if we just put a chat box on it?**
+
+ChatGPT launched on November 30, 2022. One million users in five days. 100 million in two months. It became the fastest-growing consumer application in history.
+
+**Same model. Same capabilities. Same weights.** The only thing that changed was the interface.
+
+That moment rewired my brain. I keep coming back to it because I think it reveals something fundamental about how technology actually reaches people. Something most builders get backwards.
+
+## The GPT-3.5 Problem
+
+Here's the pattern I can't unsee: **powerful technology sitting idle because nobody wrapped it in the right interface.**
+
+I call it the GPT-3.5 Problem, and once you start looking for it, you find it everywhere.
+
+The gap between what technology *can* do and what people *actually use it for* is almost never about capability. It's about accessibility. It's about the interface.
+
+This isn't a new idea. Charlie Munger would probably call it a form of incentive bias — people don't avoid powerful tools because they're lazy; they avoid them because the cost of figuring them out exceeds their perceived benefit. **The interface is what tips that equation.**
+
+But the tech industry has a persistent blind spot here. We celebrate the breakthrough. We celebrate the research paper, the new architecture, the benchmark score. We rarely celebrate the person who said, "What if we just made it easier to use?"
+
+## This Happens More Than You Think
+
+Let me walk through a few examples that have been rattling around in my head.
+
+**React before Create React App.** React was open-sourced in 2013. It was clearly powerful. But for years, getting a React project off the ground meant wrestling with Webpack configs, Babel presets, and a dozen decisions before you could write a single component. Then Create React App showed up in 2016 and said: `npx create-react-app my-app`. One command. Same technology. The barrier dropped and React's adoption curve went vertical. Today we have even better tooling with Vite and Next.js, and each step made the same underlying tech more accessible.
+
+**Vector databases before RAG.** Pinecone launched in 2021. Weaviate had been around since 2019. These were genuinely useful tools for similarity search and retrieval. But almost nobody outside of ML teams cared. The technology worked. The use case wasn't clear. Then the RAG pattern emerged — Retrieval-Augmented Generation — and suddenly everyone understood *why* you'd want a vector database. I experienced this firsthand when I built my [JFK files RAG project](/blog/jfk-rag-adventures). Scraping 2,000+ PDFs, parsing them, indexing them in Pinecone — the tech had been ready for years. It took a pattern (RAG) to make it click. Vector database adoption exploded not because the databases got better, but because someone invented the right frame for using them.
+
+**Remotion before Skills.** This one is more recent and really drives the point home. Remotion — the library for creating videos programmatically with React — has been around since 2021. Great technology. Loyal developer audience. Solid but niche. Then Anthropic released Claude, agentic workflows became real, and the Remotion team published a "Skill" — essentially a markdown file that AI agents could load to understand how to use Remotion. That tweet announcing it hit **10 million impressions**. Same library. Same API. Same capabilities. The only thing that changed was the interface through which people (and now agents) could access it.
+
+**AI models before playgrounds.** This one is so universal now that we take it for granted. Every serious model release comes with a playground or demo. Hugging Face Spaces. Replicate's one-click demos. FAL's Explore page. The model is the technology; the playground is the interface. And consistently, the models with the best playgrounds get the most adoption — not necessarily the models with the best benchmarks.
+
+## The Formula
+
+The pattern, once you see it, is almost comically simple:
+
+**Great tech + high barrier = niche adoption.**
+
+**Great tech + low barrier = escape velocity.**
+
+That's it. That's the whole thing.
+
+The "ChatGPT moment" isn't really about ChatGPT. It's a **template**. It's what happens when someone takes powerful, existing capability and dramatically lowers the barrier to using it. The technology doesn't change. The interface does. And then everything changes.
+
+## Why This Matters If You Build Things
+
+Most engineers I know — myself included — have a natural bias toward making the technology better. Faster inference. Cleaner architecture. Better algorithms. More features.
+
+And look, that stuff matters. Obviously.
+
+But I think the **highest-leverage move** is often the one that feels least impressive on a resume: making existing technology more accessible. Reducing steps. Removing jargon. Turning an API into a UI. Turning a UI into a conversation.
+
+Product engineering, the way I think about it, is the art of finding the right interface for existing capability. It's not about inventing new technology. It's about **finding the seam** between what's possible and what's accessible, and closing it.
+
+As Naval might put it: the best opportunities are where technology is undervalued because the interface hasn't been invented yet. There's an arbitrage there, and it's enormous.
+
+This is something I think about a lot with my own projects on [Hacky Experiments](https://www.hackyexperiments.com). Almost everything I build is a thin interface layer on top of powerful technology that already exists. I didn't build Gemini Flash — I built [demos that let people play with it](/blog/gemini-flash-experiments). I didn't build Mistral's OCR — I built [Auntie PDF](https://www.auntiepdf.com). The technology is someone else's breakthrough. The interface is my contribution.
+
+## The GPT-3.5 Audit
+
+Here's a practical framework if you're looking for your next project or product idea. I call it the **GPT-3.5 Audit**:
+
+**1. Find powerful technology that requires expertise to use.** Look for things with great documentation but low adoption. APIs that are powerful but underutilized. Research papers that never became products. Open-source projects with impressive READMEs and modest star counts.
+
+**2. Ask the interface question.** What would a chat interface look like? A one-click flow? A drag-and-drop? What if someone could use this technology without reading the docs? What if they didn't even need to know it existed?
+
+**3. Apply the simplicity test.** The simpler the interface, the bigger the unlock. If your "interface" still requires a tutorial, you haven't gone far enough. ChatGPT didn't need an onboarding flow. You opened it, typed something, and got a response. That's the bar.
+
+**4. Ship it and see what happens.** This part is important. You won't know if you've found the right interface until real people use it. The JFK RAG search worked because people could just type a name and get results. No understanding of vector databases required. No knowledge of embeddings or chunking strategies. Just a search box.
+
+## What's Next
+
+Here's what I keep thinking about: there are probably dozens of GPT-3.5s sitting in research labs, open-source repos, and API docs right now. Technology that works. Technology that's ready. Technology that's waiting for someone to build the right interface on top of it.
+
+The next company that reaches escape velocity might not invent anything new. It might just put the right UI on something that already exists. A chat box. A playground. A one-click deploy. A drag-and-drop.
+
+The technology is almost never the bottleneck. **The interface is.**
+
+And if you're a builder, that should be the most exciting sentence you've read all week. Because it means the hard part is already done. Someone already built the engine. Your job is to build the steering wheel.
+
+So go find a GPT-3.5. Give it its ChatGPT moment.
+
+Bilal

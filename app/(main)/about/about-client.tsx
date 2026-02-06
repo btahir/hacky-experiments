@@ -125,32 +125,48 @@ export default function AboutPage() {
         >
           <div className='text-lg text-foreground/80 space-y-6'>
             <p>
-              Hello! I&apos;m Bilal. I like to build things and try out some
-              weird hacky experiments. I&apos;m at my happiest in the thick of
-              the creation process, going from ideation to execution.
+              Hello! I&apos;m Bilal — a product engineer who lives at the intersection of AI, front-end development, and shipping fast. I&apos;ve launched close to 100 projects with Next.js, and I&apos;m at my happiest in the thick of the creation process, going from ideation to execution.
             </p>
             <p>
-              Things don&apos;t always work out, but I love the process and hope
-              to share some of it here. Would love to have you along for the
-              ride. Let&apos;s have an adventure together!
+              By day, I build products. By night (and also by day), I tinker with AI video generation, spec-driven development workflows, and whatever new model just dropped. I co-host the{' '}
+              <a
+                href='https://creativefluxpodcast.com/'
+                target='_blank'
+                rel='noreferrer'
+                className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
+              >
+                Creative Flux podcast
+              </a>
+              {' '}with Pierson Marks, where we talk about generative AI and go off the rails into all sorts of rabbit holes.
             </p>
             <p>
-              You can find some of my experiments{' '}
+              I&apos;m also building{' '}
+              <span className='font-medium text-foreground'>Jellypod</span>
+              {' '}— an AI podcast platform — and writing about everything I learn along the way. I believe the best way to understand new technology is to build with it, break it, and share the results.
+            </p>
+            <p>
+              Things don&apos;t always work out, but that&apos;s the point. You can find my{' '}
               <Link
                 href='/experiments'
                 className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
               >
-                here
+                experiments
               </Link>
-              . If you&apos;re curious about how I build stuff, you can read
-              about my process{' '}
+              , read the{' '}
               <Link
-                href='/process'
+                href='/blog'
                 className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
               >
-                here
+                blog
               </Link>
-              .
+              , or check out{' '}
+              <Link
+                href='/uses'
+                className='text-primary hover:text-primary/80 font-medium underline underline-offset-2'
+              >
+                what I use
+              </Link>
+              {' '}to build all of this. Would love to have you along for the ride.
             </p>
             <p>Happy travels!</p>
             <p className='font-medium'>— Bilal</p>

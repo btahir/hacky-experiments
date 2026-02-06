@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Hacky Experiments',
   shortName: 'Hacky',
   description:
-    'An open source playground for my coding experiments, side projects, and technical explorations.',
+    "Bilal Tahir's playground for AI experiments, technical deep dives, and product engineering — built with Next.js, Tailwind CSS, and a love for shipping fast.",
   url: 'https://hackyexperiments.com',
   ogImage: '/opengraph-image.png',
   locale: 'en_US',
@@ -17,13 +17,18 @@ export const siteConfig = {
     linkedin: 'https://www.linkedin.com/in/biltahir/',
   },
   keywords: [
-    'ai experiments',
-    'nextjs projects',
-    'developer portfolio',
-    'technical blog',
-    'contentful',
-    'framer motion',
-    'micro experiments',
+    'AI experiments',
+    'product engineer blog',
+    'Bilal Tahir',
+    'build AI apps fast',
+    'spec-driven development',
+    'vibe coding',
+    'AI video generation workflow',
+    'Next.js AI',
+    'agent-to-agent economy',
+    'front-end AI developer',
+    'shipping fast as a developer',
+    'creative AI tools',
   ],
 }
 
@@ -33,6 +38,7 @@ export const mainNavLinks = [
   { name: 'Micro', path: '/micro' },
   { name: 'Blog', path: '/blog' },
   { name: 'About', path: '/about' },
+  { name: 'Uses', path: '/uses' },
 ]
 
 export function absoluteUrl(path = '/') {

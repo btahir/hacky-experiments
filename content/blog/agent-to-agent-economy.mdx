@@ -1,0 +1,88 @@
+export const metadata = {
+  title: 'The Agent-to-Agent Economy Is Going to Be Bigger Than We Think',
+  date: '2026-02-02',
+  excerpt: "Most of the conversation is about human-agent interaction. But the real unlock is the agent-agent economy — and it could be hundreds of times bigger than the human economy.",
+  tags: ['AI', 'Futurism', 'Thought Piece'],
+}
+
+---
+
+About a decade ago, a famous business professor looked at Uber, then valued at $17B as a private company. Even assuming Uber captured 100% of the US taxi market, his math didn't get anywhere near that number. He concluded Uber was overvalued.
+
+Bill Gurley, a General Partner at Benchmark (an early Uber backer), fired back. His main point: **the professor's critical mistake was assuming the TAM stayed fixed.** When you remove friction, markets expand. Opening your phone to hail a ride in two minutes is a completely different product than hoping to flag a cab on a street corner.
+
+Fast forward 10 years and Uber is worth ~$200B — about 10x higher. So it's safe to say Gurley was right.
+
+I love this story because it shows how making something easier can create massive first, second, and third-order effects on demand.
+
+I think we're about to see the same thing happen with agents.
+
+## The Real Unlock Isn't Human-Agent
+
+Most of the current conversation is about human-agent interaction. Tech support, booking flights, coding assistants, personal CFOs. That stuff is fine. It's happening.
+
+But the real unlock will be the **agent-agent economy.** Agents transacting with each other 24/7, making millisecond-level decisions at global scale. This economy could be hundreds or thousands of times bigger than the human economy.
+
+Think about it from first principles. Right now, the internet is mostly humans requesting things from servers. The vast majority of economic activity online is initiated by a human clicking something.
+
+What happens when agents become the primary initiators of economic activity? Not "what if" — this is already starting. AI agents are already making API calls, querying databases, hitting endpoints. The only thing missing is the payment layer.
+
+## What Makes This Possible
+
+Three things are converging:
+
+**AI infrastructure.** More chips, more energy. The compute is scaling.
+
+**Smarter, cheaper models.** Inference costs keep dropping. What cost a dollar two years ago costs a fraction of a penny now.
+
+**Payments.** Instant, low-fee transactions. This last piece is crucial. Agents need seamless payments, and this is where crypto — and especially stablecoins — come in.
+
+## Why Crypto Is the Payment Layer
+
+Blockchains like Base, Solana, or Ethereum L2s make microtransactions feasible. Stablecoins unlock true microtransactions. Imagine charging an agent a cent to read your blog, or giving an agent $10 to transact with others toward a goal.
+
+With Stripe this would be impossible. The transaction fee alone is at least a nickel. You can't build an economy of one-cent transactions on rails designed for $50 purchases.
+
+Coinbase understands this better than anyone. They recently launched **x402**, an open protocol for internet-native payments. It revives the unused HTTP 402 status code — "Payment Required" — which has existed since the early days of the web but was never widely implemented.
+
+The web's original designers literally anticipated this. They just didn't know it would be agents, not humans, who'd use it.
+
+x402 lets you pay for resources directly through APIs. No registration. No OAuth. No messy signatures. And because it's literally HTTP, every client already supports it.
+
+Here's how it works: an agent makes an HTTP request. The server responds with a 402 status and a payment requirement. The agent's wallet evaluates the cost, approves the payment, completes the transaction, and gets the resource. All in milliseconds. No checkout flow. No credit card form. Just: request, pay, receive.
+
+## NickelJoke: A Dumb Experiment That Broke My Brain
+
+Vercel recently created a Next.js starter showing how x402 works, and I used it to build **NickelJoke** — a fun little app where you can buy a joke for a nickel using USDC on Base testnet.
+
+It's a toy. Obviously.
+
+But building it broke something in my brain. The entire payment flow — from request to joke delivery — took under two seconds. Two seconds for a complete economic transaction between two autonomous software agents. That's faster than most human-to-human Venmo transfers.
+
+Once you see two AI agents completing a financial transaction without any human in the loop, you start thinking about what happens when there are a million of them. And then a billion.
+
+## The TAM Expansion
+
+This is where the Uber/Gurley story comes back.
+
+Everyone is sizing the agent economy by looking at existing markets. "How much of customer support will agents handle? How much of coding? How much of research?" That's the business professor mistake. You're assuming the TAM stays fixed.
+
+When agents can transact with each other for fractions of a penny, instantly, 24/7 — **you're not replacing existing economic activity. You're creating entirely new economic activity that couldn't exist before.**
+
+A cent to read a blog post. A fraction of a cent for a weather check. Half a cent for a sentiment analysis. A penny for a translation. These transactions don't exist today because the friction is too high. Remove the friction and the market expands — just like Uber expanded the taxi market by making it trivially easy to hail a ride.
+
+The agent-to-agent economy won't just be bigger than the human-to-agent economy. It could be bigger than the human economy, period. Agents can transact at a speed, volume, and granularity that humans simply can't.
+
+## Early Innings
+
+We're at the very beginning of this. The infrastructure is early. The protocols are nascent. The use cases are mostly toys (like NickelJoke).
+
+But every major economic transformation looked like a toy at the beginning. The internet was "just email." Social media was "just status updates." Mobile apps were "just small programs."
+
+The agent-to-agent economy is "just agents paying each other for jokes."
+
+People who understand these protocols early will have a huge advantage. The agent-to-agent economy is just getting started.
+
+For now.
+
+Bilal
