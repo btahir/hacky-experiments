@@ -96,7 +96,6 @@ export default async function BlogPostPage({
     const allPosts = await getAllPosts()
     const currentTags = metadata.tags || []
 
-    // Find related posts: prioritize shared tags, then chronologically adjacent
     const otherPosts = allPosts.filter((p) => p.slug !== slug)
     const relatedPosts = otherPosts
       .map((p) => {
