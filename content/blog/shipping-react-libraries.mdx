@@ -5,22 +5,26 @@ excerpt: "I treated LLM agents like a parallel engineering team. Four repos ship
 tags: ["Open Source", "React", "AI", "Engineering"],
 }
 
-The ground is shifting fast. Build cycles that used to take weeks now take days, sometimes hours. You can either argue about it on X, or you can jump in and actually ship.
+This weekend I wanted to release something open source. Usually I build apps but I really wanted to see if I could publish an npm package. Well things got out of hand...
 
-This weekend I tried something simple: treat LLM agents like a parallel engineering team. Not “help me write a function,” but “you own a lane, go build, I’ll integrate and judge.”
+I published not 1, not 2, not 3… but 4 packages 😄
 
-I ended up publishing four packages:
+Here's a quick walkthrough
 
 React Kino: cinematic scroll-driven storytelling for React
+
 [https://github.com/btahir/react-kino](https://github.com/btahir/react-kino) ([GitHub][1])
 
 React Tourlight: onboarding tours and feature highlights for React
+
 [https://github.com/btahir/react-tourlight](https://github.com/btahir/react-tourlight) ([GitHub][2])
 
 React Redact: one keyboard shortcut to make your app demo-safe
+
 [https://github.com/btahir/react-redact](https://github.com/btahir/react-redact) ([GitHub][3])
 
 React Clickmap: privacy-first heatmaps for React, your data, your database, zero cloud
+
 [https://github.com/btahir/react-clickmap](https://github.com/btahir/react-clickmap) ([GitHub][4])
 
 Now the real story: how it actually happened.
@@ -30,30 +34,30 @@ I started with the least glamorous part: idea selection. I asked an agent to go 
 Once I had a list of candidates, I picked four that met my “weekend test” constraints:
 
 * clear value in one sentence
+
 * a v1 that can be small
+
 * demoable (because marketing is part of shipping now)
 
-Then I did the boring thing that makes agents dramatically better: I wrote a real PRD for each library before anyone touched code.
+Then I did the boring thing that makes agents dramatically better: I wrote a real PRD for each library before anyone touched code. This is where you sharpen the axe.
 
-Not a vibe doc. A spec. API shape, non-goals, docs outline, dependency constraints, and a “what does good look like” checklist. I also baked in a requirement that the agents do quick web research for dependencies and modern tooling before they committed to a stack.
+I asked Claude to do extensive research for dependencies and modern tooling before they committed to a stack. Look at what people were complaining about to hone in on features etc. Then we crafted a detailed PRD for each library.
 
 After that, I went full parallel:
 
-Claude Code on one end, Codex on the other, Cursor Auto on the other. I assigned one project per agent and basically said: “You own it end-to-end. Follow the PRD. Keep it tight. Ship something I’d actually install.”
-
-This is the part people miss: parallelization only works if you’re brutal about scope. Otherwise you get four half-products, each with 40 features and none of them finished.
+Claude Code on one end, Codex on the other, Cursor Auto (it's ok) on the other. I assigned one project per agent and basically said: “You own it end-to-end. Follow the PRD. Keep it tight. Ship something I’d actually install.”
 
 The second big thing I did was add “taste” to the pipeline.
 
 I gave Claude a front-end design skill so it wouldn’t default to the usual LLM look (we all know it: overdone gradients, random purple, weird spacing). Then for anything visual, I used an Agent Browser workflow so the agent could literally look at the UI, take screenshots, and iterate. Without that, the agent is basically blind and will happily ship something ugly with total confidence.
 
-Finally, I treated launch assets as first-class. No good OSS launch without a short video and clean README media. Remotion made this unfair: it’s programmatic, so agents can take screenshots from the demos and turn them into a polished launch clip, plus generate supporting GIFs/images for the README and docs.
+Finally, I treated launch assets as first-class. No good OSS launch without a short video and clean README media. Remotion made this unfair: it’s programmatic, so agents can take screenshots from the demos and turn them into a polished launch clip, plus generate supporting GIFs/images for the README and docs. throw in a cool music track and you're 95% to a 10K professional video.
 
 After each repo was “done,” I ran cross-review. If Claude built one project, I had Codex review it. If Codex built one, I had Claude review it. Different eyes catch different problems. It also forces clarity: if an agent can’t explain your API back to you in plain language, your API is probably too complicated.
 
 What came out of that assembly line is the four packages.
 
-React Kino is the “Apple scroll page” itch, but done in a React-native way. The README calls out that the core scroll engine is under 1 KB gzipped and directly compares it to GSAP ScrollTrigger’s size. ([GitHub][1]) The design choice I cared about is that it’s declarative: you compose components like `<Scene>` and `<Reveal>` instead of writing imperative timelines. ([GitHub][1]) It also ships a CLI (`npx @react-kino/cli init`) plus templates you can drop in, which is basically me admitting the truth: people want “wow” in 60 seconds, not a blank canvas. ([GitHub][1])
+React Kino is the “Apple scroll page” itch, but done in a React-native way. The README calls out that the core scroll engine is under 1 KB gzipped and directly compares it to GSAP ScrollTrigger’s size. ([GitHub][1]) The design choice I cared about is that it’s declarative: you compose components like `<Scene>` and `<Reveal>` instead of writing imperative timelines. ([GitHub][1]) It also ships a CLI (`npx u/react-kino/cli init`) plus templates you can drop in, which is basically me admitting the truth: people want “wow” in 60 seconds, not a blank canvas. ([GitHub][1])
 
 React Tourlight exists because onboarding tours are a mess right now. In the README I’m blunt about the motivation (Joyride broken on React 19, licensing issues elsewhere) and I wanted something that looks modern by default. ([GitHub][2]) The implementation leans on CSS clip-path for the spotlight, uses Floating UI for positioning as a peer dep, and it’s explicitly built around accessibility (focus trap, keyboard nav, WCAG 2.1 AA claims). ([GitHub][2])
 
@@ -66,12 +70,13 @@ The biggest takeaway from the weekend is not “agents write code now.” That�
 The real shift is that shipping is now limited by your ability to:
 
 * choose what to build (taste)
+
 * specify it clearly (PRDs)
+
 * say “no” aggressively (scope control)
+
 * polish the last 10 percent (docs, visuals, launch)
 
 Agents multiply you. They don’t replace you.
 
-I’m going to keep doing more of these. If you try any of the libraries and you have feedback (good or brutal), I want it.
-
----
+Hope this was helpful. Now go build!
