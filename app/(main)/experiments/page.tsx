@@ -110,7 +110,7 @@ export default async function ExperimentsPage({
               {paginatedPosts.map((post) => (
                 <Link
                   href={`/experiments/${post.slug}`}
-                  key={post.slug}
+                  key={post.sys.id}
                   className='group'
                 >
                   <Card className='h-full flex flex-col surface-card surface-card-hover pt-0'>

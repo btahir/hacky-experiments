@@ -3,49 +3,35 @@ const spaceId = process.env.CONTENTFUL_SPACE_ID
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
 const collection = process.env.HACKY_BLOG_COLLECTION as string
 
-export interface ContentfulPostListItem {
-  sys?: { id: string }
-  title: string
-  slug: string
-  description?: string
-  heroImage?: { title?: string; url: string; height?: number; width?: number }
-  publishDate?: string
-}
-
-function isContentfulConfigured() {
-  return Boolean(spaceId && accessToken && collection)
-}
-
-async function callContentful(query: string): Promise<{ data?: Record<string, { items?: unknown[]; total?: number }> }> {
-  if (!isContentfulConfigured()) {
-    console.warn('Contentful: missing CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN, or HACKY_BLOG_COLLECTION. Skipping CMS fetch.')
-    return { data: {} }
-  }
-
+async function callContentful(query: string) {
   const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${spaceId}`
 
-  const fetchOptions: RequestInit = {
+  const fetchOptions: any = {
+    spaceID: spaceId,
+    accessToken: accessToken,
+    endpoint: fetchUrl,
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json',
     },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
     body: JSON.stringify({ query }),
   }
 
   try {
-    const res = await fetch(fetchUrl, fetchOptions)
-    const data = await res.json()
-    if (!res.ok || !data?.data) return { data: {} }
+    const data = await fetch(fetchUrl, fetchOptions).then((response) =>
+      response.json()
+    )
     return data
   } catch (error) {
-    console.warn('Contentful fetch failed (build continues with empty data):', (error as Error)?.message ?? error)
-    return { data: {} }
+    console.error('Error fetching blog posts:', error)
+    throw new Error('Could not fetch blog posts!')
   }
 }
 
-export async function fetchRecentPosts(limit: number): Promise<ContentfulPostListItem[]> {
-  if (!isContentfulConfigured()) return []
+export async function fetchRecentPosts(limit: number) {
   const query = `{
       ${collection}(limit: ${limit}, order: publishDate_DESC) {
         total
@@ -66,9 +52,13 @@ export async function fetchRecentPosts(limit: number): Promise<ContentfulPostLis
         }
       }
     }`
-  const response = await callContentful(query)
-  const data = response.data?.[collection]
-  return (data?.items ?? []) as ContentfulPostListItem[]
+  const response: any = await callContentful(query)
+
+  const recentPosts = response.data[collection].items
+    ? response.data[collection].items
+    : []
+
+  return recentPosts
 }
 
 export async function getPaginatedBlogPosts(page: number) {
@@ -97,34 +87,32 @@ export async function getPaginatedBlogPosts(page: number) {
       }
     }`
   const response = await callContentful(query)
-  const data = response.data?.[collection]
-  const total = data?.total ?? 0
-  const posts = (data?.items ?? []) as ContentfulPostListItem[]
+
+  const { total } = response.data[collection]
+  const posts = response.data[collection].items
+    ? response.data[collection].items
+    : []
+
   return { posts, total }
 }
 
-export async function fetchAllPosts(): Promise<ContentfulPostListItem[]> {
-  try {
-    let page = 1
-    let shouldQueryMorePosts = true
-    const returnPosts: ContentfulPostListItem[] = []
+export async function fetchAllPosts() {
+  let page = 1
+  let shouldQueryMorePosts = true
+  const returnPosts = []
 
-    while (shouldQueryMorePosts) {
-      const response = await getPaginatedBlogPosts(page)
+  while (shouldQueryMorePosts) {
+    const response = await getPaginatedBlogPosts(page)
 
-      if (response.posts.length > 0) {
-        returnPosts.push(...response.posts)
-      }
-
-      shouldQueryMorePosts = returnPosts.length < response.total
-      page++
+    if (response.posts.length > 0) {
+      returnPosts.push(...response.posts)
     }
 
-    return returnPosts
-  } catch (error) {
-    console.warn('Contentful fetchAllPosts failed:', (error as Error)?.message ?? error)
-    return []
+    shouldQueryMorePosts = returnPosts.length < response.total
+    page++
   }
+
+  return returnPosts
 }
 
 async function getPaginatedSlugs(page: number) {
@@ -141,36 +129,32 @@ async function getPaginatedSlugs(page: number) {
       }
     }`
   const response = await callContentful(query)
-  const data = response.data?.[collection]
-  const total = data?.total ?? 0
-  const slugs = Array.isArray(data?.items)
-    ? (data.items as { slug: string }[]).map((item) => item.slug)
+
+  const { total } = response.data[collection]
+  const slugs = response.data[collection].items
+    ? response.data[collection].items.map((item: any) => item.slug)
     : []
+
   return { slugs, total }
 }
 
-export async function fetchPostSlugs(): Promise<string[]> {
-  try {
-    let page = 1
-    let shouldQueryMoreSlugs = true
-    const returnSlugs: string[] = []
+export async function fetchPostSlugs() {
+  let page = 1
+  let shouldQueryMoreSlugs = true
+  const returnSlugs = []
 
-    while (shouldQueryMoreSlugs) {
-      const response = await getPaginatedSlugs(page)
+  while (shouldQueryMoreSlugs) {
+    const response = await getPaginatedSlugs(page)
 
-      if (response.slugs.length > 0) {
-        returnSlugs.push(...response.slugs)
-      }
-
-      shouldQueryMoreSlugs = returnSlugs.length < response.total
-      page++
+    if (response.slugs.length > 0) {
+      returnSlugs.push(...response.slugs)
     }
 
-    return returnSlugs
-  } catch (error) {
-    console.warn('Contentful fetchPostSlugs failed:', (error as Error)?.message ?? error)
-    return []
+    shouldQueryMoreSlugs = returnSlugs.length < response.total
+    page++
   }
+
+  return returnSlugs
 }
 
 export async function fetchPost(slug: string) {
@@ -222,6 +206,8 @@ export async function fetchPost(slug: string) {
       }
     }`
   const response = await callContentful(query)
-  const items = response.data?.[collection]?.items ?? []
-  return items.pop()
+  const pageContent = response.data[collection].items
+    ? response.data[collection].items
+    : []
+  return pageContent.pop()
 }
