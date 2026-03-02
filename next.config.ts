@@ -1,11 +1,9 @@
 import createMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
-import rehypeHighlight from 'rehype-highlight'
 import type { NextConfig } from 'next'
 
 const mdxOptions = {
-  remarkPlugins: [remarkGfm],
-  rehypePlugins: [rehypeHighlight],
+  remarkPlugins: ['remark-gfm'],
+  rehypePlugins: ['rehype-highlight'],
 }
 
 const withMDX = createMDX({
@@ -14,10 +12,6 @@ const withMDX = createMDX({
 
 // Define Next.js configuration
 const nextConfig: NextConfig = {
-  experimental: {
-    mdxRs: true,
-  },
-
   // Configure file extensions to be processed by Next.js
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
