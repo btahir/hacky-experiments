@@ -34,12 +34,12 @@ async function callContentful(query: string): Promise<{ data?: Record<string, { 
   }
 
   try {
-    const data = await fetch(fetchUrl, fetchOptions).then((response) =>
-      response.json()
-    )
+    const res = await fetch(fetchUrl, fetchOptions)
+    const data = await res.json()
+    if (!res.ok || !data?.data) return { data: {} }
     return data
   } catch (error) {
-    console.error('Error fetching from Contentful (build will continue with empty data):', error)
+    console.warn('Contentful fetch failed (build continues with empty data):', (error as Error)?.message ?? error)
     return { data: {} }
   }
 }
@@ -104,22 +104,27 @@ export async function getPaginatedBlogPosts(page: number) {
 }
 
 export async function fetchAllPosts(): Promise<ContentfulPostListItem[]> {
-  let page = 1
-  let shouldQueryMorePosts = true
-  const returnPosts: ContentfulPostListItem[] = []
+  try {
+    let page = 1
+    let shouldQueryMorePosts = true
+    const returnPosts: ContentfulPostListItem[] = []
 
-  while (shouldQueryMorePosts) {
-    const response = await getPaginatedBlogPosts(page)
+    while (shouldQueryMorePosts) {
+      const response = await getPaginatedBlogPosts(page)
 
-    if (response.posts.length > 0) {
-      returnPosts.push(...response.posts)
+      if (response.posts.length > 0) {
+        returnPosts.push(...response.posts)
+      }
+
+      shouldQueryMorePosts = returnPosts.length < response.total
+      page++
     }
 
-    shouldQueryMorePosts = returnPosts.length < response.total
-    page++
+    return returnPosts
+  } catch (error) {
+    console.warn('Contentful fetchAllPosts failed:', (error as Error)?.message ?? error)
+    return []
   }
-
-  return returnPosts
 }
 
 async function getPaginatedSlugs(page: number) {
@@ -144,23 +149,28 @@ async function getPaginatedSlugs(page: number) {
   return { slugs, total }
 }
 
-export async function fetchPostSlugs() {
-  let page = 1
-  let shouldQueryMoreSlugs = true
-  const returnSlugs = []
+export async function fetchPostSlugs(): Promise<string[]> {
+  try {
+    let page = 1
+    let shouldQueryMoreSlugs = true
+    const returnSlugs: string[] = []
 
-  while (shouldQueryMoreSlugs) {
-    const response = await getPaginatedSlugs(page)
+    while (shouldQueryMoreSlugs) {
+      const response = await getPaginatedSlugs(page)
 
-    if (response.slugs.length > 0) {
-      returnSlugs.push(...response.slugs)
+      if (response.slugs.length > 0) {
+        returnSlugs.push(...response.slugs)
+      }
+
+      shouldQueryMoreSlugs = returnSlugs.length < response.total
+      page++
     }
 
-    shouldQueryMoreSlugs = returnSlugs.length < response.total
-    page++
+    return returnSlugs
+  } catch (error) {
+    console.warn('Contentful fetchPostSlugs failed:', (error as Error)?.message ?? error)
+    return []
   }
-
-  return returnSlugs
 }
 
 export async function fetchPost(slug: string) {
