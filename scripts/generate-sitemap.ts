@@ -80,7 +80,7 @@ async function generateSitemap() {
     for (const experiment of experiments) {
       sitemap += `  <url>
     <loc>${BASE_URL}/experiments/${experiment.slug}</loc>
-    <lastmod>${new Date(experiment.publishDate).toISOString().split('T')[0]}</lastmod>
+    <lastmod>${new Date(experiment.publishDate ?? Date.now()).toISOString().split('T')[0]}</lastmod>
   </url>
 `
     }
