@@ -11,21 +11,17 @@ I published not 1, not 2, not 3… but 4 packages 😄
 
 Here's a quick walkthrough
 
-React Kino: cinematic scroll-driven storytelling for React
+React Kino: cinematic scroll-driven storytelling for React  
+[website](https://www.react-kino.dev/) · [github](https://github.com/btahir/react-kino)
 
-[https://www.react-kino.dev/](https://www.react-kino.dev/) · [https://github.com/btahir/react-kino](https://github.com/btahir/react-kino)
+React Tourlight: onboarding tours and feature highlights for React  
+[website](https://react-tourlight.vercel.app/) · [github](https://github.com/btahir/react-tourlight)
 
-React Tourlight: onboarding tours and feature highlights for React
+React Redact: one keyboard shortcut to make your app demo-safe  
+[website](https://react-redact.vercel.app/) · [github](https://github.com/btahir/react-redact)
 
-[https://react-tourlight.vercel.app/](https://react-tourlight.vercel.app/) · [https://github.com/btahir/react-tourlight](https://github.com/btahir/react-tourlight)
-
-React Redact: one keyboard shortcut to make your app demo-safe
-
-[https://react-redact.vercel.app/](https://react-redact.vercel.app/) · [https://github.com/btahir/react-redact](https://github.com/btahir/react-redact)
-
-React Clickmap: privacy-first heatmaps for React, your data, your database, zero cloud
-
-[https://react-clickmap.vercel.app/](https://react-clickmap.vercel.app/) · [https://github.com/btahir/react-clickmap](https://github.com/btahir/react-clickmap)
+React Clickmap: privacy-first heatmaps for React, your data, your database, zero cloud  
+[website](https://react-clickmap.vercel.app/) · [github](https://github.com/btahir/react-clickmap)
 
 #### How it actually happened.
 
@@ -49,13 +45,13 @@ After each PRD was fully implemented, I ran a cross-review. If Claude built one 
 
 What came out of that assembly line is the four packages.
 
-React Kino is the “Apple scroll page” itch, but done in a React-native way. The README calls out that the core scroll engine is under 1 KB gzipped and directly compares it to GSAP ScrollTrigger’s size. ([GitHub][1]) The design choice I cared about is that it’s declarative: you compose components like `<Scene>` and `<Reveal>` instead of writing imperative timelines. ([GitHub][1]) It also ships a CLI (`npx u/react-kino/cli init`) plus templates you can drop in, which is basically me admitting the truth: people want “wow” in 60 seconds, not a blank canvas. ([GitHub][1])
+React Kino is the “Apple scroll page” itch, but done in a React-native way. The README calls out that the core scroll engine is under 1 KB gzipped and directly compares it to GSAP ScrollTrigger’s size. The design choice I cared about is that it’s declarative: you compose components like `<Scene>` and `<Reveal>` instead of writing imperative timelines. It also ships a CLI (`npx u/react-kino/cli init`) plus templates you can drop in, which is basically me admitting the truth: people want “wow” in 60 seconds, not a blank canvas.
 
-React Tourlight exists because onboarding tours are a mess right now. In the README I’m blunt about the motivation (Joyride broken on React 19, licensing issues elsewhere) and I wanted something that looks modern by default. ([GitHub][2]) The implementation leans on CSS clip-path for the spotlight, uses Floating UI for positioning as a peer dep, and it’s explicitly built around accessibility (focus trap, keyboard nav, WCAG 2.1 AA claims). ([GitHub][2])
+React Tourlight exists because onboarding tours are a mess right now. In the README I’m blunt about the motivation (Joyride broken on React 19, licensing issues elsewhere) and I wanted something that looks modern by default. The implementation leans on CSS clip-path for the spotlight, uses Floating UI for positioning as a peer dep, and it’s explicitly built around accessibility (focus trap, keyboard nav, WCAG 2.1 AA claims).
 
-React Redact is the “oh no I’m screensharing prod data” button. Wrap the app in `<RedactProvider>`, hit `⌘⇧X` or `Ctrl+Shift+X`, and anything you mark gets blurred/masked/replaced. ([GitHub][3]) It also supports a `?redact=true` param and an auto-detection component that scans for emails, phone numbers, SSNs, credit cards, IPs, plus custom regex. ([GitHub][3]) I also like that the README is honest about what it is: visual-only, it does not remove data from the DOM. ([GitHub][3]) That kind of honesty is rare and it builds trust.
+React Redact is the “oh no I’m screensharing prod data” button. Wrap the app in `<RedactProvider>`, hit `⌘⇧X` or `Ctrl+Shift+X`, and anything you mark gets blurred/masked/replaced. It also supports a `?redact=true` param and an auto-detection component that scans for emails, phone numbers, SSNs, credit cards, IPs, plus custom regex.
 
-React Clickmap is my privacy-first take on heatmaps. It captures clicks, scroll depth, pointer movement, rage clicks, and dead clicks, then renders GPU-accelerated overlays. ([GitHub][4]) The core is adapter-based: you can use a fetch endpoint, Postgres adapter, Supabase adapter, or bring your own. ([GitHub][4]) It also bakes in privacy signals like DNT and Global Privacy Control in the provider options. ([GitHub][4]) The whole pitch is “no third-party analytics, no cloud, no vendor lock,” and the README is pretty explicit about that framing. ([GitHub][4])
+React Clickmap is my privacy-first take on heatmaps. It captures clicks, scroll depth, pointer movement, rage clicks, and dead clicks, then renders GPU-accelerated overlays. The core is adapter-based: you can use a fetch endpoint, Postgres adapter, Supabase adapter, or bring your own. It also bakes in privacy signals like DNT and Global Privacy Control in the provider options. The whole pitch is “no third-party analytics, no cloud, no vendor lock in”.
 
 The biggest takeaway from the weekend is not “agents write code now.” That’s the boring part.
 
