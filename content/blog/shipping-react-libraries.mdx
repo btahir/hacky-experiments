@@ -13,35 +13,27 @@ Here's a quick walkthrough
 
 React Kino: cinematic scroll-driven storytelling for React
 
-[https://github.com/btahir/react-kino](https://github.com/btahir/react-kino) ([GitHub][1])
+[https://www.react-kino.dev/](https://www.react-kino.dev/) · [https://github.com/btahir/react-kino](https://github.com/btahir/react-kino)
 
 React Tourlight: onboarding tours and feature highlights for React
 
-[https://github.com/btahir/react-tourlight](https://github.com/btahir/react-tourlight) ([GitHub][2])
+[https://react-tourlight.vercel.app/](https://react-tourlight.vercel.app/) · [https://github.com/btahir/react-tourlight](https://github.com/btahir/react-tourlight)
 
 React Redact: one keyboard shortcut to make your app demo-safe
 
-[https://github.com/btahir/react-redact](https://github.com/btahir/react-redact) ([GitHub][3])
+[https://react-redact.vercel.app/](https://react-redact.vercel.app/) · [https://github.com/btahir/react-redact](https://github.com/btahir/react-redact)
 
 React Clickmap: privacy-first heatmaps for React, your data, your database, zero cloud
 
-[https://github.com/btahir/react-clickmap](https://github.com/btahir/react-clickmap) ([GitHub][4])
+[https://react-clickmap.vercel.app/](https://react-clickmap.vercel.app/) · [https://github.com/btahir/react-clickmap](https://github.com/btahir/react-clickmap)
 
-Now the real story: how it actually happened.
+#### How it actually happened.
 
-I started with the least glamorous part: idea selection. I asked an agent to go hunting for gaps in the React ecosystem. Stuff that’s outdated, broken on newer React, weirdly licensed, or just stuck in 2018 with a UI to match. Tour libraries are a perfect example: Tourlight exists because the most popular option (React Joyride) is broken on React 19 and leans on deprecated APIs, while other alternatives come with licensing or integration issues. ([GitHub][2])
+I started with the least glamorous part: idea selection. I asked an agent to go hunting for gaps in the React ecosystem. Stuff that’s outdated, broken on newer React, weirdly licensed, or just stuck in 2018 with a UI to match. Tour libraries are a perfect example: Tourlight exists because the most popular option (React Joyride) is broken on React 19 and leans on deprecated APIs, while other alternatives come with licensing or integration issues.
 
-Once I had a list of candidates, I picked four that met my “weekend test” constraints:
+Once I had a list of candidates, I picked four that I personally liked.
 
-* clear value in one sentence
-
-* a v1 that can be small
-
-* demoable (because marketing is part of shipping now)
-
-Then I did the boring thing that makes agents dramatically better: I wrote a real PRD for each library before anyone touched code. This is where you sharpen the axe.
-
-I asked Claude to do extensive research for dependencies and modern tooling before they committed to a stack. Look at what people were complaining about to hone in on features etc. Then we crafted a detailed PRD for each library.
+I then wrote a real PRD for each library before anyone touched code. This is where you sharpen the axe. I asked Claude to do extensive research for dependencies and modern tooling before they committed to a stack. Look at what people were complaining about to hone in on features etc.
 
 After that, I went full parallel:
 
@@ -49,11 +41,11 @@ Claude Code on one end, Codex on the other, Cursor Auto (it's ok) on the other. 
 
 The second big thing I did was add “taste” to the pipeline.
 
-I gave Claude a front-end design skill so it wouldn’t default to the usual LLM look (we all know it: overdone gradients, random purple, weird spacing). Then for anything visual, I used an Agent Browser workflow so the agent could literally look at the UI, take screenshots, and iterate. Without that, the agent is basically blind and will happily ship something ugly with total confidence.
+I gave Claude a front-end design skill so it wouldn’t default to the usual LLM look (we all know it: ugly purple gradients, weird spacing etc). Then for anything visual, I used an Agent Browser workflow so the agent could literally look at the UI, take screenshots, and iterate. Without that, the agent is basically blind and will happily ship something ugly with total confidence.
 
 Finally, I treated launch assets as first-class. No good OSS launch without a short video and clean README media. Remotion made this unfair: it’s programmatic, so agents can take screenshots from the demos and turn them into a polished launch clip, plus generate supporting GIFs/images for the README and docs. throw in a cool music track and you're 95% to a 10K professional video.
 
-After each repo was “done,” I ran cross-review. If Claude built one project, I had Codex review it. If Codex built one, I had Claude review it. Different eyes catch different problems. It also forces clarity: if an agent can’t explain your API back to you in plain language, your API is probably too complicated.
+After each PRD was fully implemented, I ran a cross-review. If Claude built one project, I had Codex review it. If Codex built one, I had Claude review it. Different eyes catch different problems. It also forces clarity: if an agent can’t explain your API back to you in plain language, your API is probably too complicated.
 
 What came out of that assembly line is the four packages.
 
@@ -73,7 +65,7 @@ The real shift is that shipping is now limited by your ability to:
 
 * specify it clearly (PRDs)
 
-* say “no” aggressively (scope control)
+* have a solid verification process (tests, agent browswer, multi agent review)
 
 * polish the last 10 percent (docs, visuals, launch)
 
