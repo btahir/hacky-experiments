@@ -1,0 +1,77 @@
+export const metadata = {
+title: "I shipped 4 React libraries in a weekend by parallelizing with agents",
+date: "2026-03-01",
+excerpt: "I treated LLM agents like a parallel engineering team. Four repos shipped. The real trick was specs, taste, and ruthless polish.",
+tags: ["Open Source", "React", "AI", "Engineering"],
+}
+
+The ground is shifting fast. Build cycles that used to take weeks now take days, sometimes hours. You can either argue about it on X, or you can jump in and actually ship.
+
+This weekend I tried something simple: treat LLM agents like a parallel engineering team. Not “help me write a function,” but “you own a lane, go build, I’ll integrate and judge.”
+
+I ended up publishing four packages:
+
+React Kino: cinematic scroll-driven storytelling for React
+[https://github.com/btahir/react-kino](https://github.com/btahir/react-kino) ([GitHub][1])
+
+React Tourlight: onboarding tours and feature highlights for React
+[https://github.com/btahir/react-tourlight](https://github.com/btahir/react-tourlight) ([GitHub][2])
+
+React Redact: one keyboard shortcut to make your app demo-safe
+[https://github.com/btahir/react-redact](https://github.com/btahir/react-redact) ([GitHub][3])
+
+React Clickmap: privacy-first heatmaps for React, your data, your database, zero cloud
+[https://github.com/btahir/react-clickmap](https://github.com/btahir/react-clickmap) ([GitHub][4])
+
+Now the real story: how it actually happened.
+
+I started with the least glamorous part: idea selection. I asked an agent to go hunting for gaps in the React ecosystem. Stuff that’s outdated, broken on newer React, weirdly licensed, or just stuck in 2018 with a UI to match. Tour libraries are a perfect example: Tourlight exists because the most popular option (React Joyride) is broken on React 19 and leans on deprecated APIs, while other alternatives come with licensing or integration issues. ([GitHub][2])
+
+Once I had a list of candidates, I picked four that met my “weekend test” constraints:
+
+* clear value in one sentence
+* a v1 that can be small
+* demoable (because marketing is part of shipping now)
+
+Then I did the boring thing that makes agents dramatically better: I wrote a real PRD for each library before anyone touched code.
+
+Not a vibe doc. A spec. API shape, non-goals, docs outline, dependency constraints, and a “what does good look like” checklist. I also baked in a requirement that the agents do quick web research for dependencies and modern tooling before they committed to a stack.
+
+After that, I went full parallel:
+
+Claude Code on one end, Codex on the other, Cursor Auto on the other. I assigned one project per agent and basically said: “You own it end-to-end. Follow the PRD. Keep it tight. Ship something I’d actually install.”
+
+This is the part people miss: parallelization only works if you’re brutal about scope. Otherwise you get four half-products, each with 40 features and none of them finished.
+
+The second big thing I did was add “taste” to the pipeline.
+
+I gave Claude a front-end design skill so it wouldn’t default to the usual LLM look (we all know it: overdone gradients, random purple, weird spacing). Then for anything visual, I used an Agent Browser workflow so the agent could literally look at the UI, take screenshots, and iterate. Without that, the agent is basically blind and will happily ship something ugly with total confidence.
+
+Finally, I treated launch assets as first-class. No good OSS launch without a short video and clean README media. Remotion made this unfair: it’s programmatic, so agents can take screenshots from the demos and turn them into a polished launch clip, plus generate supporting GIFs/images for the README and docs.
+
+After each repo was “done,” I ran cross-review. If Claude built one project, I had Codex review it. If Codex built one, I had Claude review it. Different eyes catch different problems. It also forces clarity: if an agent can’t explain your API back to you in plain language, your API is probably too complicated.
+
+What came out of that assembly line is the four packages.
+
+React Kino is the “Apple scroll page” itch, but done in a React-native way. The README calls out that the core scroll engine is under 1 KB gzipped and directly compares it to GSAP ScrollTrigger’s size. ([GitHub][1]) The design choice I cared about is that it’s declarative: you compose components like `<Scene>` and `<Reveal>` instead of writing imperative timelines. ([GitHub][1]) It also ships a CLI (`npx @react-kino/cli init`) plus templates you can drop in, which is basically me admitting the truth: people want “wow” in 60 seconds, not a blank canvas. ([GitHub][1])
+
+React Tourlight exists because onboarding tours are a mess right now. In the README I’m blunt about the motivation (Joyride broken on React 19, licensing issues elsewhere) and I wanted something that looks modern by default. ([GitHub][2]) The implementation leans on CSS clip-path for the spotlight, uses Floating UI for positioning as a peer dep, and it’s explicitly built around accessibility (focus trap, keyboard nav, WCAG 2.1 AA claims). ([GitHub][2])
+
+React Redact is the “oh no I’m screensharing prod data” button. Wrap the app in `<RedactProvider>`, hit `⌘⇧X` or `Ctrl+Shift+X`, and anything you mark gets blurred/masked/replaced. ([GitHub][3]) It also supports a `?redact=true` param and an auto-detection component that scans for emails, phone numbers, SSNs, credit cards, IPs, plus custom regex. ([GitHub][3]) I also like that the README is honest about what it is: visual-only, it does not remove data from the DOM. ([GitHub][3]) That kind of honesty is rare and it builds trust.
+
+React Clickmap is my privacy-first take on heatmaps. It captures clicks, scroll depth, pointer movement, rage clicks, and dead clicks, then renders GPU-accelerated overlays. ([GitHub][4]) The core is adapter-based: you can use a fetch endpoint, Postgres adapter, Supabase adapter, or bring your own. ([GitHub][4]) It also bakes in privacy signals like DNT and Global Privacy Control in the provider options. ([GitHub][4]) The whole pitch is “no third-party analytics, no cloud, no vendor lock,” and the README is pretty explicit about that framing. ([GitHub][4])
+
+The biggest takeaway from the weekend is not “agents write code now.” That’s the boring part.
+
+The real shift is that shipping is now limited by your ability to:
+
+* choose what to build (taste)
+* specify it clearly (PRDs)
+* say “no” aggressively (scope control)
+* polish the last 10 percent (docs, visuals, launch)
+
+Agents multiply you. They don’t replace you.
+
+I’m going to keep doing more of these. If you try any of the libraries and you have feedback (good or brutal), I want it.
+
+---
