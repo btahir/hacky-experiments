@@ -15,6 +15,7 @@ export const siteConfig = {
     github: 'https://github.com/btahir/hacky-experiments',
     x: 'https://twitter.com/deepwhitman',
     linkedin: 'https://www.linkedin.com/in/biltahir/',
+    podcast: 'https://creativeflux.riverside.com/',
   },
   keywords: [
     'AI experiments',
