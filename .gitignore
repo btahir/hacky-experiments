@@ -32,6 +32,14 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# Private content exports, drafts, downloaded originals, verification reports
+/.content-local/
+# Build downloads; deployed as public files, originals retained in object storage
+/public/media/
+__pycache__/
+*.pyc
 
 # vercel
 .vercel

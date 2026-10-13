@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CACHE_HEADERS, minimalHtmlPage } from '@/lib/markdown-response'
+import { acceptsMarkdown, minimalHtmlPage, representationHeaders } from '@/lib/markdown-response'
 import fs from 'fs'
 import path from 'path'
 
@@ -104,14 +104,17 @@ export async function GET(
 ) {
   const { slug } = await params
   const cleanSlug = slug.replace(/\.md$/, '')
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleanSlug)) {
+    return new NextResponse('Not Found', { status: 404 })
+  }
+  const canonicalPath = `/blog/${cleanSlug}`
   const mdxPath = path.join(process.cwd(), 'content', 'blog', `${cleanSlug}.mdx`)
 
   try {
     const fileContent = fs.readFileSync(mdxPath, 'utf-8')
     const markdownContent = extractContent(fileContent)
-    const accept = request.headers.get('accept') ?? ''
 
-    if (accept.includes('text/markdown')) {
+    if (slug.endsWith('.md') || acceptsMarkdown(request.headers.get('accept'))) {
       const metadata = extractMetadata(fileContent)
       const frontmatter = [
         '---',
@@ -125,12 +128,12 @@ export async function GET(
         .join('\n')
       const fullMarkdown = `${frontmatter}\n\n${markdownContent}`
       return new NextResponse(fullMarkdown, {
-        headers: { 'Content-Type': 'text/markdown; charset=utf-8', ...CACHE_HEADERS },
+        headers: { 'Content-Type': 'text/markdown; charset=utf-8', ...representationHeaders(canonicalPath) },
       })
     }
 
-    return new NextResponse(minimalHtmlPage(markdownContent), {
-      headers: { 'Content-Type': 'text/html; charset=utf-8', ...CACHE_HEADERS },
+    return new NextResponse(minimalHtmlPage(markdownContent, canonicalPath), {
+      headers: { 'Content-Type': 'text/html; charset=utf-8', ...representationHeaders(canonicalPath) },
     })
   } catch (error: unknown) {
     const isNotFound = error instanceof Error && 'code' in error && (error as NodeJS.ErrnoException).code === 'ENOENT'

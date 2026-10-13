@@ -94,7 +94,7 @@ export function Footer() {
             <div className="font-mono text-xs text-muted-foreground space-y-1">
               <p>$ next.js + react</p>
               <p>$ tailwind + framer</p>
-              <p>$ contentful cms</p>
+              <p>$ markdown + git</p>
               <p className="text-primary">$ built with {'<3'}</p>
             </div>
           </div>

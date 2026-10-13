@@ -14,6 +14,13 @@ export function NavBar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [previousPathname, setPreviousPathname] = useState(pathname)
+
+  // Reset before rendering a new route, without an extra effect-driven render.
+  if (previousPathname !== pathname) {
+    setPreviousPathname(pathname)
+    setMobileMenuOpen(false)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +42,6 @@ export function NavBar() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
-
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [pathname])
 
   return (
     <>

@@ -123,9 +123,9 @@ const sections: Section[] = [
         url: 'https://www.pinecone.io',
       },
       {
-        name: 'Contentful',
-        description: 'CMS for my experiments. GraphQL API is nice.',
-        url: 'https://www.contentful.com',
+        name: 'Markdown + Git',
+        description: 'Experiment posts live in Markdown, with Git history and portable image storage.',
+        url: 'https://github.com/btahir/hacky-experiments',
       },
     ],
   },

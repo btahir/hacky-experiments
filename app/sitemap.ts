@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { MetadataRoute } from 'next'
-import { fetchAllPosts } from '@/lib/contentful'
+import { fetchAllPosts } from '@/lib/content/experiments'
 import { getAllPosts } from '@/lib/mdx'
 import { absoluteUrl } from '@/lib/site-config'
 
@@ -12,15 +12,14 @@ const staticPages = ['/', '/about', '/blog', '/experiments', '/micro', '/uses', 
 async function getMicroPages() {
   const microDir = path.join(process.cwd(), 'app', '(micro)', 'micro')
 
-  try {
-    const entries = await fs.readdir(microDir, { withFileTypes: true })
-    return entries
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => `/micro/${entry.name}`)
-  } catch (error) {
-    console.error('Error reading micro routes for sitemap:', error)
-    return []
-  }
+  const entries = await fs.readdir(microDir, { withFileTypes: true })
+  const routes = await Promise.all(entries.filter((entry) => entry.isDirectory()).map(async (entry) => {
+    const files = await fs.readdir(path.join(microDir, entry.name), { withFileTypes: true })
+    return files.some((file) => file.isFile() && /^page\.(tsx?|jsx?|mdx?)$/.test(file.name))
+      ? `/micro/${entry.name}`
+      : undefined
+  }))
+  return routes.filter((route): route is string => route !== undefined)
 }
 
 function validDate(dateValue: string | undefined) {
@@ -35,14 +34,8 @@ function validDate(dateValue: string | undefined) {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [microPages, blogPosts, experiments] = await Promise.all([
     getMicroPages(),
-    getAllPosts().catch((error) => {
-      console.error('Error generating blog URLs for sitemap:', error)
-      return []
-    }),
-    fetchAllPosts().catch((error) => {
-      console.error('Error generating experiment URLs for sitemap:', error)
-      return []
-    }),
+    getAllPosts(),
+    fetchAllPosts(),
   ])
 
   const staticUrls: MetadataRoute.Sitemap = staticPages.map((route) => ({
@@ -64,14 +57,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly',
   }))
 
-  const experimentUrls: MetadataRoute.Sitemap = experiments
-    .filter((post) => post?.slug)
-    .map((post) => ({
-      url: absoluteUrl(`/experiments/${post.slug}`),
-      lastModified: validDate(post.publishDate),
-      priority: 0.7,
-      changeFrequency: 'monthly' as const,
-    }))
+  const experimentUrls: MetadataRoute.Sitemap = experiments.map((post) => ({
+    url: absoluteUrl(`/experiments/${post.slug}`),
+    lastModified: validDate(post.updatedAt || post.publishDate),
+    priority: 0.7,
+    changeFrequency: 'monthly' as const,
+  }))
 
   return [...staticUrls, ...blogUrls, ...experimentUrls, ...microUrls]
 }

@@ -18,10 +18,6 @@ export function formatDate(dateString: string): string {
   }).format(date);
 }
 
-export function formatContentfulDate(dateString: string): string {
-  return formatDate(dateString);
-}
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }

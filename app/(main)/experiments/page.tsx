@@ -1,40 +1,58 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { SearchBar } from './search-bar'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/utils'
-import { fetchAllPosts } from '@/lib/contentful'
+import { fetchAllPosts } from '@/lib/content/experiments'
 import { absoluteUrl, siteConfig } from '@/lib/site-config'
 
 // Define how many posts per page
 const POSTS_PER_PAGE = 6
 
-// Generate static metadata for the page
 const description = 'Browse through all our experiments and projects'
 
-export const metadata: Metadata = {
-  title: 'Experiments',
-  description,
-  alternates: {
-    canonical: '/experiments',
-  },
-  openGraph: {
-    title: `Experiments | ${siteConfig.name}`,
+type SearchParams = { page?: string | string[]; search?: string | string[] }
+
+function readSearchParams(params: SearchParams) {
+  const page = Array.isArray(params.page) ? params.page[0] : params.page
+  const search = Array.isArray(params.search) ? params.search[0] : params.search
+  const currentPage = page === undefined ? 1 : Number(page)
+  if (!Number.isSafeInteger(currentPage) || currentPage < 1) notFound()
+  return { currentPage, searchQuery: search?.trim() || '', hasSearch: search !== undefined }
+}
+
+function listingPath(page: number, search = '') {
+  const params = new URLSearchParams()
+  if (page > 1) params.set('page', String(page))
+  if (search) params.set('search', search)
+  return `/experiments${params.size ? `?${params}` : ''}`
+}
+
+export async function generateMetadata({
+  searchParams,
+}: { searchParams: Promise<SearchParams> }): Promise<Metadata> {
+  const { currentPage, searchQuery, hasSearch } = readSearchParams(await searchParams)
+  const title = currentPage > 1 ? `Experiments | Page ${currentPage}` : 'Experiments'
+  const canonical = listingPath(currentPage, searchQuery)
+  return {
+    title,
     description,
-    url: '/experiments',
-  },
+    alternates: { canonical },
+    openGraph: { title: `${title} | ${siteConfig.name}`, description, url: canonical },
+    ...(hasSearch ? {
+      robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
+    } : {}),
+  }
 }
 
 export default async function ExperimentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; search?: string }>
+  searchParams: Promise<SearchParams>
 }) {
-  // Get the page from the search params, default to 1
-  const { page, search } = await searchParams
-  const currentPage = Number(page) || 1
-  const searchQuery = search || ''
+  const { currentPage, searchQuery } = readSearchParams(await searchParams)
 
   // Fetch all posts at once (this is the server component advantage)
   const allPosts = await fetchAllPosts()
@@ -52,7 +70,8 @@ export default async function ExperimentsPage({
   const totalPosts = filteredPosts.length
 
   // Calculate pagination values
-  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+  const totalPages = Math.max(1, Math.ceil(totalPosts / POSTS_PER_PAGE))
+  if (currentPage > totalPages) notFound()
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE
   const endIndex = startIndex + POSTS_PER_PAGE
   const paginatedPosts = filteredPosts.slice(startIndex, endIndex)
@@ -62,7 +81,7 @@ export default async function ExperimentsPage({
     '@type': 'CollectionPage',
     name: `${siteConfig.name} Experiments`,
     description,
-    url: absoluteUrl('/experiments'),
+    url: absoluteUrl(listingPath(currentPage, searchQuery)),
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: totalPosts,
@@ -107,10 +126,10 @@ export default async function ExperimentsPage({
         ) : (
           <>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {paginatedPosts.map((post) => (
+              {paginatedPosts.map((post, index) => (
                 <Link
                   href={`/experiments/${post.slug}`}
-                  key={post.sys.id}
+                  key={post.id}
                   className='group'
                 >
                   <Card className='h-full flex flex-col surface-card surface-card-hover pt-0'>
@@ -118,12 +137,12 @@ export default async function ExperimentsPage({
                       <div className='relative w-full h-64 overflow-hidden rounded-t-lg'>
                         <Image
                           src={post.heroImage.url}
-                          alt={post.heroImage.title || post.title}
+                          alt={post.heroImage.description || post.heroImage.title || post.title}
                           className='object-cover w-full h-full transition-transform duration-200 group-hover:scale-105'
                           width={post.heroImage.width || 800}
                           height={post.heroImage.height || 600}
-                          sizes='(max-width: 768px) 100vw, 33vw'
-                          priority={startIndex <= 3}
+                          sizes='(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw'
+                          priority={index === 0}
                         />
                       </div>
                     )}
@@ -131,7 +150,7 @@ export default async function ExperimentsPage({
                       <CardTitle>{post.title}</CardTitle>
                       {post.publishDate && (
                         <p className='font-mono text-xs text-muted-foreground'>
-                          {formatDate(post.publishDate)}
+                          <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
                         </p>
                       )}
                     </CardHeader>
@@ -151,14 +170,11 @@ export default async function ExperimentsPage({
             {/* Pagination */}
             {totalPages > 1 && (
               <div className='mt-12 flex justify-center'>
-                <nav className='flex items-center gap-4'>
+                <nav className='flex items-center gap-4' aria-label='Experiment pages'>
                   {currentPage > 1 && (
                     <Link
-                      href={`/experiments?page=${currentPage - 1}${
-                        searchQuery
-                          ? `&search=${encodeURIComponent(searchQuery)}`
-                          : ''
-                      }`}
+                      href={listingPath(currentPage - 1, searchQuery)}
+                      rel='prev'
                       className='inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 font-mono text-sm text-foreground/70 transition-colors hover:bg-accent hover:text-foreground'
                     >
                       &larr; Previous
@@ -171,11 +187,8 @@ export default async function ExperimentsPage({
 
                   {currentPage < totalPages && (
                     <Link
-                      href={`/experiments?page=${currentPage + 1}${
-                        searchQuery
-                          ? `&search=${encodeURIComponent(searchQuery)}`
-                          : ''
-                      }`}
+                      href={listingPath(currentPage + 1, searchQuery)}
+                      rel='next'
                       className='inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 font-mono text-sm text-foreground/70 transition-colors hover:bg-accent hover:text-foreground'
                     >
                       Next &rarr;
