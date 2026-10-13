@@ -54,6 +54,10 @@ The optional `content:import` command reads a Contentful collection into this fo
 
 Articles also support `.md` URLs and `Accept: text/markdown`. Markdown responses carry a canonical link and are not cached. Next.js may overwrite `Vary` on HTML responses, so outside Vercel the article routes use private, always-revalidated HTTP caching while retaining static generation. Keep that policy when adding a reverse proxy, or explicitly append `Vary: Accept` after Next.js and configure the proxy to cache each representation separately. Leave `VERCEL` unset outside Vercel. On Vercel, [middleware runs before the CDN cache](https://vercel.com/docs/routing-middleware), so the Markdown rewrite preserves cached HTML delivery.
 
+## Analytics
+
+Analytics uses Umami. Set `NEXT_PUBLIC_UMAMI_SCRIPT_URL` and `NEXT_PUBLIC_UMAMI_WEBSITE_ID` for the production build; both are public tracker settings, not credentials. Leaving either unset disables analytics. The tracker runs only on the apex and `www` hostnames of `NEXT_PUBLIC_SITE_URL` (the configured site URL), so localhost and preview domains are excluded. Umami tracks client-side navigation automatically; query strings and fragments are excluded. Google Analytics is no longer loaded.
+
 ## 🛠️ Technologies
 
 My experiments make use of various technologies, including but not limited to:

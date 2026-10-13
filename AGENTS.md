@@ -4,7 +4,7 @@ Keep answers concise. Experiments live in `content/experiments/*.md` and appear 
 
 ## Credentials and configuration
 
-Use the repository's ignored `.env.local`, mode `600`. See `.env.example` for variable names. Never print, commit, or put secret values in docs, manifests, command arguments or chat. R2 credentials are for tooling/builds only, never client components or `NEXT_PUBLIC_` variables. Only public site/media URL settings may use that prefix.
+Use the repository's ignored `.env.local`, mode `600`. See `.env.example` for variable names. Never print, commit, or put secret values in docs, manifests, command arguments or chat. R2 credentials are for tooling/builds only, never client components or `NEXT_PUBLIC_` variables. Only public site/media URLs and public analytics tracker settings may use that prefix.
 
 Images use one R2 bucket. The build downloads missing files into ignored `public/media/` and the website serves them under `/media/`. All images are intended to be public. No private bucket or custom media domain is needed.
 

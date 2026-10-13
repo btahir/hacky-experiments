@@ -1,31 +1,31 @@
 'use client'
 
 import Script from 'next/script'
+import { useSyncExternalStore } from 'react'
+import { siteConfig } from '@/lib/site-config'
 
-const GOOGLE_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID || ''
+const UMAMI_SCRIPT_URL = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL
+const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+const hostname = new URL(siteConfig.url).hostname.replace(/^www\./, '')
+const PUBLIC_HOSTS = new Set([hostname, `www.${hostname}`])
+const subscribe = () => () => {}
+const serverSnapshot = () => false
+const browserSnapshot = () => PUBLIC_HOSTS.has(window.location.hostname)
 
 export function Analytics() {
-  if (!GOOGLE_MEASUREMENT_ID) {
+  const enabled = useSyncExternalStore(subscribe, browserSnapshot, serverSnapshot)
+  if (!enabled || !UMAMI_SCRIPT_URL || !UMAMI_WEBSITE_ID) {
     return null
   }
 
   return (
     <Script
-      src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_MEASUREMENT_ID}`}
+      src={UMAMI_SCRIPT_URL}
+      data-website-id={UMAMI_WEBSITE_ID}
+      data-domains={[...PUBLIC_HOSTS].join(',')}
+      data-exclude-search='true'
+      data-exclude-hash='true'
       strategy='afterInteractive'
-      onLoad={() => {
-        // @ts-ignore
-        window.dataLayer = window.dataLayer || []
-        function gtag() {
-          // @ts-ignore
-          dataLayer.push(arguments)
-        }
-        // @ts-ignore
-        gtag('js', new Date())
-        // @ts-ignore
-        gtag('config', GOOGLE_MEASUREMENT_ID)
-      }}
     />
   )
 }
