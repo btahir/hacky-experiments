@@ -1,9 +1,14 @@
+const configuredSiteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.hackyexperiments.com')
+if (!['https:', 'http:'].includes(configuredSiteUrl.protocol) || configuredSiteUrl.username || configuredSiteUrl.password) {
+  throw new Error('NEXT_PUBLIC_SITE_URL must be an HTTP(S) URL without credentials')
+}
+
 export const siteConfig = {
   name: 'Hacky Experiments',
   shortName: 'Hacky',
   description:
     "Bilal Tahir's playground for AI experiments, technical deep dives, and product engineering — built with Next.js, Tailwind CSS, and a love for shipping fast.",
-  url: 'https://hackyexperiments.com',
+  url: configuredSiteUrl.origin,
   ogImage: '/opengraph-image.png',
   locale: 'en_US',
   creator: {
@@ -43,5 +48,5 @@ export const mainNavLinks = [
 ]
 
 export function absoluteUrl(path = '/') {
-  return `${siteConfig.url}${path}`
+  return new URL(path, `${siteConfig.url}/`).toString()
 }
